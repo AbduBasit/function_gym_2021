@@ -300,59 +300,15 @@ class FitoadminController extends Controller
         return view('message.read', compact('page_title', 'page_description','action'));
     }
 	
-	    // Form Editor Summernote
-    public function form_editor_summernote()
-    {
-        $page_title = 'Summernote Editor';
-        $page_description = 'Some description for the page';
-		
-        $action = __FUNCTION__;
-
-        return view('form.editorsummernote', compact('page_title', 'page_description','action'));
-	}
-	
-	    // Form Element
-    public function form_element()
-    {
-        $page_title = 'Form Element';
-        $page_description = 'Some description for the page';
-		
-		$action = __FUNCTION__;
-
-        return view('form.element', compact('page_title', 'page_description','action'));
-    }
-	
-	    // Form Pickers
-    public function form_pickers()
-    {
-        $page_title = 'Form Pickers';
-        $page_description = 'Some description for the page';
-		
-		$action = __FUNCTION__;
-
-        return view('form.pickers', compact('page_title', 'page_description','action'));
-    }
-	
-	    // Form Validation Jquery
-    public function form_validation_jquery()
-    {
-        $page_title = 'Form Validation';
-        $page_description = 'Some description for the page';
-		
-		$action = __FUNCTION__;
-
-        return view('form.validationjquery', compact('page_title', 'page_description','action'));
-    }
-	
-	    // Form Wizard
+	    // Create Customer Section
     public function form_wizard()
     {
-        $page_title = 'Form Wizard';
+        $page_title = 'Add Customer';
         $page_description = 'Some description for the page';
 		
 		$action = __FUNCTION__;
 
-        return view('form.wizard', compact('page_title', 'page_description','action'));
+        return view('customer.createnew', compact('page_title', 'page_description','action'));
     }
     
     	

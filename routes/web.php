@@ -2,24 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
-
-
-Route::get('/', 'App\Http\Controllers\FitoadminController@dashboard_1');
-Route::get('/index', 'App\Http\Controllers\FitoadminController@dashboard_1');
+Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
+Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
 Route::get('/distance-map', 'App\Http\Controllers\FitoadminController@distance_map');
 Route::post('/recent-activities', 'App\Http\Controllers\FitoadminController@recent_activities');
 Route::get('/food-menu', 'App\Http\Controllers\FitoadminController@food_menu');
@@ -46,11 +30,7 @@ Route::get('/ecom-product-order', 'App\Http\Controllers\FitoadminController@ecom
 Route::get('/email-compose', 'App\Http\Controllers\FitoadminController@email_compose');
 Route::get('/email-inbox', 'App\Http\Controllers\FitoadminController@email_inbox');
 Route::get('/email-read', 'App\Http\Controllers\FitoadminController@email_read');
-Route::get('/form-editor-summernote', 'App\Http\Controllers\FitoadminController@form_editor_summernote');
-Route::get('/form-element', 'App\Http\Controllers\FitoadminController@form_element');
-Route::get('/form-pickers', 'App\Http\Controllers\FitoadminController@form_pickers');
-Route::get('/form-validation-jquery', 'App\Http\Controllers\FitoadminController@form_validation_jquery');
-Route::get('/form-wizard', 'App\Http\Controllers\FitoadminController@form_wizard');
+Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
 Route::get('/map-jqvmap', 'App\Http\Controllers\FitoadminController@map_jqvmap');
 Route::get('/page-error-400', 'App\Http\Controllers\FitoadminController@page_error_400');
 Route::get('/page-error-403', 'App\Http\Controllers\FitoadminController@page_error_403');
@@ -59,7 +39,6 @@ Route::get('/page-error-500', 'App\Http\Controllers\FitoadminController@page_err
 Route::get('/page-error-503', 'App\Http\Controllers\FitoadminController@page_error_503');
 Route::get('/page-forgot-password', 'App\Http\Controllers\FitoadminController@page_forgot_password');
 Route::get('/page-lock-screen', 'App\Http\Controllers\FitoadminController@page_lock_screen');
-Route::get('/page-login', 'App\Http\Controllers\FitoadminController@page_login');
 Route::get('/page-register', 'App\Http\Controllers\FitoadminController@page_register');
 Route::get('/table-bootstrap-basic', 'App\Http\Controllers\FitoadminController@table_bootstrap_basic');
 Route::get('/table-datatable-basic', 'App\Http\Controllers\FitoadminController@table_datatable_basic');
