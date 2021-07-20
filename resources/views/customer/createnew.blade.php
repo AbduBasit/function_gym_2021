@@ -28,11 +28,11 @@
                             <div class="card-header">
                                 <h4 class="card-title">Create a New Customer</h4>
                             </div>
-                            <div class="card-body">
-                                <form action="#" id="step-form-horizontal" class="step-form-horizontal">
+                            <div class="card-body h-100">
+                                <form action="#" id="step-form-horizontal" class="step-form-horizontal" enctype="multipart/form-data">
                                     <div>
-                                        <h4>Personal Info</h4>
-                                        <section>
+                                       <h4>Personal Info</h4>
+                                        <section class="pl-2 pr-2">
                                             <div class="row">
                                                 <div class="col-lg-4 mb-2">
                                                     <div class="form-group">
@@ -82,11 +82,23 @@
                                                         <input type="number" min="20" max="300" name="weight" class="form-control" placeholder="40">
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-12">
+                                                    <label class="text-label">Upload Image</label>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                          <span class="input-group-text">Upload</span>
+                                                        </div>
+                                                        <div class="custom-file">
+                                                          <input type="file" name="cimg" class="custom-file-input" id="customer-img">
+                                                          <label class="custom-file-label" for="customer-img">Choose file</label>
+                                                        </div>
+                                                      </div>
+                                                </div>
                                             </div>
                                         </section>
-                                        <h4>Account Details</h4>
+                                         <h4>Account Details</h4>
                                         <section>
-                                            <div class="row">
+                                            <div class="row pl-2 pr-2">
                                                 <div class="col-lg-6 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Date of Joining*</label>
@@ -96,7 +108,7 @@
                                                 <div class="col-lg-6 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Month End Date</label>
-                                                        <input type="text" class="form-control disable" name="mde" value="name" disabled>
+                                                        <input type="text" class="form-control disable" name="mde" value="undefine" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 mb-2">
@@ -112,7 +124,7 @@
                                                 <div class="col-lg-3 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Trainer Name</label>
-                                                        <input type="text" name="tname" class="form-control disable" disabled value="Zaheer Khan">
+                                                        <input type="text" name="tname" class="form-control disable" disabled value="undefine">
 													</div>
                                                 </div>
                                                 <div class="col-lg-3 mb-2">
@@ -136,25 +148,25 @@
                                                 <div class="col-lg-3 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Registration Fee*</label>
-                                                        <input type="text" name="phoneNumber" class="form-control" placeholder="3000" required>
+                                                        <input type="text" name="regfee" class="form-control" placeholder="3000" required>
 													</div>
                                                 </div>
                                                 <div class="col-lg-3 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Gym Fee*</label>
-                                                        <input type="text" name="phoneNumber" class="form-control" placeholder="5000" required>
+                                                        <input type="text" name="gymfee" class="form-control" placeholder="5000" required>
 													</div>
                                                 </div>
                                                 <div class="col-lg-3 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Trainer Fee Per Session*</label>
-                                                        <input type="text" name="phoneNumber" class="form-control" placeholder="2000" required>
+                                                        <input type="text" name="trainfee" class="form-control" placeholder="2000" required>
 													</div>
                                                 </div>
                                                 <div class="col-lg-3 mb-2">
                                                     <div class="form-group">
                                                         <label class="text-label">Total Session</label>
-                                                        <input type="number" name="tsession" class="form-control disable" value="10" disabled>
+                                                        <input type="number" name="tsession" class="form-control disable" value="0" disabled>
 													</div>
                                                 </div>
                                                 
@@ -163,182 +175,290 @@
                                                     <div class="form-group">
                                                         <label class="text-label">Allow Discount?</label>
                                                         <div class="material-switch mt-3">
-                                                            <input id="someSwitchOptionDefault" hidden name="discounttoggle" type="checkbox"/>
-                                                            <label for="someSwitchOptionDefault" class="label-default"></label>
+                                                            <input id="discounttoggle" hidden name="discounttoggle" value="yes" type="checkbox"/>
+                                                            <label for="discounttoggle" id="toggle-discount" class="label-default"></label>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-3 mb-2">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Discount Category</label>
-                                                        <select name="dtype" class="form-control form-control-lg" required>
-                                                            <option hidden>Select Category</option>
-                                                            <option value="percentage">Percentage</option>
-                                                            <option value="fixed">Fixed Amount</option>
-                                                        </select>
-													</div>
-                                                </div>
-                                                <div class="col-lg-3 mb-2">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Discount Type</label>
-                                                        <select name="dtype" class="form-control form-control-lg" required>
-                                                            <option hidden>Select Type</option>
-                                                            <option value="Family Discount">Family Discount </option>
-                                                            <option value="General Discount">General Discount</option>
-                                                        </select>
-													</div>
-                                                </div>
-                                                <div class="col-lg-3 mb-2">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Enter Percentage %</label>
-                                                        <input type="number" min="0" max="100" name="percent" placeholder="10" class="form-control">
-													</div>
-                                                </div>
-                                                <div class="col-lg-3 mb-2">
-                                                    <div class="form-group">
-                                                        <label class="text-label">Enter Amount</label>
-                                                        <input type="text" name="fixed" placeholder="1000" class="form-control">
-													</div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <h4>Business Hours</h4>
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <h4>Monday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input1" id="input1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input2" id="input2">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <h4>Tuesday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input3" id="input3">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input4" id="input4">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <h4>Wednesday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input5" id="input5">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input6" id="input6">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <h4>Thrusday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input7" id="input7">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input8" id="input8">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <h4>Friday *</h4>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="9.00" type="number" name="input9" id="input9">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 col-sm-3 mb-2">
-                                                    <div class="form-group">
-                                                        <input class="form-control" value="6.00" type="number" name="input10" id="input10">
+                                                <div class="discount pl-3 pr-3">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 mb-2">
+                                                            <div class="form-group">
+                                                                <label class="text-label">Discount Category</label>
+                                                                <select name="dtype" class="form-control form-control-lg" required>
+                                                                    <option hidden>Select Type</option>
+                                                                    <option value="Family Discount">Family Discount </option>
+                                                                    <option value="General Discount">General Discount</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 mb-2">
+                                                            <div class="form-group">
+                                                                <label class="text-label">Discount Type</label>
+                                                                <select name="dtype" id="toggle-discount-select" class="form-control form-control-lg" required>
+                                                                    <option value="fixed">Fixed Amount</option>
+                                                                    <option value="percentage">Percentage</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 mb-2 percent-a">
+                                                            <div class="form-group ">
+                                                                <label class="text-label">Enter Percentage %</label>
+                                                                <input type="number" min="0" max="100" name="percent" placeholder="10" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 mb-2 fixed-a">
+                                                            <div class="form-group ">
+                                                                <label class="text-label">Enter Amount</label>
+                                                                <input type="text" name="fixed" placeholder="1000" class="form-control">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </section>
-                                        <h4>Email Setup</h4>
-                                        <section>
-                                            <div class="row emial-setup">
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient11" class="mailclinet mailclinet-gmail">
-                                                            <input type="radio" name="emailclient" id="mailclient11">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-google-plus" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Gmail</span>
-                                                        </label>
+                                        <h4>Gym Schedule</h4>
+                                        <section class="pl-2 pr-2">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Monday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="mondaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="mondaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="mondaypt" name="mondaypt" hidden type="checkbox"/>
+                                                                <label for="mondaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient12" class="mailclinet mailclinet-office">
-                                                            <input type="radio" name="emailclient" id="mailclient12">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-office" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Office</span>
-                                                        </label>
+
+
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Tuesday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="tuesdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="tuesdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="tuesdaypt" hidden name="tuesdaypt" type="checkbox"/>
+                                                                <label for="tuesdaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient13" class="mailclinet mailclinet-drive">
-                                                            <input type="radio" name="emailclient" id="mailclient13">
-                                                            <span class="mail-icon">
-                                                                <i class="mdi mdi-google-drive" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">I'm using Drive</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="form-group">
-                                                        <label for="mailclient14" class="mailclinet mailclinet-another">
-                                                            <input type="radio" name="emailclient" id="mailclient14">
-                                                            <span class="mail-icon">
-                                                                <i class="fa fa-question-circle-o"
-                                                                    aria-hidden="true"></i>
-                                                            </span>
-                                                            <span class="mail-text">Another Service</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-12">
-                                                    <div class="skip-email text-center">
-                                                        <p>Or if want skip this step entirely and setup it later</p>
-                                                        <a href="javascript:void()">Skip step</a>
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Wednesday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="wednesdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="wednesdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="wednesdaypt" name="wednesdaypt" hidden type="checkbox"/>
+                                                                <label for="wednesdaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Thursday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="thursdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="thursdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="thursdaypt" hidden name="thursdaypt" type="checkbox"/>
+                                                                <label for="thursdaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Friday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="fridaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="fridaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="fridaypt" name="fridaypt" hidden type="checkbox"/>
+                                                                <label for="fridaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Saturday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="saturdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="saturdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="saturdaypt" hidden name="saturdaypt" type="checkbox"/>
+                                                                <label for="saturdaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="card bg-card-form-customer">
+                                                        <div class="card-header border-0 pb-0">
+                                                            <h5 class="card-title">Sunday</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label>Start Timming</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="09:30" name="sundaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                            </div>
+                                                        </div>
+                                                            <div class="col-lg-6">
+                                                                <label>End Timming</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" value="10:30" name="sundaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                                </div>
+                                                            </div>
+                                                       </div>
+                                                        </div>
+                                                        <div class="card-footer border-0 pt-0">
+                                                            <p class="card-text d-inline">Person Training (PT)?</p>
+                                                            <div class="material-switch mt-3 float-right">
+                                                                <input id="sundaypt" hidden name="sundaypt" type="checkbox"/>
+                                                                <label for="sundaypt" class="label-default"></label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </section>
+                                        <h4>Confirmation</h4>
+                                        <section>
+                                           <div class="checkout-name text-center mt-5 pt-5"> 
+                                               <img src="{{asset('./images/custom/check.png')}}" alt="check image" width="100px" >
+                                                <h1 class="display-5 mt-3">Your Form is Done</h1>
+                                                <p class="lead">Check Your Detail again? or Finish Your Process</p>
+                                           </div>
+                                          
                                         </section>
                                     </div>
                                 </form>
@@ -349,3 +469,5 @@
             </div>
 			
 @endsection
+
+

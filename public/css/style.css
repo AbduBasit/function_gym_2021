@@ -30491,3 +30491,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     background: #1b75bc;
     left: 20px;
 }
+
+.bg-card-form-customer{
+  background-color: #ececec;
+}
+.discount, .percent-a{
+  display: none;
+}

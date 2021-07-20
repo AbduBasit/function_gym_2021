@@ -142,8 +142,9 @@
     background: #eee;
     display: block;
     margin: 0.5em;
-    min-height: 35em;
-    overflow: hidden;
+    min-height: auto;
+    overflow-y: scroll !important ;
+    overflow-x: hidden;
     position: relative;
     width: auto;
 
@@ -159,12 +160,31 @@
     margin: 0 2.5% 0.5em 2.5%;
     width: 65%;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1b75bc; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1b75bc; 
+  }
 
 .wizard > .content > .body
 {
     float: left;
     position: absolute;
-    width: 95%;
+    width: 90%;
     height: 95%;
     padding: 2.5%;
 }
@@ -219,7 +239,8 @@
 
 .wizard > .actions
 {
-    position: relative;
+    position: relative !important;
+    margin-top: 30px;
     display: block;
     text-align: right;
     width: 100%;
