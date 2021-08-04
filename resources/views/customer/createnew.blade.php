@@ -29,7 +29,9 @@
                     <h4 class="card-title">Create a New Customer</h4>
                 </div>
                 <div class="card-body h-100">
-                    <form action="#" id="step-form-horizontal" class="step-form-horizontal" enctype="multipart/form-data">
+                    <form action="#" id="step-form-horizontal" class="step-form-horizontal" method="POST" enctype="multipart/form-data">
+
+                        @csrf
                         <div>
                             <h4>Information</h4>
                             <section class="pl-2 pr-2">
@@ -54,7 +56,7 @@
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Email Address*</label>
-                                            <input type="email" class="form-control" id="inputGroupPrepend2" aria-describedby="inputGroupPrepend2" placeholder="abc@xyz.com" required>
+                                            <input type="email" class="form-control" name="email" placeholder="abc@xyz.com" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-2">
@@ -188,7 +190,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="tva-1-com" placeholder="Comment" required>
+                                                                    <input type="text" class="form-control" name="tva-1-com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -215,7 +217,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="tva-2-com" placeholder="Comment" required>
+                                                                    <input type="text" class="form-control" name="tva-2-com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -267,7 +269,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="glute-com" placeholder="Comment" required>
+                                                                    <input type="text" class="form-control" name="glute-com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -321,7 +323,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="clamshell-com" placeholder="Comment" required>
+                                                                    <input type="text" class="form-control" name="clamshell-com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -472,7 +474,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc1" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc1-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -493,7 +495,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc2" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc2-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -515,7 +517,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc3" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc3-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -538,7 +540,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc4" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc4-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -560,7 +562,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc5" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc5-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -582,7 +584,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc6" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc6-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -605,7 +607,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc7" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc7-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -627,7 +629,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc8" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc8-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -650,7 +652,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc9" required>
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc9-desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -774,7 +776,7 @@
                                             <div class="col-lg-4 mb-2">
                                                 <div class="form-group">
                                                     <label class="text-label">Discount Category</label>
-                                                    <select name="dtype" class="form-control form-control-lg" required>
+                                                    <select name="dcat" class="form-control form-control-lg" required>
                                                         <option hidden>Select Type</option>
                                                         <option value="Family Discount">Family Discount </option>
                                                         <option value="General Discount">General Discount</option>
