@@ -43,6 +43,9 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'protectedCMS' => [
+            \App\Http\Middleware\authentication_user::class,
+        ]
     ];
 
     /**

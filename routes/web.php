@@ -1,9 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController,
+    App\Http\Controllers\UserController;
 
 Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
-Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
+Route::post('login_process', [UserController::class, 'checkpoint']);
+Route::get('logout', [UserController::class, 'logout']);
+Route::group(['middleware' => ['protectedCMS']], function () {
+    Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
+    Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
+    Route::post('create-customer', [CustomerController::class, 'create_data']);
+});
+
+
 Route::get('/distance-map', 'App\Http\Controllers\FitoadminController@distance_map');
 Route::post('/recent-activities', 'App\Http\Controllers\FitoadminController@recent_activities');
 Route::get('/food-menu', 'App\Http\Controllers\FitoadminController@food_menu');
@@ -30,7 +40,6 @@ Route::get('/ecom-product-order', 'App\Http\Controllers\FitoadminController@ecom
 Route::get('/email-compose', 'App\Http\Controllers\FitoadminController@email_compose');
 Route::get('/email-inbox', 'App\Http\Controllers\FitoadminController@email_inbox');
 Route::get('/email-read', 'App\Http\Controllers\FitoadminController@email_read');
-Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
 Route::get('/map-jqvmap', 'App\Http\Controllers\FitoadminController@map_jqvmap');
 Route::get('/page-error-400', 'App\Http\Controllers\FitoadminController@page_error_400');
 Route::get('/page-error-403', 'App\Http\Controllers\FitoadminController@page_error_403');
@@ -65,4 +74,3 @@ Route::get('/ui-progressbar', 'App\Http\Controllers\FitoadminController@ui_progr
 Route::get('/ui-tab', 'App\Http\Controllers\FitoadminController@ui_tab');
 Route::get('/ui-typography', 'App\Http\Controllers\FitoadminController@ui_typography');
 Route::get('/widget-basic', 'App\Http\Controllers\FitoadminController@widget_basic');
-

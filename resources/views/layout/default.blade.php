@@ -7,25 +7,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('dz.name') }} | @yield('title', $page_title ?? '')</title>
-	
-	<meta name="description" content="@yield('page_description', $page_description ?? '')"/>
+
+    <meta name="description" content="@yield('page_description', $page_description ?? '')" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
-	
-	
-	
-	@if(!empty(config('dz.public.pagelevel.css.'.$action))) 
-		@foreach(config('dz.public.pagelevel.css.'.$action) as $style)
-				<link href="{{ asset($style) }}" rel="stylesheet" type="text/css"/>
-		@endforeach
-	@endif	
 
-	{{-- Global Theme Styles (used by all pages) --}}
-	@if(!empty(config('dz.public.global.css'))) 
-		@foreach(config('dz.public.global.css') as $style)
-			<link href="{{ asset($style) }}" rel="stylesheet" type="text/css"/>
-		@endforeach
-	@endif	
+
+
+    @if(!empty(config('dz.public.pagelevel.css.'.$action)))
+    @foreach(config('dz.public.pagelevel.css.'.$action) as $style)
+    <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
+    @endforeach
+    @endif
+
+    {{-- Global Theme Styles (used by all pages) --}}
+    @if(!empty(config('dz.public.global.css')))
+    @foreach(config('dz.public.global.css') as $style)
+    <link href="{{ asset($style) }}" rel="stylesheet" type="text/css" />
+    @endforeach
+    @endif
 
 
 </head>
@@ -56,18 +56,18 @@
         ***********************************-->
         <div class="nav-header">
             <a href="{!! url('/index'); !!}" class="brand-logo">
-			@if(!empty($logo))
-				<img class="logo-abbr" src="{{ asset($logo) }}" alt="">
-			@else
+                @if(!empty($logo))
+                <img class="logo-abbr" src="{{ asset($logo) }}" alt="">
+                @else
                 <img class="logo-abbr" src="{{ asset('images/logo.png') }}" alt="">
-			@endif
-			@if(!empty($logoText))
+                @endif
+                @if(!empty($logoText))
                 <img class="logo-compact" src="{{ asset($logoText) }}" alt="">
                 <img class="brand-title" src="{{ asset($logoText) }}" alt="">
-			@else
+                @else
                 <img class="logo-compact" src="{{ asset('images/logo-text.png') }}" alt="">
                 <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt="">
-			@endif	
+                @endif
             </a>
 
             <div class="nav-control">
@@ -83,10 +83,10 @@
         <!--**********************************
             Header start
         ***********************************-->
-        
-		@include('elements.header')
-		
-		
+
+        @include('elements.header')
+
+
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -99,8 +99,8 @@
             Sidebar end
         ***********************************-->
 
-		
-		
+
+
         <!--**********************************
             Content body start
         ***********************************-->
@@ -116,14 +116,14 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        
-		@include('elements.footer')
-		
+
+        @include('elements.footer')
+
         <!--**********************************
             Footer end
         ***********************************-->
 
-		<!--**********************************
+        <!--**********************************
            Support ticket button start
         ***********************************-->
 
@@ -140,6 +140,8 @@
     <!--**********************************
         Scripts
     ***********************************-->
-	@include('elements.footer-scripts')
+    @include('elements.footer-scripts')
+    <script src="{{ asset('./js/script.js') }}"></script>
 </body>
+
 </html>

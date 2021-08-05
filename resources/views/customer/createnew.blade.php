@@ -13,6 +13,17 @@
 
 {{-- Content --}}
 @section('content')
+@if(session('user'))
+<div class="alert alert-success" role="alert">
+    <strong>Success! </strong>Data Inserted Successfully.
+</div>
+
+@elseif(session('error'))
+<div class="alert alert-success" role="alert">
+    <strong>Error! </strong>Something went wrong!.
+</div>
+
+@endif
 
 <div class="container-fluid">
     <div class="page-titles">
@@ -29,13 +40,14 @@
                     <h4 class="card-title">Create a New Customer</h4>
                 </div>
                 <div class="card-body h-100">
-                    <form action="#" id="step-form-horizontal" class="step-form-horizontal" method="POST" enctype="multipart/form-data">
+                    <form action="/create-customer" id="step-form-horizontal" class="step-form-horizontal" method="POST" enctype="multipart/form-data">
 
-                        @csrf
+
                         <div>
+                            @csrf
                             <h4>Information</h4>
                             <section class="pl-2 pr-2">
-                                <div class="heading-section mt-2">
+                                <div class="heading-section mt-lg-2">
                                     <h4>Personal Information</h4>
                                     <hr />
                                 </div>
@@ -91,7 +103,7 @@
                                                 <span class="input-group-text">Upload</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input type="file" name="cimg" class="custom-file-input" id="customer-img">
+                                                <input type="file" name="cfile" class="custom-file-input" id="customer-img">
                                                 <label class="custom-file-label" for="customer-img">Choose file</label>
                                             </div>
                                         </div>
@@ -190,7 +202,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="tva-1-com" placeholder="Comment">
+                                                                    <input type="text" class="form-control" name="tva_1_com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -217,7 +229,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="tva-2-com" placeholder="Comment">
+                                                                    <input type="text" class="form-control" name="tva_2_com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -238,7 +250,7 @@
                                                     <div class="col-lg-6 mt-4 core-weak">
                                                         <div class="form-group">
                                                             <label class="text-label">If weak core activation, Describe Briefly*</label>
-                                                            <textarea type="text" name="weakcore" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                                            <textarea type="text" name="weakcore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -269,7 +281,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="glute-com" placeholder="Comment">
+                                                                    <input type="text" class="form-control" name="glute_com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -291,7 +303,7 @@
                                                     <div class="col-lg-6 mt-4 glute-weak">
                                                         <div class="form-group">
                                                             <label class="text-label">If weak Glute activation, Describe Briefly*</label>
-                                                            <textarea type="text" name="glutecore" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                                            <textarea type="text" name="glutecore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -323,7 +335,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" name="clamshell-com" placeholder="Comment">
+                                                                    <input type="text" class="form-control" name="clamshell_com" placeholder="Comment">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -345,7 +357,7 @@
                                                     <div class="col-lg-6 mt-4 clamshell-weak">
                                                         <div class="form-group">
                                                             <label class="text-label">If weak clamshell activation, Describe Briefly*</label>
-                                                            <textarea type="text" name="clamshellcore" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                                            <textarea type="text" name="clamshellcore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -411,7 +423,7 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Weight Unit</label>
-                                                            <select name="bweight" class="form-control form-control-lg" id="bweight" required>
+                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight" required>
                                                                 <option value="kilogram">Kilogram</option>
                                                                 <option value="pound">Pounds</option>
                                                             </select>
@@ -474,7 +486,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc1-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc1_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -495,7 +507,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc2-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc2_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -517,7 +529,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc3-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc3_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -540,7 +552,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc4-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc4_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -562,7 +574,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc5-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc5_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -584,7 +596,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc6-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc6_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -607,7 +619,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc7-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc7_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -629,7 +641,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc8-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc8_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -652,7 +664,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc9-desc">
+                                                            <input type="text" class="form-control" placeholder="Describe..." name="sc9_desc">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -674,7 +686,7 @@
                                                     <div class="col-lg-6 mt-4 squat-weak">
                                                         <div class="form-group">
                                                             <label class="text-label">If weak squat activation, Describe Briefly*</label>
-                                                            <textarea type="text" name="squatcore" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                                            <textarea type="text" name="squatcore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
 
@@ -867,7 +879,7 @@
                                             <div class="card-footer border-0 pt-0">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
-                                                    <input id="tuesdaypt" hidden name="tuesdaypt" type="checkbox" />
+                                                    <input id="tuesdaypt" value="yes" hidden name="tuesdaypt" type="checkbox" />
                                                     <label for="tuesdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -901,7 +913,7 @@
                                             <div class="card-footer border-0 pt-0">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
-                                                    <input id="wednesdaypt" name="wednesdaypt" hidden type="checkbox" />
+                                                    <input id="wednesdaypt" value="yes" name="wednesdaypt" hidden type="checkbox" />
                                                     <label for="wednesdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -933,7 +945,7 @@
                                             <div class="card-footer border-0 pt-0">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
-                                                    <input id="thursdaypt" hidden name="thursdaypt" type="checkbox" />
+                                                    <input id="thursdaypt" value="yes" hidden name="thursdaypt" type="checkbox" />
                                                     <label for="thursdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -967,7 +979,7 @@
                                             <div class="card-footer border-0 pt-0">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
-                                                    <input id="fridaypt" name="fridaypt" hidden type="checkbox" />
+                                                    <input id="fridaypt" value="yes" name="fridaypt" hidden type="checkbox" />
                                                     <label for="fridaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -999,7 +1011,7 @@
                                             <div class="card-footer border-0 pt-0">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
-                                                    <input id="saturdaypt" hidden name="saturdaypt" type="checkbox" />
+                                                    <input id="saturdaypt" value="yes" hidden name="saturdaypt" type="checkbox" />
                                                     <label for="saturdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -1033,7 +1045,7 @@
                                             <div class="card-footer border-0 pt-0">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
-                                                    <input id="sundaypt" hidden name="sundaypt" type="checkbox" />
+                                                    <input id="sundaypt" hidden name="sundaypt" value="yes" type="checkbox" />
                                                     <label for="sundaypt" class="label-default"></label>
                                                 </div>
                                             </div>
