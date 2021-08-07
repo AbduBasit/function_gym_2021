@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/function/public_html/
+    - export DEPLOYPATH=/home/function/admin.function.pk/
     - /bin/cp * $DEPLOYPATH
