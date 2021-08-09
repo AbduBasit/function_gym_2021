@@ -2,18 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController,
-    App\Http\Controllers\UserController;
+    App\Http\Controllers\UserController,
+    App\Http\Controllers\TrainerController;
 
 Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
 Route::post('login_process', [UserController::class, 'checkpoint']);
 Route::get('logout', [UserController::class, 'logout']);
 Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
+
+    // Complete Customer Module
     Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
     Route::post('create-customer', [CustomerController::class, 'create_data']);
     Route::get('manage-customer', 'App\Http\Controllers\FitoadminController@table_bootstrap_basic');
     Route::get('customer-view/{id}', [CustomerController::class, 'customer_view']);
+    Route::get('customer-delete/{id}', [CustomerController::class, 'customer_delete']);
+    Route::get('customer-edit/{id}', [CustomerController::class, 'customer_update_show']);
+    Route::post('update-customer', [CustomerController::class, 'customer_update']);
 
+    // Trainer Module
+    Route::get('/create-trainer', [TrainerController::class, 'create_data']);
+    Route::post('/create-trainer', [TrainerController::class, 'create_new_trainer']);
 });
 
 
