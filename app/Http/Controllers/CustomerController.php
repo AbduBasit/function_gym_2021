@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\customer;
-use Mockery\Undefined;
+use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
@@ -21,7 +21,9 @@ class CustomerController extends Controller
         $db->date_of_birth = $req->dob;
         $db->cnic = $req->cnic;
         // Image Section
-        $db->image = $req->file('cfile')->store('customer_images');
+        if($req->file('cfile')){
+            $db->image = $req->file('cfile')->store('customer_images');
+        }
         $db->current_activity_level = $req->activity;
         $db->daily_routine = $req->dailyroutine;
         $db->medical_condition = $req->medicon;
@@ -112,5 +114,14 @@ class CustomerController extends Controller
             $req->session()->flash('error', $data);
         }
         return redirect('create-customer');
+    }
+    // view Functions
+    public function customer_view($id){
+        $page_title = 'View Customer Profile';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        $db = new customer();
+        $data = $db::all()->find($id);
+        return view('customer.view', compact('page_title', 'page_description', 'action'), ['datas'=>$data]);
     }
 }

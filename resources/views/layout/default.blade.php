@@ -142,6 +142,8 @@
     ***********************************-->
     @include('elements.footer-scripts')
     <script src="{{ asset('./js/script.js') }}"></script>
+
+
 </body>
 
 </html>

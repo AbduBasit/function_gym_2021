@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\customer;
+
 
 class FitoadminController extends Controller
 {
@@ -425,13 +427,19 @@ class FitoadminController extends Controller
         return view('page.register', compact('page_title', 'page_description', 'action'));
     }
 
-    // Table Bootstrap Basic
+    // Manage Customer 
     public function table_bootstrap_basic()
     {
-        $page_title = 'Table Basic';
+
+        $page_title = 'Manage Customers';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        return view('table.bootstrapbasic', compact('page_title', 'page_description', 'action'));
+        $db = new customer();
+        $data = $db::all();
+        return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members'=>$data]);
+
+
+
     }
 
     // Table Datatable Basic

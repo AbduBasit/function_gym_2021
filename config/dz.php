@@ -41,6 +41,9 @@ return [
 							'https://cdn.lineicons.com/2.0/LineIcons.css',
 							'vendor/owl-carousel/owl.carousel.css',
 				],
+				'customer_view' =>[
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'distance_map' => [
 							'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'vendor/chartist/css/chartist.min.css',
@@ -517,6 +520,11 @@ return [
             'js/custom.min.js',
             'js/deznav-init.js',
 				],
+				'customer_view' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+						],
 				'table_datatable_basic' => [
             'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
             'vendor/datatables/js/jquery.dataTables.min.js',

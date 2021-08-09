@@ -11,6 +11,9 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
     Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
     Route::post('create-customer', [CustomerController::class, 'create_data']);
+    Route::get('manage-customer', 'App\Http\Controllers\FitoadminController@table_bootstrap_basic');
+    Route::get('customer-view/{id}', [CustomerController::class, 'customer_view']);
+
 });
 
 
@@ -49,7 +52,7 @@ Route::get('/page-error-503', 'App\Http\Controllers\FitoadminController@page_err
 Route::get('/page-forgot-password', 'App\Http\Controllers\FitoadminController@page_forgot_password');
 Route::get('/page-lock-screen', 'App\Http\Controllers\FitoadminController@page_lock_screen');
 Route::get('/page-register', 'App\Http\Controllers\FitoadminController@page_register');
-Route::get('/table-bootstrap-basic', 'App\Http\Controllers\FitoadminController@table_bootstrap_basic');
+
 Route::get('/table-datatable-basic', 'App\Http\Controllers\FitoadminController@table_datatable_basic');
 Route::get('/uc-nestable', 'App\Http\Controllers\FitoadminController@uc_nestable');
 Route::get('/uc-noui-slider', 'App\Http\Controllers\FitoadminController@uc_noui_slider');

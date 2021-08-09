@@ -16,6 +16,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="create-customer">Add Customer</a></li>
+                        <li><a href="manage-customer">Manage Customer</a></li>
                     </ul>
                 </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
