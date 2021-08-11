@@ -44,6 +44,15 @@ return [
 				'customer_view' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'update_trainer' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
+				'trainer_manage'  => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
+				'trainer_view'  => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'create_data' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/jquery-steps/css/jquery.steps.css',
@@ -538,6 +547,22 @@ return [
 					'js/deznav-init.js',
 				],
 				'customer_view' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'trainer_manage' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'update_trainer' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+
+				'trainer_view' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

@@ -23,6 +23,12 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     // Trainer Module
     Route::get('/create-trainer', [TrainerController::class, 'create_data']);
     Route::post('/create-trainer', [TrainerController::class, 'create_new_trainer']);
+    Route::get('manage-trainer', [TrainerController::class, 'trainer_manage']);
+    Route::get('trainer-view/{id}', [TrainerController::class, 'trainer_view']);
+    Route::get('trainer-delete/{id}', [TrainerController::class, 'trainer_delete']);
+    Route::get('trainer-edit/{id}', [TrainerController::class, 'update_trainer']);
+    Route::post('update_trainer', [TrainerController::class, 'update']);
+    
 });
 
 

@@ -5,7 +5,7 @@
 <div class="deznav">
     <div class="deznav-scroll">
         <ul class="metismenu" id="menu">
-            <li><a class="ai-icon" href="dashboard" aria-expanded="false">
+            <li><a class="ai-icon" href={{ url('dashboard') }} aria-expanded="false">
                     <i class="flaticon-381-networking"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
@@ -16,7 +16,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="create-customer">Add Customer</a></li>
-                    <li><a href="manage-customer">Manage Customer</a></li>
+                    <li><a href="{!! url('/manage-customer'); !!}">Manage Customer</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -24,8 +24,8 @@
                     <span class="nav-text">Trainers</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="create-trainer">Add Trainer</a></li>
-                    <!-- <li><a href="manage-trainer">Manage Trainers</a></li> -->
+                    <li><a href="/create-trainer">Add Trainer</a></li>
+                    <li><a href="{!! url('/manage-trainer'); !!}">Manage Trainers</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
