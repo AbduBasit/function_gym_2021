@@ -28,6 +28,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('trainer-delete/{id}', [TrainerController::class, 'trainer_delete']);
     Route::get('trainer-edit/{id}', [TrainerController::class, 'update_trainer']);
     Route::post('update_trainer', [TrainerController::class, 'update']);
+    Route::get('trainer-schedule/{id}', [TrainerController::class, 'schedule_manage']);
     
 });
 

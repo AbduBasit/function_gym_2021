@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Http\Controllers\Controller;
+use App\Models\trainer;
 
 class CustomerController extends Controller
 {
@@ -141,8 +142,10 @@ class CustomerController extends Controller
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new customer();
+        $db_2 = new trainer();
         $data = $db::all()->find($id);
-        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data]);
+        $data_2 = $db::all();
+        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2,]);
     }
     public function customer_update(Request $req)
     {

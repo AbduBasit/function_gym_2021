@@ -787,7 +787,12 @@
                                     <div class="col-lg-3 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Trainer Name</label>
-                                            <input type="text" name="tname" class="form-control disable" value="{{$datas->trainer_name}}" disabled>
+                                            <select name="tname" id="single-select" class="form-control form-control-lg" required>
+                                                <option hidden value="{{$datas->trainer_name}}">{{$datas->trainer_name}}</option>
+                                                @foreach ($trainers as $trainer)
+                                                    <option value="{{$trainer->first_name . ' '. $trainer->first_name}}">{{$trainer->first_name . ' '. $trainer->first_name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 mb-2">

@@ -104,4 +104,14 @@ class TrainerController extends Controller
             return redirect('manage-trainer');
         }
     }
+
+    public function schedule_manage($id){
+        $db = new trainer();
+        $data = $db::all()->find($id);
+        $name = $data->first_name . ' '. $db->first_name;
+        $page_title = 'Trainers Schedule';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        return view('trainer.schedule', compact('page_title', 'page_description', 'action'), ['trainer_name'=> $name]);
+    }
 }

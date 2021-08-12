@@ -47,6 +47,9 @@ return [
 				'update_trainer' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'schedule_manage' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'trainer_manage'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -171,6 +174,8 @@ return [
 				'customer_update_show' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/jquery-steps/css/jquery.steps.css',
+					'vendor/select2/css/select2.min.css',
+					
 				],
 				'map_jqvmap' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -485,6 +490,8 @@ return [
 					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
+					'vendor/select2/js/select2.full.min.js',
+					'js/plugins-init/select2-init.js',
 				],
 				'map_jqvmap' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
@@ -547,6 +554,11 @@ return [
 					'js/deznav-init.js',
 				],
 				'customer_view' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'schedule_manage' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

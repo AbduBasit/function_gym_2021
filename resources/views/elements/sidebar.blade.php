@@ -26,6 +26,7 @@
                 <ul aria-expanded="false">
                     <li><a href="/create-trainer">Add Trainer</a></li>
                     <li><a href="{!! url('/manage-trainer'); !!}">Manage Trainers</a></li>
+                    <li><a href="{!! url('/manage-schedule-trainer'); !!}">Manage Trainers Schedule</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

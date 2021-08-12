@@ -52,7 +52,7 @@
                                                <td>{{$member->address}}</td>
                                                <td>{{$member->timing_in}}</td>
                                                <td>{{$member->timing_out}}</td>
-                                               <td><a class="anchor_link" href="trainer-schedule?id={{$member->id}}">View Details</a></td>
+                                               <td><a class="anchor_link" href="trainer-schedule/{{$member->id}}">View Details</a></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">
