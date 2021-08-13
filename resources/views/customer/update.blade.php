@@ -622,7 +622,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc6" class="form-control form-control-lg" id="sc5" required>
+                                                            <select name="sc5" class="form-control form-control-lg" id="sc5" required>
                                                                 <option value="{{$datas->squat_test_5}}" hidden>{{$datas->squat_test_5}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -669,7 +669,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc8" class="form-control form-control-lg" id="sc8" required>
+                                                            <select name="sc7" class="form-control form-control-lg" id="sc8" required>
                                                                 <option value="{{$datas->squat_test_7}}" hidden>{{$datas->squat_test_7}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -790,7 +790,7 @@
                                             <select name="tname" id="single-select" class="form-control form-control-lg" required>
                                                 <option hidden value="{{$datas->trainer_name}}">{{$datas->trainer_name}}</option>
                                                 @foreach ($trainers as $trainer)
-                                                    <option value="{{$trainer->first_name . ' '. $trainer->first_name}}">{{$trainer->first_name . ' '. $trainer->first_name}}</option>
+                                                <option value="{{$trainer->first_name . ' '. $trainer->last_name}}">{{$trainer->first_name . ' '. $trainer->last_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

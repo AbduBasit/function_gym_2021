@@ -144,7 +144,7 @@ class CustomerController extends Controller
         $db = new customer();
         $db_2 = new trainer();
         $data = $db::all()->find($id);
-        $data_2 = $db::all();
+        $data_2 = $db_2::all();
         return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2,]);
     }
     public function customer_update(Request $req)
