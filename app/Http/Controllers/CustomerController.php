@@ -114,7 +114,7 @@ class CustomerController extends Controller
         } else {
             $req->session()->flash('error', $data);
         }
-        return redirect('create-customer');
+        return redirect('manage-customer');
     }
     // view Functions
     public function customer_view($id)
@@ -145,7 +145,7 @@ class CustomerController extends Controller
         $db_2 = new trainer();
         $data = $db::all()->find($id);
         $data_2 = $db_2::all();
-        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2,]);
+        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2]);
     }
     public function customer_update(Request $req)
     {

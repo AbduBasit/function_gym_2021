@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\customer;
-
+use App\Models\trainer;
 
 class FitoadminController extends Controller
 {
@@ -307,10 +307,12 @@ class FitoadminController extends Controller
     {
         $page_title = 'Add Customer';
         $page_description = 'Some description for the page';
+        $db_2 = new trainer();
+        $data_2 = $db_2::all();
 
         $action = __FUNCTION__;
 
-        return view('customer.createnew', compact('page_title', 'page_description', 'action'));
+        return view('customer.createnew', compact('page_title', 'page_description', 'action'), ['trainers' => $data_2]);
     }
 
 
@@ -436,10 +438,7 @@ class FitoadminController extends Controller
         $action = __FUNCTION__;
         $db = new customer();
         $data = $db::all();
-        return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members'=>$data]);
-
-
-
+        return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members' => $data]);
     }
 
     // Table Datatable Basic
