@@ -16,7 +16,8 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="create-customer">Add Customer</a></li>
-                    <li><a href="{!! url('/manage-customer'); !!}">Manage Customer</a></li>
+                    <li><a href="{!! url('/pt-customer-details'); !!}">Add PT Details</a></li>
+                    <li><a href="{!! url('/manage-customer'); !!}">Manage Customers</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

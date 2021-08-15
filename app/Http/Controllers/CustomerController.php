@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Http\Controllers\Controller;
 use App\Models\trainer;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -20,59 +21,12 @@ class CustomerController extends Controller
         $db->phone_number = $req->phoneNumber;
         $db->address = $req->place;
         $db->date_of_birth = $req->dob;
+        $db->gender = $req->gender;
         $db->cnic = $req->cnic;
         // Image Section
         if ($req->file('cfile')) {
             $db->image = $req->file('cfile')->store('customer_images');
         }
-        $db->current_activity_level = $req->activity;
-        $db->daily_routine = $req->dailyroutine;
-        $db->medical_condition = $req->medicon;
-        $db->medical_condition_description = $req->injury;
-        $db->previous_excersice = $req->preexcersice;
-        $db->daily_diet = $req->dailydiet;
-        $db->test1_core_activation = $req->tva1;
-        $db->test1_core_activation_description = $req->tva_1_com;
-        $db->test2_core_activation = $req->tva2;
-        $db->test2_core_activation_description = $req->tva_2_com;
-        $db->strength_core_activation = $req->absstrength;
-        $db->strength_core_activation_description = $req->weakcore;
-        $db->test_glute_activation = $req->glute;
-        $db->test_glute_activation_description = $req->glute_com;
-        $db->strength_glute_activation = $req->glutestrength;
-        $db->strength_glute_activation_description = $req->glutecore;
-        $db->test_clamshells_activation = $req->clamshell;
-        $db->test_clamshells_activation_description = $req->clamshell_com;
-        $db->strength_clamshells_activation = $req->clamshellstrength;
-        $db->strength_clamshells_activation_description = $req->clamshellcore;
-        $db->measurement_cal_unit = $req->mcal;
-        $db->chest = $req->chest;
-        $db->waist = $req->waist;
-        $db->hips = $req->hips;
-        $db->weight_cal_unit = $req->weight_unit;
-        $db->body_weight = $req->weight;
-        $db->body_fat = $req->fat;
-        $db->muscles_mass = $req->muscles;
-        $db->squat_test_1 = $req->sc1;
-        $db->squat_test_1_desc = $req->sc1_desc;
-        $db->squat_test_2 = $req->sc2;
-        $db->squat_test_2_desc = $req->sc2_desc;
-        $db->squat_test_3 = $req->sc3;
-        $db->squat_test_3_desc = $req->sc3_desc;
-        $db->squat_test_4 = $req->sc4;
-        $db->squat_test_4_desc = $req->sc4_desc;
-        $db->squat_test_5 = $req->sc5;
-        $db->squat_test_5_desc = $req->sc5_desc;
-        $db->squat_test_6 = $req->sc6;
-        $db->squat_test_6_desc = $req->sc6_desc;
-        $db->squat_test_7 = $req->sc7;
-        $db->squat_test_7_desc = $req->sc7_desc;
-        $db->squat_test_8 = $req->sc8;
-        $db->squat_test_8_desc = $req->sc8_desc;
-        $db->squat_test_9 = $req->sc9;
-        $db->squat_test_9_desc = $req->sc9_desc;
-        $db->strength_squat_activation = $req->squatstrength;
-        $db->strength_squat_activation_description = $req->squatcore;
         $db->date_of_joining = $req->doj;
         $db->month_end = $req->mde;
         $db->training_type = $req->ttype;
@@ -83,11 +37,9 @@ class CustomerController extends Controller
         $db->gym_fees = $req->gymfee;
         $db->trainer_fees_per_session = $req->trainfee;
         $db->total_session = $req->tsession;
-        $db->allow_discount = $req->discounttoggle;
-        $db->discount_category = $req->dcat;
-        $db->discount_type = $req->dtype;
-        $db->discount_fixed_amount = $req->percent;
-        $db->discount_percent_amount = $req->fixed;
+        $db->advnace_allow = $req->advnace_allow;
+        $db->advance_month = $req->advance_month;
+        $db->avance_total = $req->avance_total;
         $db->mon_start_time = $req->mondaytimein;
         $db->mon_end_time = $req->mondaytimeout;
         $db->mon_allow_pt = $req->mondaypt;
@@ -116,6 +68,19 @@ class CustomerController extends Controller
         }
         return redirect('manage-customer');
     }
+
+    // Add PT Details
+    public function pt_trainer_details()
+    {
+        $db = new customer();
+        $data = DB::select("SELECT * FROM customers where training_type = 'PT'");
+        $page_title = 'Add Person Training Details';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        return view('customer.addPtDetails', compact('page_title', 'page_description', 'action'), ['customers' => $data]);
+    }
+
+
     // view Functions
     public function customer_view($id)
     {
@@ -246,6 +211,67 @@ class CustomerController extends Controller
         $data->sun_start_time = $req->sundaytimein;
         $data->sun_end_time = $req->sundaytimeout;
         $data->sun_allow_pt = $req->sundaypt;
+        if ($data->save()) {
+            return redirect('manage-customer');
+        } else {
+            return redirect('manage-customer');
+        }
+    }
+
+    public function add_pt_details(Request $req)
+    {
+        $db = new customer();
+        $data = $db::all()->find($req->customer_id);
+
+        $data->current_activity_level = $req->activity;
+        $data->daily_routine = $req->dailyroutine;
+        $data->medical_condition = $req->medicon;
+        $data->medical_condition_description = $req->injury;
+        $data->previous_excersice = $req->preexcersice;
+        $data->daily_diet = $req->dailydiet;
+        $data->test1_core_activation = $req->tva1;
+        $data->test1_core_activation_description = $req->tva_1_com;
+        $data->test2_core_activation = $req->tva2;
+        $data->test2_core_activation_description = $req->tva_2_com;
+        $data->strength_core_activation = $req->absstrength;
+        $data->strength_core_activation_description = $req->weakcore;
+        $data->test_glute_activation = $req->glute;
+        $data->test_glute_activation_description = $req->glute_com;
+        $data->strength_glute_activation = $req->glutestrength;
+        $data->strength_glute_activation_description = $req->glutecore;
+        $data->test_clamshells_activation = $req->clamshell;
+        $data->test_clamshells_activation_description = $req->clamshell_com;
+        $data->strength_clamshells_activation = $req->clamshellstrength;
+        $data->strength_clamshells_activation_description = $req->clamshellcore;
+        $data->measurement_cal_unit = $req->mcal;
+        $data->chest = $req->chest;
+        $data->waist = $req->waist;
+        $data->hips = $req->hips;
+        $data->weight_cal_unit = $req->weight_unit;
+        $data->body_weight = $req->weight;
+        $data->body_fat = $req->fat;
+        $data->muscles_mass = $req->muscles;
+        $data->squat_test_1 = $req->sc1;
+        $data->squat_test_1_desc = $req->sc1_desc;
+        $data->squat_test_2 = $req->sc2;
+        $data->squat_test_2_desc = $req->sc2_desc;
+        $data->squat_test_3 = $req->sc3;
+        $data->squat_test_3_desc = $req->sc3_desc;
+        $data->squat_test_4 = $req->sc4;
+        $data->squat_test_4_desc = $req->sc4_desc;
+        $data->squat_test_5 = $req->sc5;
+        $data->squat_test_5_desc = $req->sc5_desc;
+        $data->squat_test_6 = $req->sc6;
+        $data->squat_test_6_desc = $req->sc6_desc;
+        $data->squat_test_7 = $req->sc7;
+        $data->squat_test_7_desc = $req->sc7_desc;
+        $data->squat_test_8 = $req->sc8;
+        $data->squat_test_8_desc = $req->sc8_desc;
+        $data->squat_test_9 = $req->sc9;
+        $data->squat_test_9_desc = $req->sc9_desc;
+        $data->strength_squat_activation = $req->squatstrength;
+        $data->strength_squat_activation_description = $req->squatcore;
+
         if ($data->save()) {
             return redirect('manage-customer');
         } else {

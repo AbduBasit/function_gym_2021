@@ -19,6 +19,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('customer-delete/{id}', [CustomerController::class, 'customer_delete']);
     Route::get('customer-edit/{id}', [CustomerController::class, 'customer_update_show']);
     Route::post('update-customer', [CustomerController::class, 'customer_update']);
+    Route::get('pt-customer-details', [CustomerController::class, 'pt_trainer_details']);
+    Route::post('create-pt-details', [CustomerController::class, 'add_pt_details']);
 
     // Trainer Module
     Route::get('/create-trainer', [TrainerController::class, 'create_data']);
@@ -29,7 +31,6 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('trainer-edit/{id}', [TrainerController::class, 'update_trainer']);
     Route::post('update_trainer', [TrainerController::class, 'update']);
     Route::get('trainer-schedule/{id}', [TrainerController::class, 'schedule_manage']);
-    
 });
 
 

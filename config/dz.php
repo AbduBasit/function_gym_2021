@@ -172,6 +172,11 @@ return [
 					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 				],
+				'pt_trainer_details' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/jquery-steps/css/jquery.steps.css',
+					'vendor/select2/css/select2.min.css',
+				],
 				'customer_update_show' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/jquery-steps/css/jquery.steps.css',
@@ -475,6 +480,17 @@ return [
 					'js/deznav-init.js',
 				],
 				'form_wizard' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'vendor/jquery-steps/build/jquery.steps.min.js',
+					'vendor/jquery-validation/jquery.validate.min.js',
+					'js/plugins-init/jquery.validate-init.js',
+					'js/plugins-init/jquery-steps-init.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+					'vendor/select2/js/select2.full.min.js',
+					'js/plugins-init/select2-init.js',
+				],
+				'pt_trainer_details' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',

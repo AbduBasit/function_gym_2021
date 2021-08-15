@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-responsive">
+                        <table class="table table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th class="width80"><strong>#</strong></th>
@@ -47,9 +47,17 @@
                                     <td>{{$member->date_of_birth}}</td>
                                     <td>{{$member->date_of_joining}}</td>
                                     <td>{{$member->training_type}}</td>
-                                    <td>{{$member->trainer_name}}</td>
+                                    <td>
+                                        @if(!$member->trainer_name || $member->trainer_name == 'Select Trainer')
+                                        No Trainer
+                                        @else
+                                        {{$member->trainer_name}}
+                                        @endif
+                                    </td>
                                     <td>{{$member->status}}</td>
-                                    <td>{{$member->trainer_name}}</td>
+                                    <td class="text-success">
+                                        All Clear
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">
