@@ -72,7 +72,12 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="customer-view/{{$member->id}}">View</a>
-                                                <a class="dropdown-item" href="customer-edit/{{$member->id}}">Edit</a>
+                                                @if(!$member->trainer_name || $member->trainer_name == 'Select Trainer')
+                                                
+                                                @else
+                                                <a class="dropdown-item" href="customer-edit-pt/{{$member->id}}">Edit PT Information</a>
+                                                @endif
+                                                <a class="dropdown-item" href="customer-edit/{{$member->id}}">Edit Basic Information</a>
                                                 <a class="dropdown-item" href="customer-delete/{{$member->id}}">Delete</a>
                                             </div>
                                         </div>

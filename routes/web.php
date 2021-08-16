@@ -19,8 +19,12 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('customer-delete/{id}', [CustomerController::class, 'customer_delete']);
     Route::get('customer-edit/{id}', [CustomerController::class, 'customer_update_show']);
     Route::post('update-customer', [CustomerController::class, 'customer_update']);
+    Route::get('customer-edit-pt/{id}', [CustomerController::class, 'customer_update_pt']);
     Route::get('pt-customer-details', [CustomerController::class, 'pt_trainer_details']);
     Route::post('create-pt-details', [CustomerController::class, 'add_pt_details']);
+    Route::post('update-pt', [CustomerController::class, 'update_pt']);
+
+
 
     // Trainer Module
     Route::get('/create-trainer', [TrainerController::class, 'create_data']);
