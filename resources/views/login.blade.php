@@ -14,7 +14,7 @@
         <div class="row no-gutters">
             <div class="col-xl-12">
                 <div class="auth-form">
-                    <h4 class="text-center mb-4">Sign in your account</h4>
+                    <h4 class="text-center mb-4">Sign into your account</h4>
                     <form action="login_process" method="post">
                         @csrf
                         <div class="form-group">

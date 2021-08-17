@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController,
     App\Http\Controllers\UserController,
-    App\Http\Controllers\TrainerController;
+    App\Http\Controllers\TrainerController,
+    App\Http\Controllers\ActivityController;
 
 Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
 Route::post('login_process', [UserController::class, 'checkpoint']);
@@ -35,6 +36,12 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('trainer-edit/{id}', [TrainerController::class, 'update_trainer']);
     Route::post('update_trainer', [TrainerController::class, 'update']);
     Route::get('trainer-schedule/{id}', [TrainerController::class, 'schedule_manage']);
+
+
+    // Activity
+    Route::get('manage-rules', [ActivityController::class, 'rules_index']);
+    Route::get('update_rule_show/{id}', [ActivityController::class, 'update_rule_show']);
+    Route::post('update_rule', [ActivityController::class, 'update_rule']);
 });
 
 

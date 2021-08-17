@@ -53,6 +53,9 @@ return [
 				'trainer_manage'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'rules_index'  => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'trainer_view'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -168,6 +171,11 @@ return [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
 				'form_wizard' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/jquery-steps/css/jquery.steps.css',
+					'vendor/select2/css/select2.min.css',
+				],
+				'update_rule_show' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
@@ -495,6 +503,17 @@ return [
 					'vendor/select2/js/select2.full.min.js',
 					'js/plugins-init/select2-init.js',
 				],
+				'update_rule_show' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'vendor/jquery-steps/build/jquery.steps.min.js',
+					'vendor/jquery-validation/jquery.validate.min.js',
+					'js/plugins-init/jquery.validate-init.js',
+					'js/plugins-init/jquery-steps-init.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+					'vendor/select2/js/select2.full.min.js',
+					'js/plugins-init/select2-init.js',
+				],
 				'pt_trainer_details' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'vendor/jquery-steps/build/jquery.steps.min.js',
@@ -599,6 +618,11 @@ return [
 					'js/deznav-init.js',
 				],
 				'trainer_manage' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'rules_index' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

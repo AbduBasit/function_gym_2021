@@ -15,9 +15,9 @@
                     <span class="nav-text">Customers</span>
                 </a>
                 <ul aria-expanded="false">
+                    <li><a href="{!! url('/manage-customer'); !!}">Manage Customers</a></li>
                     <li><a href="create-customer">Add Customer</a></li>
                     <li><a href="{!! url('/pt-customer-details'); !!}">Add PT Details</a></li>
-                    <li><a href="{!! url('/manage-customer'); !!}">Manage Customers</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -27,6 +27,14 @@
                 <ul aria-expanded="false">
                     <li><a href="/create-trainer">Add Trainer</a></li>
                     <li><a href="{!! url('/manage-trainer'); !!}">Manage Trainers</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-381-layer-1"></i>
+                    <span class="nav-text">Activity</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href={{ url('manage-rules') }}>Manage Rules</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

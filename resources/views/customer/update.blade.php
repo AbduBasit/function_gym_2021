@@ -4,6 +4,10 @@
         padding: 0.9rem 1rem !important;
         font-size: 15px !important;
     }
+
+    .wizard>.steps>ul>li {
+        width: 25% !important;
+    }
 </style>
 
 {{-- Extends layout --}}
@@ -115,7 +119,13 @@
                                             </div>
                                             <div class="custom-file">
                                                 <input type="file" name="cfile" class="custom-file-input" id="customer-img" value="{{$datas->image}}">
-                                                <label class="custom-file-label" for="customer-img">Choose file</label>
+                                                <label class="custom-file-label" for="customer-img">
+                                                    @if($datas->advance_month)
+                                                    {{$datas->advance_month}}
+                                                    @else
+                                                    Choose Image
+                                                    @endif
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -123,7 +133,7 @@
                             </section>
 
 
-                           
+
 
 
 
@@ -145,14 +155,14 @@
                                     <div class="col-lg-3 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Training Type*</label>
-                                            <select name="ttype" class="form-control form-control-lg" required>
+                                            <select name="ttype" id="select_training" class="form-control form-control-lg" required>
                                                 <option hidden value="{{$datas->training_type}}">{{$datas->training_type}}</option>
                                                 <option value="PT">Person Training (PT)</option>
                                                 <option value="GT">General Training (GT)</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 mb-2">
+                                    <div class="col-lg-3 mb-2 display">
                                         <div class="form-group">
                                             <label class="text-label">Trainer Name</label>
                                             <select name="tname" id="single-select" class="form-control form-control-lg" required>
@@ -193,13 +203,13 @@
                                             <input type="text" name="gymfee" class="form-control" value="{{$datas->gym_fees}}" placeholder="5000" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 mb-2">
+                                    <div class="col-lg-3 mb-2 display">
                                         <div class="form-group">
                                             <label class="text-label">Trainer Fee Per Session*</label>
-                                            <input type="text" name="trainfee" value="{{$datas->trainer_fees_per_session}}" class="form-control" placeholder="2000" required>
+                                            <input type="text" name="trainfee" value="{{$datas->trainer_fees_per_session}}" class="form-control" placeholder="2000">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 mb-2">
+                                    <div class="col-lg-3 mb-2 display">
                                         <div class="form-group">
                                             <label class="text-label">Total Session</label>
                                             <input type="number" name="tsession" value="{{$datas->total_session}}" class="form-control disable" value="0" disabled>
@@ -226,7 +236,7 @@
 
                                     <div class="discount pl-3 pr-3">
                                         <div class="row">
-                                            
+
                                             <div class="col-lg-6 mb-2">
                                                 <div class="form-group ">
                                                     <label class="text-label">Enter Total of Months</label>
@@ -267,7 +277,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 @if($datas->mon_allow_pt=='on' || $datas->mon_allow_pt=='yes')
                                                 <div class="material-switch mt-3 float-right">
@@ -307,7 +317,7 @@
                                                 </div>
                                             </div>
                                             @if($datas->tue_allow_pt=='on' || $datas->tue_allow_pt=='yes')
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
                                                     <input id="tuesdaypt" value="yes" hidden name="tuesdaypt" type="checkbox" checked />
@@ -315,7 +325,7 @@
                                                 </div>
                                             </div>
                                             @else
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
                                                     <input id="tuesdaypt" value="yes" hidden name="tuesdaypt" type="checkbox" />
@@ -351,7 +361,7 @@
                                                 </div>
                                             </div>
                                             @if($datas->wed_allow_pt=='on' || $datas->wed_allow_pt=='yes')
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
                                                     <input id="wednesdaypt" value="yes" name="wednesdaypt" checked hidden type="checkbox" />
@@ -359,7 +369,7 @@
                                                 </div>
                                             </div>
                                             @else
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 <div class="material-switch mt-3 float-right">
                                                     <input id="wednesdaypt" value="yes" name="wednesdaypt" hidden type="checkbox" />
@@ -396,7 +406,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 @if($datas->thu_allow_pt=='on' || $datas->thu_allow_pt=='yes')
                                                 <div class="material-switch mt-3 float-right">
@@ -437,7 +447,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 @if($datas->fri_allow_pt=='on' || $datas->fri_allow_pt=='yes')
                                                 <div class="material-switch mt-3 float-right">
@@ -476,7 +486,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 @if($datas->sat_allow_pt=='on' || $datas->sat_allow_pt=='yes')
                                                 <div class="material-switch mt-3 float-right">
@@ -517,7 +527,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer border-0 pt-0">
+                                            <div class="card-footer border-0 pt-0 display">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
                                                 @if($datas->sun_allow_pt=='on' || $datas->sun_allow_pt=='yes')
                                                 <div class="material-switch mt-3 float-right">
