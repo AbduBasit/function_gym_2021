@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController,
     App\Http\Controllers\UserController,
     App\Http\Controllers\TrainerController,
-    App\Http\Controllers\ActivityController;
+    App\Http\Controllers\ActivityController,
+    App\Http\Controllers\PosController;
 
 Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
 Route::post('login_process', [UserController::class, 'checkpoint']);
@@ -42,6 +43,10 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('manage-rules', [ActivityController::class, 'rules_index']);
     Route::get('update_rule_show/{id}', [ActivityController::class, 'update_rule_show']);
     Route::post('update_rule', [ActivityController::class, 'update_rule']);
+
+
+    // Finance / Point of Sale (POS)
+    Route::get('manage-invoice', [PosController::class, 'invoice_index']);
 });
 
 
