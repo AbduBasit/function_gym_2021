@@ -6,7 +6,6 @@ jQuery(document).ready(() => {
             var gfees = document.getElementById('g-fees').value;
             var result = month * gfees;
             $("#t-amount").val(function () {
-                document.getElementById('t-amount').value = result;
                 return result;
             });
             
@@ -20,9 +19,20 @@ jQuery(document).ready(() => {
         jQuery('.display').hide();   
     }
     else{
-        jQuery('.display').show();   
+        jQuery('.display').show(); 
+          
     }
 
-   
+    dateCalc = (value, data) => {
+        var ruleDays = data;
+        var chooseDate = new Date(value);
+        chooseDate.setDate(chooseDate.getUTCDate() + ruleDays);
+        var futureDate = chooseDate.getFullYear() + '-' + ('0' + (chooseDate.getMonth() + 2)).slice(-2) + '-' + ('0' + (chooseDate.getDate())).slice(-2);
+        $("#month-end").val(function() {
+            return futureDate;
+        });
+    }
+
+
 
 })

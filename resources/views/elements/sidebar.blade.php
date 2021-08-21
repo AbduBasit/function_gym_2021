@@ -16,7 +16,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{!! url('/manage-customer'); !!}">Manage Customers</a></li>
-                    <li><a href="create-customer">Add Customer</a></li>
+                    <li><a href="{{url('/create-customer')}}">Add Customer</a></li>
                     <li><a href="{!! url('/pt-customer-details'); !!}">Add PT Details</a></li>
                 </ul>
             </li>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\customer;
+use App\Models\rule;
 use App\Models\trainer;
+use Illuminate\Support\Facades\DB;
 
 class FitoadminController extends Controller
 {
@@ -309,10 +311,11 @@ class FitoadminController extends Controller
         $page_description = 'Some description for the page';
         $db_2 = new trainer();
         $data_2 = $db_2::all();
+        $data = DB::select("select * from rules where id = 1");
 
         $action = __FUNCTION__;
 
-        return view('customer.createnew', compact('page_title', 'page_description', 'action'), ['trainers' => $data_2]);
+        return view('customer.createnew', compact('page_title', 'page_description', 'action'), ['trainers' => $data_2, 'rul' => $data]);
     }
 
 

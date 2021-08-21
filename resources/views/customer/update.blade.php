@@ -120,8 +120,8 @@
                                             <div class="custom-file">
                                                 <input type="file" name="cfile" class="custom-file-input" id="customer-img" value="{{$datas->image}}">
                                                 <label class="custom-file-label" for="customer-img">
-                                                    @if($datas->advance_month)
-                                                    {{$datas->advance_month}}
+                                                    @if($datas->image)
+                                                    {{$datas->image}}
                                                     @else
                                                     Choose Image
                                                     @endif
@@ -143,13 +143,13 @@
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Date of Joining*</label>
-                                            <input type="date" name="doj" class="form-control" placeholder="Cellophane Square" value="{{$datas->date_of_joining}}" required>
+                                            <input type="date" name="doj" class="form-control" onchange="dateCalc(this.value, {{$rul[0]->values}})" placeholder="Cellophane Square" value="{{$datas->date_of_joining}}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Month End Date</label>
-                                            <input type="text" class="form-control disable" name="mde" value="{{$datas->month_end}}" disabled>
+                                            <input type="text" class="form-control disable" id="month-end" value="{{$datas->month_end}}" name="mde" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 mb-2">
@@ -200,7 +200,7 @@
                                     <div class="col-lg-3 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Gym Fee*</label>
-                                            <input type="text" name="gymfee" class="form-control" value="{{$datas->gym_fees}}" placeholder="5000" required>
+                                            <input type="text" name="gymfee" class="form-control" value="{{$datas->gym_fees}}" id="g-fees" placeholder="5000" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 mb-2 display">
@@ -220,20 +220,40 @@
                                     <div class="col-lg-12 mb-3">
                                         <div class="form-group">
                                             <label class="text-label">Advance Payment?</label>
-                                            @if($datas->advance_allow=='yes')
-                                            <div class="material-switch mt-3">
-                                                <input id="discounttoggle" hidden name="discounttoggle" value="yes" type="checkbox" checked />
+                                            @if($datas->advnace_allow == ' yes' || $datas->advnace_allow == 'on') <div class="material-switch mt-3">
+                                                <input id="discounttoggle" hidden name="advnace_allow" value="yes" type="checkbox" checked />
                                                 <label for="discounttoggle" id="toggle-discount" class="label-default"></label>
                                             </div>
                                             @else
                                             <div class="material-switch mt-3">
-                                                <input id="discounttoggle" hidden name="discounttoggle" type="checkbox" />
+                                                <input id="discounttoggle" hidden name="advnace_allow" type="checkbox" />
                                                 <label for="discounttoggle" id="toggle-discount" class="label-default"></label>
                                             </div>
                                             @endif
                                         </div>
                                     </div>
 
+                                    @if($datas->advnace_allow == ' yes' || $datas->advnace_allow == 'on')
+
+                                    <div class="discount1 pl-3 pr-3">
+                                        <div class="row">
+
+                                            <div class="col-lg-6 mb-2">
+                                                <div class="form-group ">
+                                                    <label class="text-label">Enter Total of Months</label>
+                                                    <input type="number" min="0" max="24" name="advance_month" value="{{$datas->advance_month}}" id="t-months" placeholder="10" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mb-2">
+                                                <div class="form-group ">
+                                                    <label class="text-label">Total Amount</label>
+                                                    <input type="text" name="avance_total" placeholder="0" id="t-amount" value="{{$datas->avance_total}}" disabled class="disable form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @else
                                     <div class="discount pl-3 pr-3">
                                         <div class="row">
 
@@ -246,11 +266,12 @@
                                             <div class="col-lg-6 mb-2">
                                                 <div class="form-group ">
                                                     <label class="text-label">Total Amount</label>
-                                                    <input type="text" name="avance_total" placeholder="0" id="t-amount" value="{{$datas->advance_total}}" disabled class="disable form-control">
+                                                    <input type="text" name="avance_total" placeholder="0" id="t-amount" value="{{$datas->avance_total}}" disabled class="disable form-control">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </section>
                             <h4>Gym Schedule</h4>

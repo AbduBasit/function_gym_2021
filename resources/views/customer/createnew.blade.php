@@ -140,13 +140,13 @@
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Date of Joining*</label>
-                                            <input type="date" name="doj" class="form-control" placeholder="Cellophane Square" required>
+                                            <input type="date" name="doj" class="form-control" onchange="dateCalc(this.value, {{$rul[0]->values}})" placeholder="Cellophane Square" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Month End Date</label>
-                                            <input type="text" class="form-control disable" name="mde" value="undefine" disabled>
+                                            <input type="text" class="form-control disable" id="month-end" name="mde" value="undefine" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 mb-2">

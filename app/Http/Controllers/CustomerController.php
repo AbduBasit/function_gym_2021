@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Http\Controllers\Controller;
+use App\Models\rule;
 use App\Models\trainer;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +29,15 @@ class CustomerController extends Controller
             $db->image = $req->file('cfile')->store('customer_images');
         }
         $db->date_of_joining = $req->doj;
-        $db->month_end = $req->mde;
+        // date_end function
+        $data = DB::select("select * from rules where id = 1");
+        if ($req->doj) {
+            $Date2 = date('Y-m-d', strtotime($req->doj . "+ 1 month + " . $data[0]->values . " day"));
+            $db->month_end = $Date2;
+        } else {
+            $db->month_end = "No Date";
+        }
+
         $db->training_type = $req->ttype;
         $db->trainer_name = $req->tname;
         $db->status = $req->status;
@@ -39,7 +48,14 @@ class CustomerController extends Controller
         $db->total_session = $req->tsession;
         $db->advnace_allow = $req->advnace_allow;
         $db->advance_month = $req->advance_month;
-        $db->avance_total = $req->avance_total;
+
+        // advance total calculation
+        if ($req->advnace_allow == 'yes') {
+            $db->avance_total = $req->gymfee * $req->advance_month;
+        } else {
+            $db->avance_total = 0;
+        }
+
         $db->mon_start_time = $req->mondaytimein;
         $db->mon_end_time = $req->mondaytimeout;
         $db->mon_allow_pt = $req->mondaypt;
@@ -103,17 +119,20 @@ class CustomerController extends Controller
 
     public function customer_update_show($id)
     {
-        $page_title = 'View Customer Profile';
+        $page_title = 'Customer Update';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new customer();
         $db_2 = new trainer();
         $data = $db::all()->find($id);
         $data_2 = $db_2::all();
-        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2]);
+        $data_3 = (DB::select("select * from rules where id = 1"));
+        // dd($data_3);
+        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2, 'rul' => $data_3]);
     }
     public function customer_update(Request $req)
     {
+        $data_3 = (DB::select("select * from rules where id = 1"));
         $db = new customer();
         $data = $db::all()->find($req->id);
         $data->first_name = $req->firstName;
@@ -127,56 +146,15 @@ class CustomerController extends Controller
         if ($req->file('cfile')) {
             $data->image = $req->file('cfile')->store('customer_images');
         }
-        $data->current_activity_level = $req->activity;
-        $data->daily_routine = $req->dailyroutine;
-        $data->medical_condition = $req->medicon;
-        $data->medical_condition_description = $req->injury;
-        $data->previous_excersice = $req->preexcersice;
-        $data->daily_diet = $req->dailydiet;
-        $data->test1_core_activation = $req->tva1;
-        $data->test1_core_activation_description = $req->tva_1_com;
-        $data->test2_core_activation = $req->tva2;
-        $data->test2_core_activation_description = $req->tva_2_com;
-        $data->strength_core_activation = $req->absstrength;
-        $data->strength_core_activation_description = $req->weakcore;
-        $data->test_glute_activation = $req->glute;
-        $data->test_glute_activation_description = $req->glute_com;
-        $data->strength_glute_activation = $req->glutestrength;
-        $data->strength_glute_activation_description = $req->glutecore;
-        $data->test_clamshells_activation = $req->clamshell;
-        $data->test_clamshells_activation_description = $req->clamshell_com;
-        $data->strength_clamshells_activation = $req->clamshellstrength;
-        $data->strength_clamshells_activation_description = $req->clamshellcore;
-        $data->measurement_cal_unit = $req->mcal;
-        $data->chest = $req->chest;
-        $data->waist = $req->waist;
-        $data->hips = $req->hips;
-        $data->weight_cal_unit = $req->weight_unit;
-        $data->body_weight = $req->weight;
-        $data->body_fat = $req->fat;
-        $data->muscles_mass = $req->muscles;
-        $data->squat_test_1 = $req->sc1;
-        $data->squat_test_1_desc = $req->sc1_desc;
-        $data->squat_test_2 = $req->sc2;
-        $data->squat_test_2_desc = $req->sc2_desc;
-        $data->squat_test_3 = $req->sc3;
-        $data->squat_test_3_desc = $req->sc3_desc;
-        $data->squat_test_4 = $req->sc4;
-        $data->squat_test_4_desc = $req->sc4_desc;
-        $data->squat_test_5 = $req->sc5;
-        $data->squat_test_5_desc = $req->sc5_desc;
-        $data->squat_test_6 = $req->sc6;
-        $data->squat_test_6_desc = $req->sc6_desc;
-        $data->squat_test_7 = $req->sc7;
-        $data->squat_test_7_desc = $req->sc7_desc;
-        $data->squat_test_8 = $req->sc8;
-        $data->squat_test_8_desc = $req->sc8_desc;
-        $data->squat_test_9 = $req->sc9;
-        $data->squat_test_9_desc = $req->sc9_desc;
-        $data->strength_squat_activation = $req->squatstrength;
-        $data->strength_squat_activation_description = $req->squatcore;
         $data->date_of_joining = $req->doj;
-        $data->month_end = $req->mde;
+        // date_end function
+        if ($req->doj) {
+            $Date2 = date('Y-m-d', strtotime($req->doj . "+ 1 month + " . $data_3[0]->values . " day"));
+            $data->month_end = $Date2;
+        } else {
+            $data->month_end = "No Date";
+        }
+
         $data->training_type = $req->ttype;
         $data->trainer_name = $req->tname;
         $data->status = $req->status;
@@ -185,9 +163,16 @@ class CustomerController extends Controller
         $data->gym_fees = $req->gymfee;
         $data->trainer_fees_per_session = $req->trainfee;
         $data->total_session = $req->tsession;
-        $db->advnace_allow = $req->advnace_allow;
-        $db->advance_month = $req->advance_month;
-        $db->avance_total = $req->avance_total;
+        $data->advnace_allow = $req->advnace_allow;
+        $data->advance_month = $req->advance_month;
+        // advance total calculation
+        $count = '';
+        if ($req->advnace_allow == "yes") {
+            $count = $req->gymfee * $req->advance_month;
+            $data->avance_total = $count;
+        } else {
+            $data->avance_total = 0;
+        }
         $data->mon_start_time = $req->mondaytimein;
         $data->mon_end_time = $req->mondaytimeout;
         $data->mon_allow_pt = $req->mondaypt;
