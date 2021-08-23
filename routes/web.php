@@ -49,6 +49,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);
     Route::get('manage-expense', [PosController::class, 'expense_index']);
     Route::get('create-expense', [PosController::class, 'expense_create']);
+    Route::post('expense-add', [PosController::class, 'add_expense']);
 });
 
 

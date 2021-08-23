@@ -39,34 +39,33 @@
                                     <th><strong>Action</strong></th>
                                 </tr>
                             </thead>
-                            <form action="" method="POST">
+                            <form action="expense-add" method="POST">
                                 <tbody class="report">
-                                    <tr>
-                                        <td> <input type="text" required class="form-control border-primary new-input"> </td>
-                                        <td> <input type="text" class="form-control new-input  border-primary"> </td>
-                                        <td> <input type="number" value="0" min="0" required class="form-control new-input  border-primary"> </td>
-                                        <td> <input type="number" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>
-                                        <td> <input type="number" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>
-                                        <td> <input type="number" value="0" min="0" max="100" class="width80 form-control new-input  border-primary"> </td>
-                                        <td> <input type="text" value="0" disabled class="disable form-control new-input border-primary"> </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <button type="button" class="btn btn-primary addRow shadow btn-xs sharp mr-1"><i class="fa fa-plus"></i></button>
-                                                <button type="button" id="deleteRow" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button>
-                                            </div>
-                                        </td>
+                                    <tr id="row-sec">
+                                        @csrf
+                                        <td> <input type="text" name="exp_title[]" required class="form-control border-primary new-input"> </td>
+                                        <td> <input type="text" name="exp_desc[]" class="form-control new-input  border-primary"> </td>
+                                        <td> <input type="number" name="exp_amount[]" value="0" min="0" required class="form-control new-input  border-primary"> </td>
+                                        <td> <input type="number" name="exp_quan[]" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>
+                                        <td> <input type="number" name="exp_disc[]" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>
+                                        <td> <input type="number" name="exp_tax[]" value="0" min="0" max="100" class="width80 form-control new-input  border-primary"> </td>
+                                        <td> <input type="text" name="exp_net[]" value="0" disabled class="disable form-control new-input border-primary"> </td>
                                     </tr>
                                 </tbody>
-                            </form>
+
                         </table>
-
                     </div>
+                </div>
 
-
+                <div class="card-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary ml-auto shadow btn-sm mr-1"><i class="fa fa-plus"></i> Submit</button>
+                        <button type="button" id="addRow" class="btn btn-primary ml-auto shadow btn-sm mr-1"><i class="fa fa-plus"></i> Add Row</button>
+                    </div>
                 </div>
             </div>
         </div>
-
+        </form>
     </div>
 </div>
 

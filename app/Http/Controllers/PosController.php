@@ -31,4 +31,18 @@ class PosController extends Controller
         $action = __FUNCTION__;
         return view('pos.createExpense', compact('page_title', 'page_description', 'action'));
     }
+    public function add_expense(Request $req)
+    {
+        $title = $req->exp_title;
+        $desc = $req->exp_desc;
+        $amount = $req->exp_amount;
+        $quan = $req->exp_quan;
+        $disc = $req->exp_disc;
+        $tax = $req->exp_tax;
+        $net = $req->exp_net;
+
+        foreach ($title as $index => $titles) {
+            echo $titles . $desc[$index] . $amount[$index] . $quan[$index] . $disc[$index] . $tax[$index];
+        }
+    }
 }
