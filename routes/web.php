@@ -47,6 +47,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
 
     // Finance / Point of Sale (POS)
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);
+    Route::get('manage-expense', [PosController::class, 'expense_index']);
+    Route::get('create-expense', [PosController::class, 'expense_create']);
 });
 
 

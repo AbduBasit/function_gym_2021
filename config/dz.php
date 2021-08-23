@@ -53,6 +53,13 @@ return [
 				'invoice_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'expense_index' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/datatables/css/jquery.dataTables.min.css',
+				],
+				'expense_create' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'trainer_manage'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -620,7 +627,19 @@ return [
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],
-				'invoice_index'=> [
+				'invoice_index' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'expense_index' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'vendor/datatables/js/jquery.dataTables.min.js',
+					'js/plugins-init/datatables.init.js',
+					'js/deznav-init.js',
+				],
+				'expense_create' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
