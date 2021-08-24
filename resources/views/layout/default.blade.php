@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('dz.name') }} | @yield('title', $page_title ?? '')</title>
+    <title>Function | @yield('title', $page_title ?? '')</title>
 
     <meta name="description" content="@yield('page_description', $page_description ?? '')" />
     <!-- Favicon icon -->

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use App\Models\expense;
+use App\Models\trainer;
 use Dotenv\Validator;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PosController extends Controller
 {
@@ -38,55 +40,19 @@ class PosController extends Controller
     }
     public function add_expense(Request $req)
     {
-
-        if ($req->ajax()) {
-            $rule = array(
-                'exp_title.*' => 'required',
-                'exp_desc.*' => 'required',
-                'exp_amount.*' => 'required',
-                'exp_quan.*' => 'required',
-                'exp_disc.*' => 'required',
-                'exp_tax.*' => 'required',
-                'exp_net.*' => 'required',
-            );
-            $error = Validator::make($req->all(), $rule);
-            if ($error->fails()) {
-                return response()->json(
-                    [
-                        'error' => $error->errors()->all(),
-                    ]
-                );
-            }
-            $exp_title = $req->exp_title;
-            $exp_desc = $req->exp_desc;
-            $exp_amount = $req->exp_amount;
-            $exp_quan = $req->exp_quan;
-            $exp_disc = $req->exp_disc;
-            $exp_tax = $req->exp_tax;
-            $exp_net = $req->exp_net;
-            for ($count = 0; $count < count($exp_title); $count++) {
-                $data = array(
-                    'exp_title' => $exp_title[$count],
-                    'exp_desc' => $exp_desc[$count],
-                    'exp_amount' => $exp_amount[$count],
-                    'exp_quan' => $exp_quan[$count],
-                    'exp_disc' => $exp_disc[$count],
-                    'exp_tax' => $exp_tax[$count],
-                    'exp_net' => $exp_net[$count],
-
-                );
-                $insert_data[] = $data;
-                expense::insert($insert_data);
-                return response()->json([
-                    'sucess' => 'data added success fully',
-                ]);
-            }
+        foreach($req->exp_title as $key => $exp_title){
+            $data = new expense();
+            $data->title = $exp_title;
+            $data->desc = $req->exp_desc[$key];
+            $data->amount = $req->exp_amount[$key];
+            $data->quan = $req->exp_quan[$key];
+            $data->disc = $req->exp_disc[$key];
+            $data->tax = $req->exp_tax[$key];
+            
+            $data->save();
+            return $key;
         }
-
-
-        // return $item;
-        // return redirect('/create-expense');
-
+        return redirect('create-expense');
     }
 
     public function expense_delete($id)
@@ -122,5 +88,16 @@ class PosController extends Controller
 
         $data->save();
         return redirect('manage-expense');
+    }
+
+    public function trainer_commision_index(){
+        $page_title = 'Trainer Commision Report';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        $db = new trainer();
+        $data = $db->all();
+
+        $customer = DB::select('select *  from customers where trainer_name = "Syed Junaid Ali"');
+        return view('pos.trainerCommision', compact('page_title', 'page_description', 'action'), ['data' => $data, 'customer' => $customer]);
     }
 }

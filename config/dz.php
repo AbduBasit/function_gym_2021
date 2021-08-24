@@ -50,6 +50,9 @@ return [
 				'schedule_manage' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'trainer_commision_index' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'invoice_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -626,6 +629,11 @@ return [
 					'js/deznav-init.js',
 				],
 				'schedule_manage' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'trainer_commision_index' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

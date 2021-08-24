@@ -48,11 +48,12 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     // Finance / Point of Sale (POS)
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);
     Route::get('manage-expense', [PosController::class, 'expense_index']);
-    Route::get('create-expense', [PosController::class, 'expense_create']);
-    Route::post('expense-add', [PosController::class, 'add_expense']);
+    Route::get('create-expense', [PosController::class, 'expense_create'])->name('create-expense');
+    Route::post('expense-add', [PosController::class, 'add_expense'])->name('expense-add');
     Route::get('deleteExpense/{id}', [PosController::class, 'expense_delete']);
     Route::get('editExpense/{id}', [PosController::class, 'expense_edit']);
     Route::post('expense-edit', [PosController::class, 'expense_edit_put']);
+    Route::get('trainer-commision', [PosController::class, 'trainer_commision_index']);
 });
 
 

@@ -208,7 +208,7 @@
                                     <div class="col-lg-3 mb-2 display">
                                         <div class="form-group">
                                             <label class="text-label">Total Session</label>
-                                            <input type="number" name="tsession" class="form-control disable" value="0" disabled>
+                                            <input type="number" name="tsession" id="total_session" class="form-control disable" value="0" disabled>
                                         </div>
                                     </div>
 
@@ -217,7 +217,7 @@
                                         <div class="form-group">
                                             <label class="text-label">Advance Payment?</label>
                                             <div class="material-switch mt-3">
-                                                <input id="discounttoggle" hidden name="advnace_allow" value="yes" type="checkbox" />
+                                                <input id="discounttoggle" hidden name="advnace_allow" value="1" type="checkbox" />
                                                 <label for="discounttoggle" id="toggle-discount" class="label-default"></label>
                                             </div>
                                         </div>
@@ -244,7 +244,7 @@
                             </section>
                             <h4>Gym Schedule</h4>
                             <section class="pl-2 pr-2">
-                                <div class="row">
+                                <div class="row" id="parentOfCheckbox">
                                     <div class="col-lg-6">
                                         <div class="card bg-card-form-customer">
                                             <div class="card-header border-0 pb-0">
@@ -268,8 +268,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="mondaypt" name="mondaypt" hidden type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="mondaypt" value="1" name="mondaypt" hidden type="checkbox" />
                                                     <label for="mondaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -300,8 +300,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="tuesdaypt" value="yes" hidden name="tuesdaypt" type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="tuesdaypt" value="1" hidden name="tuesdaypt" type="checkbox" />
                                                     <label for="tuesdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -334,8 +334,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="wednesdaypt" value="yes" name="wednesdaypt" hidden type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="wednesdaypt" value="1" name="wednesdaypt" hidden type="checkbox" />
                                                     <label for="wednesdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -366,8 +366,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="thursdaypt" value="yes" hidden name="thursdaypt" type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="thursdaypt" value="1" hidden name="thursdaypt" type="checkbox" />
                                                     <label for="thursdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -400,8 +400,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="fridaypt" value="yes" name="fridaypt" hidden type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="fridaypt" value="1" name="fridaypt" hidden type="checkbox" />
                                                     <label for="fridaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -432,8 +432,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="saturdaypt" value="yes" hidden name="saturdaypt" type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="saturdaypt" value="1" hidden name="saturdaypt" type="checkbox" />
                                                     <label for="saturdaypt" class="label-default"></label>
                                                 </div>
                                             </div>
@@ -466,8 +466,8 @@
                                             </div>
                                             <div class="card-footer display border-0 pt-0 display-none">
                                                 <p class="card-text d-inline">Person Training (PT)?</p>
-                                                <div class="material-switch mt-3 float-right">
-                                                    <input id="sundaypt" hidden name="sundaypt" value="yes" type="checkbox" />
+                                                <div class="material-switch data-input mt-3 float-right">
+                                                    <input id="sundaypt" hidden name="sundaypt" value="1" type="checkbox" />
                                                     <label for="sundaypt" class="label-default"></label>
                                                 </div>
                                             </div>
