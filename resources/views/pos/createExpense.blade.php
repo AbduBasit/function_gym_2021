@@ -39,10 +39,10 @@
                                     <th><strong>Action</strong></th>
                                 </tr>
                             </thead>
-                            <form action="expense-add" method="POST">
+                            <form id="new">
                                 <tbody class="report">
                                     <tr id="row-sec">
-                                        @csrf
+
                                         <td> <input type="text" name="exp_title[]" required class="form-control border-primary new-input"> </td>
                                         <td> <input type="text" name="exp_desc[]" class="form-control new-input  border-primary"> </td>
                                         <td> <input type="number" name="exp_amount[]" value="0" min="0" required class="form-control new-input  border-primary"> </td>
@@ -59,8 +59,11 @@
 
                 <div class="card-footer">
                     <div class="row">
-                        <button type="submit" class="btn btn-primary ml-auto shadow btn-sm mr-1"><i class="fa fa-plus"></i> Submit</button>
-                        <button type="button" id="addRow" class="btn btn-primary ml-auto shadow btn-sm mr-1"><i class="fa fa-plus"></i> Add Row</button>
+                        <div class="btn-group ml-auto">
+                            <button type="button" id="addRow" class="btn btn-outline-primary shadow btn-sm mr-1"><i class="fa fa-plus"></i> Add Row</button>
+                            @csrf
+                            <button type="submit" id="save" class="btn btn-outline-info shadow btn-md mr-1"> Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,5 +71,49 @@
         </form>
     </div>
 </div>
+<script src="{{ asset('./js/jquery.js') }}"></script>
+<script>
+    var count = 1;
+    // addRow function
+    jQuery('#addRow').on('click', () => {
+        count = count + 1;
+        var html_code = ' <tr id="row' + count + '">';
+        html_code += '<td> <input type="text" name="exp_title[' + count + ']" required class="form-control border-primary new-input"> </td>';
+        html_code += '<td> <input type="text" name="exp_desc[' + count + ']" class="form-control new-input  border-primary"> </td>';
+        html_code += '<td> <input type="number" name="exp_amount[' + count + ']" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
+        html_code += '<td> <input type="number" name="exp_quan[' + count + ']" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>';
+        html_code += '<td> <input type="number" name="exp_disc[' + count + ']" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>';
+        html_code += ' <td> <input type="number" name="exp_tax[' + count + ']" value="0" min="0" max="100" class="width80 form-control new-input  border-primary"> </td>';
+        html_code += ' <td> <input type="text" name="exp_net[' + count + ']" value="0" disabled class="disable form-control new-input border-primary"> </td>';
+        html_code += ' <td class="width80"><button type="button" class="deleteRow btn btn-danger shadow btn-sm sharp" data-row="row' + count + '"><i class="fa fa-trash"></i></button></td>';
+        html_code += '</tr>'
+        jQuery('.report').append(html_code);
+    })
+
+    // delete row
+    jQuery(document).on('click', '.deleteRow', function() {
+        var delete_row = jQuery(this).data("row");
+        jQuery('#' + delete_row).remove();
+    })
+
+    jQuery('#new').submit((e) => {
+        e.preventDefault()
+        jQuery.ajax({
+                url: '{{url("expense-add")}}',
+                method: 'post',
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: () => {
+                    $('#save').attr('disabled', 'disabled')
+                },
+                success: (data) => {
+                    console.log(data)
+                }
+            }
+
+
+        )
+    })
+</script>
 
 @endsection

@@ -73,7 +73,7 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="customer-view/{{$member->id}}">View</a>
                                                 @if(!$member->trainer_name || $member->trainer_name == 'Select Trainer')
-                                                
+
                                                 @else
                                                 <a class="dropdown-item" href="customer-edit-pt/{{$member->id}}">Edit PT Information</a>
                                                 @endif
