@@ -179,6 +179,16 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-lg-3 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Due Fees*</label>
+                                            <select name="fees_status" class="form-control form-control-lg" required>
+                                                <option hidden>Select status</option>
+                                                <option value="All Clear">All Clear</option>
+                                                <option value="Unpaid">Unpaid</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="col-lg-3 mb-2">
                                         <div class="form-group">
@@ -226,13 +236,19 @@
                                     <div class="discount pl-3 pr-3">
                                         <div class="row">
 
-                                            <div class="col-lg-6 mb-2">
+                                            <div class="col-lg-4 mb-2">
                                                 <div class="form-group ">
                                                     <label class="text-label">Enter Total of Months</label>
                                                     <input type="number" min="0" max="24" name="advance_month" id="t-months" placeholder="10" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 mb-2">
+                                            <div class="col-lg-4 mb-2">
+                                                <div class="form-group ">
+                                                    <label class="text-label">discount</label>
+                                                    <input type="number" min="0" name="discount" id="t-discount" placeholder="10" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 mb-2">
                                                 <div class="form-group ">
                                                     <label class="text-label">Total Amount</label>
                                                     <input type="text" name="avance_total" placeholder="0" id="t-amount" disabled class="disable form-control">

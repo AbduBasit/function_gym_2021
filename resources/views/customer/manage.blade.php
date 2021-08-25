@@ -56,7 +56,11 @@
                                     </td>
                                     <td>{{$member->status}}</td>
                                     <td class="text-success">
+                                        @if($member->fees_clear == 'All Clear')
                                         All Clear
+                                        @elseif ($member->fees_clear == 'Unpaid')
+                                        <a href="add_fees/{{$member->id}}" id="add_fees" class="text-danger">Unpaid</a>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="dropdown">

@@ -63,6 +63,9 @@ return [
 				'expense_create' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'index_fees_add' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'expense_edit' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -651,6 +654,12 @@ return [
 					'js/deznav-init.js',
 				],
 				'expense_create' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+					'js/script.js'
+				],
+				'index_fees_add' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

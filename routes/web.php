@@ -26,6 +26,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('create-pt-details', [CustomerController::class, 'add_pt_details']);
     Route::post('update-pt', [CustomerController::class, 'update_pt']);
 
+    Route::get('add_fees/{id}', [CustomerController::class, 'index_fees_add']);
+
 
 
     // Trainer Module

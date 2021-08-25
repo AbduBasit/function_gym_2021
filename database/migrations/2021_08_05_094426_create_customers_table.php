@@ -94,6 +94,7 @@ class CreateCustomersTable extends Migration
             $table->string('training_type')->nullable();
             $table->string('trainer_name')->nullable();
             $table->string('status')->nullable();
+            $table->string('fees_clear')->nullable();
             $table->string('reference_name')->nullable();
             $table->string('registration_fees')->nullable();
             $table->string('gym_fees')->nullable();
@@ -101,6 +102,7 @@ class CreateCustomersTable extends Migration
             $table->string('total_session')->nullable();
             $table->string('advnace_allow')->nullable();
             $table->string('advance_month')->nullable();
+            $table->string('discount')->nullable();
             $table->string('avance_total')->nullable();
 
             // Timeschedule

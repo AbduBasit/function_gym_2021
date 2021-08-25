@@ -40,7 +40,7 @@ class PosController extends Controller
     }
     public function add_expense(Request $req)
     {
-        foreach($req->exp_title as $key => $exp_title){
+        foreach ($req->exp_title as $key => $exp_title) {
             $data = new expense();
             $data->title = $exp_title;
             $data->desc = $req->exp_desc[$key];
@@ -48,7 +48,7 @@ class PosController extends Controller
             $data->quan = $req->exp_quan[$key];
             $data->disc = $req->exp_disc[$key];
             $data->tax = $req->exp_tax[$key];
-            
+
             $data->save();
             return $key;
         }
@@ -90,14 +90,16 @@ class PosController extends Controller
         return redirect('manage-expense');
     }
 
-    public function trainer_commision_index(){
+    public function trainer_commision_index()
+    {
         $page_title = 'Trainer Commision Report';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new trainer();
-        $data = $db->all();
+        $data = DB::select('select * from trainers');
+        $customer = DB::select('select DISTINCT * from customers INNER JOIN trainers ON customers.trainer_name = CONCAT(trainers.first_name, " ", trainers.last_name)');
 
-        $customer = DB::select('select *  from customers where trainer_name = "Syed Junaid Ali"');
+
         return view('pos.trainerCommision', compact('page_title', 'page_description', 'action'), ['data' => $data, 'customer' => $customer]);
     }
 }

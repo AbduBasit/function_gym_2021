@@ -184,6 +184,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="text-label">Due Fees*</label>
+                                        <select name="fees_status" class="form-control form-control-lg" required>
+                                            <option hidden value="{{$datas->fees_clear}}">{{$datas->fees_clear}}</option>
+                                            <option value="All Clear">All Clear</option>
+                                            <option value="Unpaid">Unpaid</option>
+                                        </select>
+                                    </div>
+
                                     <div class="col-lg-3 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Reference Name</label>
@@ -246,10 +255,17 @@
                                             </div>
                                             <div class="col-lg-6 mb-2">
                                                 <div class="form-group ">
+                                                    <label class="text-label">Discount</label>
+                                                    <input type="text" name="discount" placeholder="0" id="t-discount" value="{{$datas->discount}}" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mb-2">
+                                                <div class="form-group ">
                                                     <label class="text-label">Total Amount</label>
                                                     <input type="text" name="avance_total" placeholder="0" id="t-amount" value="{{$datas->avance_total}}" disabled class="disable form-control">
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
@@ -261,6 +277,12 @@
                                                 <div class="form-group ">
                                                     <label class="text-label">Enter Total of Months</label>
                                                     <input type="number" min="0" max="24" name="advance_month" value="{{$datas->advance_month}}" id="t-months" placeholder="10" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 mb-2">
+                                                <div class="form-group ">
+                                                    <label class="text-label">Discount</label>
+                                                    <input type="text" name="discount" placeholder="0" id="t-discount" value="{{$datas->discount}}" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-2">

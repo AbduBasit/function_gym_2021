@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-responsive table-hover">
+                        <table class="table table-md-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th><strong>Name</strong></th>
@@ -33,24 +33,32 @@
                                     <th><strong>Calculated Commsion</strong></th>
                                     <th><strong>Total Session</strong></th>
                                     <th><strong>Total Salary</strong></th>
-                                    <th><strong>Action</strong></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($customer as $cust)
                                 @foreach ($data as $item)
-                                    @foreach ($customer as $cust)
-                                    <tr>
-                                        <td>{{$item->first_name ." ". $item->last_name }}</td>
-                                        <td>{{$item->fixed_salary}}</td>
-                                        <td>{{$item->commision . "%" }}</td>
-                                        <td>{{count($customer)}}</td>
-                                        <td>{{round($cust->gym_fees / $item->commision * 100)}}</td>
-                                        <td>{{$item->first_name ." ". $item->last_name }}</td>
-                                        <td></td>
-                                    </tr>
-                                    @endforeach
+
+                                <tr>
+                                    <td>{{$item->first_name ." ". $item->last_name }}</td>
+                                    <td>{{$item->fixed_salary}}</td>
+                                    <td>{{$item->commision . "%" }}</td>
+                                    <td>{{count($customer)}}</td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        {{$cust->total_session}}
+                                    </td>
+                                    <td>
+                                    </td>
+
+
+                                </tr>
                                 @endforeach
-                                
+                                @endforeach
+
+
+
                             </tbody>
                         </table>
                     </div>

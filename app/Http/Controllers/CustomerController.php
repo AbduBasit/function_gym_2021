@@ -41,17 +41,18 @@ class CustomerController extends Controller
         $db->training_type = $req->ttype;
         $db->trainer_name = $req->tname;
         $db->status = $req->status;
+        $db->fees_clear = $req->fees_status;
         $db->reference_name = $req->reference;
         $db->registration_fees = $req->regfee;
         $db->gym_fees = $req->gymfee;
         $db->trainer_fees_per_session = $req->trainfee;
-        $db->total_session = $req->tsession;
-        $db->advnace_allow = $req->advnace_allow;
+        $db->advnace_allow = $req->avance_total;
         $db->advance_month = $req->advance_month;
+        $db->discount = $req->discount;
 
         // advance total calculation
         if ($req->advnace_allow == 'yes') {
-            $db->avance_total = $req->gymfee * $req->advance_month;
+            $db->avance_total = $req->gymfee * $req->advance_month - $req->discount;
         } else {
             $db->avance_total = 0;
         }
@@ -59,6 +60,8 @@ class CustomerController extends Controller
         $db->mon_start_time = $req->mondaytimein;
         $db->mon_end_time = $req->mondaytimeout;
         $db->mon_allow_pt = $req->mondaypt;
+
+
         $db->tue_start_time = $req->tuesdaytimein;
         $db->tue_end_time = $req->tuesdaytimeout;
         $db->tue_allow_pt = $req->tuesdaypt;
@@ -77,6 +80,33 @@ class CustomerController extends Controller
         $db->sun_start_time = $req->sundaytimein;
         $db->sun_end_time = $req->sundaytimeout;
         $db->sun_allow_pt = $req->sundaypt;
+
+        $count = 0;
+
+        if ($req->mondaypt) {
+            $count = $count + 1;
+        }
+        if ($req->tuesdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->wednesdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->thursdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->fridaypt) {
+            $count = $count + 1;
+        }
+        if ($req->saturdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->sundaypt) {
+            $count = $count + 1;
+        }
+        $result = $count * 4;
+        $db->total_session = $result;
+
         if ($db->save()) {
             $req->session()->flash('customer', $data);
         } else {
@@ -158,17 +188,19 @@ class CustomerController extends Controller
         $data->training_type = $req->ttype;
         $data->trainer_name = $req->tname;
         $data->status = $req->status;
+        $data->fees_clear = $req->fees_status;
         $data->reference_name = $req->reference;
         $data->registration_fees = $req->regfee;
         $data->gym_fees = $req->gymfee;
         $data->trainer_fees_per_session = $req->trainfee;
         $data->total_session = $req->tsession;
-        $data->advnace_allow = $req->advnace_allow;
+        $data->advnace_allow = $req->avance_total;
         $data->advance_month = $req->advance_month;
+        $data->discount = $req->discount;
         // advance total calculation
         $count = '';
         if ($req->advnace_allow == "yes") {
-            $count = $req->gymfee * $req->advance_month;
+            $count = $req->gymfee * $req->advance_month - $req->discount;
             $data->avance_total = $count;
         } else {
             $data->avance_total = 0;
@@ -194,6 +226,36 @@ class CustomerController extends Controller
         $data->sun_start_time = $req->sundaytimein;
         $data->sun_end_time = $req->sundaytimeout;
         $data->sun_allow_pt = $req->sundaypt;
+
+
+        $count = 0;
+
+        if ($req->mondaypt) {
+            $count = $count + 1;
+        }
+        if ($req->tuesdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->wednesdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->thursdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->fridaypt) {
+            $count = $count + 1;
+        }
+        if ($req->saturdaypt) {
+            $count = $count + 1;
+        }
+        if ($req->sundaypt) {
+            $count = $count + 1;
+        }
+        $result = $count * 4;
+        $data->total_session = $result;
+
+
+
         if ($data->save()) {
             return redirect('manage-customer');
         } else {
@@ -327,5 +389,16 @@ class CustomerController extends Controller
         } else {
             return redirect('manage-customer');
         }
+    }
+
+
+
+    public function index_fees_add($id)
+    {
+        $page_title = 'Add Fees';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        $db = new customer();
+        return view('customer.addFees', compact('page_title', 'page_description', 'action'));
     }
 }

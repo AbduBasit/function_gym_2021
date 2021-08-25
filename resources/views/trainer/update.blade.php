@@ -57,7 +57,7 @@
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">First Name*</label>
-                                            <input type="text" value={{$datas->first_name}}  name="firstName" class="form-control" placeholder="Asim" required>
+                                            <input type="text" value={{$datas->first_name}} name="firstName" class="form-control" placeholder="Asim" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-2">
@@ -107,7 +107,7 @@
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Commision Percentage</label>
-                                            <input type="number" min="0" max="100" value={{$datas->commision}} name="commision" placeholder="10%" class="form-control" required>
+                                            <input type="number" min="0" max="100" value="{{$datas->commision}}" name="commision" placeholder="10%" class="form-control" required>
                                         </div>
                                     </div>
 

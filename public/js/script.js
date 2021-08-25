@@ -1,10 +1,11 @@
 jQuery(document).ready(() => {
 
         
-        jQuery('#g-fees, #t-months').on('keyup', () => {
+        jQuery('#g-fees, #t-months, #t-discount').on('keyup', () => {
             var month = document.getElementById('t-months').value;
             var gfees = document.getElementById('g-fees').value;
-            var result = month * gfees;
+            var discountval = document.getElementById('t-discount').value;
+            var result = month * gfees  - discountval;
             $("#t-amount").val(function () {
                 return result;
             });
