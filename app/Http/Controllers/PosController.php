@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use App\Models\expense;
+use App\Models\invoice;
 use App\Models\trainer;
 use Dotenv\Validator;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
@@ -17,7 +18,7 @@ class PosController extends Controller
         $page_title = 'Manage Invoices';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        $db = new customer();
+        $db = new invoice();
         $data = $db->all();
         return view('pos.manageInvoices', compact('page_title', 'page_description', 'action'), ['members' => $data]);
     }

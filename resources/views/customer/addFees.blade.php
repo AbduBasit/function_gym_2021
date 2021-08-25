@@ -27,44 +27,52 @@
                 <div class="card-body">
 
 
-                    <form id="new" action="{{route('expense-add')}}" method="POST">
+                    <form id="new" action="{{url('insertFees/'.$value->id)}}" method="POST">
                         @csrf
+                        
                         <div class="row">
+                                    
                             <div class="col-lg-4 mb-2">
-                                <div class="form-group ">
-                                    <label class="text-label">Enter Total of Months</label>
-                                    <input type="number" disabled name="id" class="disable form-control">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 mb-2">
                                 <div class="form-group">
                                     <label class="text-label">Due Fees*</label>
                                     <select name="fees_status" class="form-control form-control-lg" required>
-                                        <option hidden>Select status</option>
-                                        <option value="All Clear">All Clear</option>
                                         <option value="Unpaid">Unpaid</option>
+                                        <option value="All Clear">All Clear</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-2">
+                                <div class="form-group">
+                                    <label class="text-label">Payment Type*</label>
+                                    <select name="payment_type" class="form-control form-control-lg" required>
+                                        <option value="No Select" hidden>Select Type</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Cheque">Cheque</option>
+                                        <option value="Bank Deposit">Bank Deposit</option>
+                                        <option value="Online Transaction">Online Transaction</option>
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
-                                    <label class="text-label">Enter Total of Months</label>
-                                    <input type="date" required name="advance_month" id="t-months" placeholder="10" class="form-control">
+                                    <label class="text-label">Date of Pay</label>
+                                    <input type="date" name="pay_date" id="" placeholder="10" required class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
-                                    <label class="text-label">discount</label>
-                                    <input type="number" min="0" name="discount" id="t-discount" placeholder="10" class="form-control">
+                                    <label class="text-label">Amount</label>
+                                    <input type="text" name="amount" placeholder="0" required class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
-                                    <label class="text-label">Total Amount</label>
-                                    <input type="text" name="avance_total" placeholder="0" id="t-amount" disabled class="disable form-control">
+                                    <label class="text-label">Discount</label>
+                                    <input type="text" name="discount" placeholder="0" class="form-control">
                                 </div>
                             </div>
+                            
                         </div>
 
                         </table>

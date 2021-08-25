@@ -59,7 +59,22 @@ class TrainerController extends Controller
         $action = __FUNCTION__;
         $db = new trainer();
         $data = $db::all()->find($id);
-        return view('trainer.view', compact('page_title', 'page_description', 'action'), ['datas' => $data]);
+        $name = $data->first_name . ' ' .$data->last_name; 
+        if($val = DB::select("select * from customers where trainer_name = '$name'")){
+            $gym_fees = DB::select("SELECT SUM(gym_fees) as gym_fees FROM `customers` where trainer_name = '$name'");
+            $total_session = DB::select("SELECT SUM(total_session) as tsession FROM `customers` where trainer_name = '$name'");
+
+        }
+        else{
+            $val = ['Trainer has no more Cliens'];
+        }
+        // dd($gym_fees);
+        return view('trainer.view', compact('page_title', 'page_description', 'action'), [
+            'datas' => $data,
+            'customer'=>$val,
+            'fees'=> $gym_fees,
+            'tsession'=> $total_session
+        ]);
     }
 
     // Delete Function

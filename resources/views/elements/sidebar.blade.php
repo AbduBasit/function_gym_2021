@@ -44,7 +44,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{url('/manage-invoice')}}">Sales / Invoices</a></li>
                     <li><a href="{{url('/manage-expense')}}">Expenses Reports</a></li>
-                    <li><a href="{{url('/trainer-commision')}}">Trainer Commision Report</a></li>
+                    {{-- <li><a href="{{url('/trainer-commision')}}">Trainer Commision Report</a></li> --}}
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

@@ -29,10 +29,11 @@
                                     <th class="width80"><strong>#</strong></th>
                                     <th><strong>Name</strong></th>
                                     <th><strong>Phone</strong></th>
-                                    <th><strong>Trainer Name</strong></th>
+                                    <th><strong>Payment Type</strong></th>
                                     <th><strong>Payment Date</strong></th>
+                                    <th><strong>Amount</strong></th>
+                                    <th><strong>Discount</strong></th>
                                     <th><strong>Fees Payable</strong></th>
-                                    <th><strong>Status</strong></th>
                                     <th><strong>Action</strong></th>
                                 </tr>
                             </thead>
@@ -40,21 +41,15 @@
                                 @foreach ($members as $member)
                                 <tr>
                                     <td>{{$member->id}}</td>
-                                    <td>{{$member->first_name. " " . $member->last_name}}</td>
-                                    <td>{{$member->phone_number}}</td>
-                                    <td>
-                                        @if(!$member->trainer_name || $member->trainer_name == 'Select Trainer')
-                                        No Trainer
-                                        @else
-                                        {{$member->trainer_name}}
-                                        @endif
-                                    </td>
-                                    <td>{{$member->date_of_joining}}</td>
-                                    
+                                    <td>{{$member->customer_name}}</td>
+                                    <td>{{$member->customer_phone}}</td>
+                                    <td>{{$member->payment_method}}</td>
+                                    <td>{{$member->pay_date}}</td>
+                                    <td>{{$member->amount}}</td>
+                                    <td>{{$member->discount}}</td>
                                     <td class="text-success">
-                                        All Clear
+                                        {{$member->fees_payable}}
                                     </td>
-                                    <td>{{$member->status}}</td>
                                     
                                     
                                     <td>

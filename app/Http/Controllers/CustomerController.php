@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Http\Controllers\Controller;
+use App\Models\invoice;
 use App\Models\rule;
 use App\Models\trainer;
 use Illuminate\Support\Facades\DB;
@@ -399,6 +400,31 @@ class CustomerController extends Controller
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new customer();
-        return view('customer.addFees', compact('page_title', 'page_description', 'action'));
+        $data = $db->all()->find($id);
+        return view('customer.addFees', compact('page_title', 'page_description', 'action'), ['value'=>$data]);
+    }
+
+
+    public function insertFees(Request $req, $id){
+        $db = new customer();
+        $data = $db->all()->find($id);
+        $data->fees_clear = $req->fees_status;
+        $val = new invoice();
+        $val->customer_name = $data->first_name . " " . $data->last_name;
+        $val->customer_phone = $data->phone_number;
+        $val->customer_email = $data->email;
+        $val->trainer_name = $data->trainer_name;
+        $val->training_type = $data->training_type;
+        $val->pay_date = $req->pay_date;
+        $val->training_type = $data->training_type;
+        $val->fees_payable = $req->fees_status;
+        $val->payment_method = $req->payment_type;
+        $val->amount = $req->amount;
+        $val->discount = $req->discount;
+        $val->net_total = $req->amount - $req->discount;
+
+        $data->save();
+        $val->save();
+        return redirect('manage-customer');
     }
 }
