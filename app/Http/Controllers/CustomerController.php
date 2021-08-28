@@ -31,7 +31,7 @@ class CustomerController extends Controller
         }
         $db->date_of_joining = $req->doj;
         // date_end function
-        $data = DB::select("select * from rules where id = 1");
+        $data = DB::select("select * from rules where rules_token = 'ME_A1002'");
         if ($req->doj) {
             $Date2 = date('Y-m-d', strtotime($req->doj . "+ 1 month + " . $data[0]->values . " day"));
             $db->month_end = $Date2;
@@ -157,13 +157,13 @@ class CustomerController extends Controller
         $db_2 = new trainer();
         $data = $db::all()->find($id);
         $data_2 = $db_2::all();
-        $data_3 = (DB::select("select * from rules where id = 1"));
+        $data_3 = (DB::select("select * from rules where rules_token = 'ME_A1002'"));
         // dd($data_3);
         return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2, 'rul' => $data_3]);
     }
     public function customer_update(Request $req)
     {
-        $data_3 = (DB::select("select * from rules where id = 1"));
+        $data_3 = (DB::select("select * from rules where rules_token = 'ME_A1002'"));
         $db = new customer();
         $data = $db::all()->find($req->id);
         $data->first_name = $req->firstName;

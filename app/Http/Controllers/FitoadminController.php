@@ -311,7 +311,7 @@ class FitoadminController extends Controller
         $page_description = 'Some description for the page';
         $db_2 = new trainer();
         $data_2 = $db_2::all();
-        $data = DB::select("select * from rules where id = 1");
+        $data = DB::select("select * from rules where rules_token = 'ME_A1002'");
 
         $action = __FUNCTION__;
 

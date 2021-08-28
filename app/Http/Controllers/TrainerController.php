@@ -58,6 +58,8 @@ class TrainerController extends Controller
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new trainer();
+        // $gym_fees = null;
+        // $total_session = null;
         $data = $db::all()->find($id);
         $name = $data->first_name . ' ' .$data->last_name; 
         if($val = DB::select("select * from customers where trainer_name = '$name'")){
