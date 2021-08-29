@@ -57,6 +57,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('expense-edit', [PosController::class, 'expense_edit_put']);
     Route::get('trainer_payslip', [PosController::class, 'trainer_commision_index']);
     Route::post('/insertFees/{id}', [CustomerController::class, 'insertFees']);
+    Route::get('payslip/{id}', [PosController::class, 'trainer_payslip_index']);
 });
 
 

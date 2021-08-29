@@ -93,14 +93,27 @@ class PosController extends Controller
 
     public function trainer_commision_index()
     {
-        $page_title = 'Trainer Commision Report';
+        $page_title = 'Trainer Pay Slip';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new trainer();
-        $data = DB::select('select * from trainers');
-        $customer = DB::select('select DISTINCT * from customers INNER JOIN trainers ON customers.trainer_name = CONCAT(trainers.first_name, " ", trainers.last_name)');
+        $name = "Syed Ghazanfar";
+        $data = DB::select('SELECT  customers.id as customer_id, concat(customers.first_name, " ", customers.last_name) as customer_name, customers.date_of_joining, customers.month_end, customers.training_type, customers.trainer_name, customers.status, customers.fees_clear, customers.reference_name, customers.registration_fees, customers.gym_fees, customers.trainer_fees_per_session, customers.total_session, customers.advnace_allow, customers.advance_month, customers.discount, customers.avance_total, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name)');
+        // $data = DB::select('SELECT  customers.id as customer_id, concat(customers.first_name, " ", customers.last_name) as customer_name, customers.date_of_joining, customers.month_end, customers.training_type, customers.trainer_name, customers.status, customers.fees_clear, customers.reference_name, customers.registration_fees, customers.gym_fees, customers.trainer_fees_per_session, customers.total_session, customers.advnace_allow, customers.advance_month, customers.discount, customers.avance_total, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name) WHERE customers.trainer_name = "' . $name . '"');
+        // dd($data);
+        return view('pos.trainerSlip', compact('page_title', 'page_description', 'action'), ['data' => $data]);
+    }
 
-
-        return view('pos.trainerCommision', compact('page_title', 'page_description', 'action'), ['data' => $data, 'customer' => $customer]);
+    public function trainer_payslip_index($id)
+    {
+        $page_title = 'Trainer Pay Slip';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        $db = new trainer();
+        $name = "Syed Ghazanfar";
+        // $data = DB::select('SELECT  customers.id as customer_id, concat(customers.first_name, " ", customers.last_name) as customer_name, customers.date_of_joining, customers.month_end, customers.training_type, customers.trainer_name, customers.status, customers.fees_clear, customers.reference_name, customers.registration_fees, customers.gym_fees, customers.trainer_fees_per_session, customers.total_session, customers.advnace_allow, customers.advance_month, customers.discount, customers.avance_total, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name)');
+        $data = DB::select('SELECT  customers.id as customer_id, concat(customers.first_name, " ", customers.last_name) as customer_name, customers.date_of_joining, customers.month_end, customers.training_type, customers.trainer_name, customers.status, customers.fees_clear, customers.reference_name, customers.registration_fees, customers.gym_fees, customers.trainer_fees_per_session, customers.total_session, customers.advnace_allow, customers.advance_month, customers.discount, customers.avance_total, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name) WHERE trainers.id =' . $id);
+        // dd($data);
+        return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data]);
     }
 }
