@@ -53,6 +53,9 @@ return [
 				'trainer_commision_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'expense_cat_index' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'trainer_payslip_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -65,6 +68,7 @@ return [
 				],
 				'expense_create' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/select2/css/select2.min.css',
 				],
 				'index_fees_add' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -447,6 +451,11 @@ return [
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],
+				'expense_cat_index' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
 				'ecom_product_list' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'vendor/highlightjs/highlight.pack.min.js',
@@ -665,7 +674,9 @@ return [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
-					'js/script.js'
+					'js/script.js',
+					'vendor/select2/js/select2.full.min.js',
+					'js/plugins-init/select2-init.js',
 				],
 				'index_fees_add' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',

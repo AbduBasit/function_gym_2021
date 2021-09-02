@@ -401,11 +401,12 @@ class CustomerController extends Controller
         $action = __FUNCTION__;
         $db = new customer();
         $data = $db->all()->find($id);
-        return view('customer.addFees', compact('page_title', 'page_description', 'action'), ['value'=>$data]);
+        return view('customer.addFees', compact('page_title', 'page_description', 'action'), ['value' => $data]);
     }
 
 
-    public function insertFees(Request $req, $id){
+    public function insertFees(Request $req, $id)
+    {
         $db = new customer();
         $data = $db->all()->find($id);
         $data->fees_clear = $req->fees_status;
@@ -419,7 +420,7 @@ class CustomerController extends Controller
         $val->training_type = $data->training_type;
         $val->fees_payable = $req->fees_status;
         $val->payment_method = $req->payment_type;
-        $val->amount = $req->amount;
+        $val->fee_amount = $req->amount;
         $val->discount = $req->discount;
         $val->net_total = $req->amount - $req->discount;
 

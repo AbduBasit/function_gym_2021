@@ -38,7 +38,8 @@
                                         <tr>
 
                                             <td>{{ $trainer->customer_name }}</td>
-                                            <td>150200</td>
+                                            <td>{{ round((($trainer->gym_fees * $trainer->commision) / 100) * $trainer->total_session + $trainer->fixed_salary + $trainer->trainer_fees_per_session + $trainer->registration_fees) }}
+                                            </td>
                                             <td>July</td>
                                             <td>clear</td>
                                             <td>

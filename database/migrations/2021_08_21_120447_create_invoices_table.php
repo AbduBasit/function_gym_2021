@@ -19,16 +19,17 @@ class CreateInvoicesTable extends Migration
             $table->string('customer_phone');
             $table->string('customer_email');
             $table->string('trainer_name')->nullable();
-            $table->string('training_type');
-            $table->string('pay_date');
-            $table->string('fees_payable');
-            $table->integer('amount');
-            $table->string('payment_method');
+            $table->string('training_type')->nullable();
+            $table->string('pay_date')->nullable();
+            $table->string('fees_payable')->nullable();
+            $table->integer('amount')->nullable();
+            $table->string('payment_method')->nullable();
             $table->integer('registration_fees')->nullable();
             $table->integer('gym_fees')->nullable();
+            $table->integer('fee_amount')->nullable();
             $table->integer('trainer_fees')->nullable();
-            $table->integer('discount');
-            $table->integer('net_total');
+            $table->integer('discount')->nullable();
+            $table->integer('net_total')->nullable();
 
             $table->timestamps();
         });

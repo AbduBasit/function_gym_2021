@@ -55,6 +55,9 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('deleteExpense/{id}', [PosController::class, 'expense_delete']);
     Route::get('editExpense/{id}', [PosController::class, 'expense_edit']);
     Route::post('expense-edit', [PosController::class, 'expense_edit_put']);
+    Route::get('expense_category', [PosController::class, 'expense_cat_index']);
+    Route::post('expense_cat_create', [PosController::class, 'expense_cat_store']);
+    Route::get('cat_delete/{id}', [PosController::class, 'expense_cat_delete']);
     Route::get('trainer_payslip', [PosController::class, 'trainer_commision_index']);
     Route::post('/insertFees/{id}', [CustomerController::class, 'insertFees']);
     Route::get('payslip/{id}', [PosController::class, 'trainer_payslip_index']);

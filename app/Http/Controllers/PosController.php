@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cat_expense;
 use App\Models\customer;
 use App\Models\expense;
 use App\Models\invoice;
@@ -37,21 +38,24 @@ class PosController extends Controller
         $page_title = 'Add Expenses';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        return view('pos.createExpense', compact('page_title', 'page_description', 'action'));
+        $db = new cat_expense();
+        $data = $db->all();
+
+        return view('pos.createExpense', compact('page_title', 'page_description', 'action'), ['data' => $data]);
     }
     public function add_expense(Request $req)
     {
-        foreach ($req->exp_title as $key => $exp_title) {
-            $data = new expense();
-            $data->title = $exp_title;
-            $data->desc = $req->exp_desc[$key];
-            $data->amount = $req->exp_amount[$key];
-            $data->quan = $req->exp_quan[$key];
-            $data->disc = $req->exp_disc[$key];
-            $data->tax = $req->exp_tax[$key];
-
-            $data->save();
-            return $key;
+        foreach ($req->exp_add as $key => $value) {
+            // $data = new expense();
+            // $data->title = $exp_title[$key];
+            // $data->desc = $req->exp_desc[$key];
+            // $data->amount = $req->exp_amount[$key];
+            // $data->quan = $req->exp_quan[$key];
+            // $data->disc = $req->exp_disc[$key];
+            // $data->tax = $req->exp_tax[$key];
+            dd($value);
+            // $data->save();
+            // return 'hrllo';
         }
         return redirect('create-expense');
     }
@@ -89,6 +93,33 @@ class PosController extends Controller
 
         $data->save();
         return redirect('manage-expense');
+    }
+
+    public function expense_cat_index()
+    {
+        $page_title = 'Expense Categories';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+
+        $db = new cat_expense();
+        $data = $db->all();
+        return view('pos.expenseCat', compact('page_title', 'page_description', 'action'), ['data' => $data]);
+    }
+
+    public function expense_cat_store(Request $req)
+    {
+        $db = new cat_expense();
+        $db->expense_title = $req->catname;
+        $db->expense_description = $req->catdesc;
+        $db->save();
+        return redirect('expense_category');
+    }
+    public function expense_cat_delete($id)
+    {
+        $db = new cat_expense();
+        $data = $db->all()->find($id);
+        $data->delete();
+        return redirect('expense_category');
     }
 
     public function trainer_commision_index()
