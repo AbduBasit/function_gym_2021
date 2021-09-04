@@ -46,15 +46,15 @@
                                         <th><strong>Action</strong></th>
                                     </tr>
                                 </thead>
-                                <form id="new" action="{{ route('expense-add') }}" method="POST">
+                                <form id="new">
                                     <tbody class="report">
                                         <tr id="row-sec">
                                             @csrf
-                                            <td> <input type="text" name="exp_add[0][exp_title]" required
+                                            <td> <input type="text" id="exp_title0" required
                                                     class="form-control border-primary new-input"> </td>
 
                                             <td>
-                                                <select name="exp_add[0][exp_desc]" id="single-select"
+                                                <select id="exp_desc0" 
                                                     class="form-control new-lg form-control-lg" required>
                                                     <option hidden>Expense Category</option>
                                                     @foreach ($data as $item)
@@ -64,17 +64,17 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td> <input type="number" name="exp_add[0][exp_amount]" value="0" min="0"
+                                            <td> <input type="number" id="exp_amount0" value="0" min="0"
                                                     required class="form-control new-input  border-primary"> </td>
-                                            <td> <input type="number" name="exp_add[0][exp_quan]" value="1" min="0"
+                                            <td> <input type="number" id="exp_quan0" value="1" min="0"
                                                     max="1000" required
                                                     class="width80 form-control new-input  border-primary"> </td>
-                                            <td> <input type="number" name="exp_add[0][exp_disc]" value="0" min="0"
+                                            <td> <input type="number" id="exp_disc0" value="0" min="0"
                                                     max="100000" class="width80 form-control new-input  border-primary">
                                             </td>
-                                            <td> <input type="number" name="exp_add[0][exp_tax]" value="0" min="0" max="100"
+                                            <td> <input type="number" id="exp_tax0" value="0" min="0" max="100"
                                                     class="width80 form-control new-input  border-primary"> </td>
-                                            <td> <input type="text" name="exp_add[0][exp_net]" value="0" disabled
+                                            <td> <input type="text" id="exp_net0" value="0" disabled
                                                     class="disable form-control new-input border-primary"> </td>
                                         </tr>
                                     </tbody>
@@ -101,32 +101,27 @@
     </div>
     <script src="{{ asset('./js/jquery.js') }}"></script>
     <script>
-        var count = 0;
+       $(document).ready(function () {
+            var count = 0;
+        var html_code = '';
         // addRow function
         jQuery('#addRow').on('click', () => {
             count++;
-            var html_code = ' <tr id="row' + count + '">';
+            html_code = ' <tr id="row' + count + '">';
             html_code +=
-                '<td> <input type="text" name="exp_add[' + count +
-                '][exp_title]" required class="form-control border-primary new-input"> </td>';
+                '<td> <input type="text" id="exp_title'+ count +'" required class="form-control border-primary title new-input"> </td>';
             html_code +=
-                '<td> <select name="exp_add[' + count +
-                '][exp_desc]" id="single-select" class="form-control new-lg form-control-lg" required> <option hidden>Expense Category</option> @foreach ($data as $item) <option value="{{ $item->expense_title }}"> {{ $item->expense_title }} </option> @endforeach </select> </td>';
+                '<td> <select id="exp_desc'+ count +'"  class="form-control new-lg form-control-lg" required> <option hidden>Expense Category</option> @foreach ($data as $item) <option value="{{ $item->expense_title }}"> {{ $item->expense_title }} </option> @endforeach </select> </td>';
             html_code +=
-                '<td> <input type="number" name="exp_add[' + count +
-                '][exp_amount]" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
+                '<td> <input type="number" id="exp_amount'+ count +'" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
             html_code +=
-                '<td> <input type="number" name="exp_add[' + count +
-                '][exp_quan]" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>';
+                '<td> <input type="number" id="exp_quan'+ count +'" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>';
             html_code +=
-                '<td> <input type="number" name="exp_add[' + count +
-                '][exp_disc]" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>';
+                '<td> <input type="number" id="exp_disc'+ count +'" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>';
             html_code +=
-                ' <td> <input type="number" name="exp_add[' + count +
-                '][exp_tax]" value="0" min="0" max="100" class="width80 form-control new-input  border-primary"> </td>';
+                ' <td> <input type="number" id="exp_tax'+ count +'" value="0" min="0" max="100" class="width80 form-control new-input  border-primary"> </td>';
             html_code +=
-                ' <td> <input type="text" name="exp_add[' + count +
-                '][exp_net]" value="0" disabled class="disable form-control new-input border-primary"> </td>';
+                ' <td> <input type="text" id="exp_net'+ count +'" value="0" disabled class="disable form-control new-input border-primary"> </td>';
             html_code +=
                 ' <td class="width80"><button type="button" class="deleteRow btn btn-danger shadow btn-sm sharp" data-row="row' +
                 count + '"><i class="fa fa-trash"></i></button></td>';
@@ -139,11 +134,51 @@
             jQuery('#' + delete_row).remove();
         })
 
-        // jQuery(document).on('submit', '#new', (e)=>{
-        //     e.preventDefault();
-        //     data = jQuery('#new').serializeArray();
-        //     console.log(data);
-        // })
+        jQuery(document).on('submit', '#new', (e)=>{
+            e.preventDefault();
+          
+            // data = jQuery('#new').serializeArray();
+            var i = 0;
+            let _token = $("input[name=_token]").val();
+           
+            while( i <= document.getElementsByClassName('title').length){
+                let title = document.getElementById('exp_title'+i);
+                let desc = document.getElementById('exp_desc'+i);
+                let amount = document.getElementById('exp_amount'+i);
+                let quan = document.getElementById('exp_quan'+i);
+                let disc = document.getElementById('exp_disc'+i);
+                let tax = document.getElementById('exp_tax'+i);
+                let net = document.getElementById('exp_net'+i);
+            
+
+                var data = {
+                        title:[title.value],
+                        desc:[desc.value],
+                        amount:[amount.value],
+                        quan:[quan.value],
+                        disc:[disc.value],
+                        tax:[tax.value],
+                        net:[net.value],
+                        
+                };
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('expense-add')}}",
+                    data: data,
+                    success: function (response) {
+                    }
+                });
+                i++
+            }
+            location.href="manage-expense";
+        })
+       });
     </script>
 
 @endsection

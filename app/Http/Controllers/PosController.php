@@ -45,19 +45,23 @@ class PosController extends Controller
     }
     public function add_expense(Request $req)
     {
-        foreach ($req->exp_add as $key => $value) {
-            // $data = new expense();
-            // $data->title = $exp_title[$key];
-            // $data->desc = $req->exp_desc[$key];
-            // $data->amount = $req->exp_amount[$key];
-            // $data->quan = $req->exp_quan[$key];
-            // $data->disc = $req->exp_disc[$key];
-            // $data->tax = $req->exp_tax[$key];
-            dd($value);
-            // $data->save();
-            // return 'hrllo';
-        }
-        return redirect('create-expense');
+        $db = new expense();
+        
+            $values= [
+                
+            'title' => $req->post('title')[0],
+            'desc' => $req->post('desc')[0],
+            'amount' => $req->post('amount')[0],
+            'quan' => $req->post('quan')[0],
+            'disc' => $req->post('disc')[0],
+            'tax' => $req->post('tax')[0],
+            ];
+            DB::table('expenses')->insert($values);
+            
+
+
+
+        
     }
 
     public function expense_delete($id)
