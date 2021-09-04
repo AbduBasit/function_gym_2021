@@ -96,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            </form>
+            </form> 
         </div>
     </div>
     <script src="{{ asset('./js/jquery.js') }}"></script>

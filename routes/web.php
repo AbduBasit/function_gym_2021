@@ -46,6 +46,10 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('update_rule_show/{id}', [ActivityController::class, 'update_rule_show']);
     Route::post('update_rule', [ActivityController::class, 'update_rule']);
 
+    Route::get('email-create', [ActivityController::class, 'email_index']);
+    Route::post('send_mail', [ActivityController::class, 'email_send'])->name('send_mail');
+
+
 
     // Finance / Point of Sale (POS)
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);

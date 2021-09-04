@@ -35,6 +35,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href={{ url('manage-rules') }}>Manage Rules</a></li>
+                    <li><a href="{!! url('/email-create') !!}">Compose Email   </a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

@@ -171,6 +171,11 @@ return [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/dropzone/dist/dropzone.css',
 				],
+				'email_index' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/dropzone/dist/dropzone.css',
+				],
+
 				'email_inbox' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -472,6 +477,13 @@ return [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'vendor/dropzone/dist/dropzone.js',
 					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'email_index' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'vendor/datatables/js/jquery.dataTables.min.js',
+					'js/plugins-init/datatables.init.js',
 					'js/deznav-init.js',
 				],
 				'email_inbox' => [
