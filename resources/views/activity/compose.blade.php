@@ -24,14 +24,21 @@
                                     
                                     <div class="compose-content">
                                         
-                                            <div class="form-group">
-                                                <input type="email" id="to" class="form-control border-primary" required placeholder=" To:">
+                                       
+                                                    
+                                           
+                                        <div class="form-group">
+                                            <select id="to" class="multi-select border-primary" name="emails[]" multiple="multiple">
+                                                @foreach ($data as $item)
+                                                    <option value="{{$item->email}}">{{$item->email}}</option>
+                                                @endforeach
+                                            </select>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" id="sub" class="form-control required border-primary" placeholder=" Subject:">
+                                                <input type="text" id="sub" class="form-control border-primary" placeholder=" Subject:">
                                             </div>
                                             <div class="form-group">
-                                                <textarea id="message" required class="textarea_editor form-control border-primary" rows="15" placeholder="Enter text ..."></textarea>
+                                                <textarea id="message" class="textarea_editor form-control border-primary" rows="15" placeholder="Enter text ..."></textarea>
                                             </div>
                                         
                                         
@@ -55,14 +62,19 @@
                 
                     jQuery(document).on('submit', '#email', function(e){
                         e.preventDefault();
-                        let to = document.getElementById('to').value;
+                        // let to = document.getElementById('to').value;
                         let subject = document.getElementById('sub').value;
                         let message = document.getElementById('message').value;
-                        var values = {
-                        to:[to],
-                        subject:[subject],
-                        message:[message],
-                    };
+                        let selectedValues = $('select[name="emails[]"] option:selected');
+                        let emails = null;
+                        for(i=0; i < selectedValues.length; i++){
+                            emails = selectedValues[i];
+                            emailsData = [emails.value];
+                            var values = {
+                                subject:[subject],
+                                message:[message],
+                            };
+                            
                         $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -71,11 +83,15 @@
                        jQuery.ajax({
                            type: "post",
                            url: "{{ route('send_mail')}}",
-                           data: values,
+                           data: {values: values, emails: emails.value},
                            success:function(response){
                                 console.log(response)   
                            }
                        });
+                        }
+                        
+                    
+                    
                         
                     });
                

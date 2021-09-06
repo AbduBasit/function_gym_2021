@@ -174,6 +174,7 @@ return [
 				'email_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/dropzone/dist/dropzone.css',
+					'vendor/select2/css/select2.min.css',
 				],
 
 				'email_inbox' => [
@@ -485,6 +486,8 @@ return [
 					'vendor/datatables/js/jquery.dataTables.min.js',
 					'js/plugins-init/datatables.init.js',
 					'js/deznav-init.js',
+					'vendor/select2/js/select2.full.min.js',
+					'js/plugins-init/select2-init.js',
 				],
 				'email_inbox' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
