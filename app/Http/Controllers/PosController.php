@@ -11,9 +11,13 @@ use Dotenv\Validator;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\While_;
 
 class PosController extends Controller
 {
+
+
+    public $result = null;
     public function invoice_index()
     {
         $page_title = 'Manage Invoices';
@@ -141,6 +145,8 @@ class PosController extends Controller
 
     public function trainer_payslip_index($id)
     {
+
+
         $page_title = 'Trainer Pay Slip';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
@@ -151,24 +157,50 @@ class PosController extends Controller
 
         // dd($data[0]->tname);
         $data1 = new invoice();
-        $date = date("m", strtotime("0 months"));
+
+        // Reference Commision  
+        $date = date("m", strtotime("-1 months"));
         $inv = DB::select('SELECT sum(registration_fees) as reg_fee from invoices  where reference = "' . $data[0]->tname . '" and MONTH(pay_date) = ' . $date);
 
         $rule = DB::select('select * from rules where rules_token = "RC_A1003"')[0];
         $calc = $inv[0]->reg_fee * $rule->values / 100;
 
+        // dd($inv);
         // Retians Commision
-        $date1 = date("m", strtotime("-2 months"));
+        $date1 = date("m", strtotime("-3 months"));
         $_Query_1 = DB::select('SELECT customers.trainer_name, MONTH(trainers.date_of_pay) as t_dop, ' . $date1 . ' as i_dop FROM customers inner JOIN trainers ON customers.trainer_name=concat(trainers.first_name, " ", trainers.last_name) inner JOIN invoices ON customers.trainer_name=invoices.trainer_name WHERE invoices.trainer_name = "' . $data[0]->tname . '"');
+        if ($_Query_1 != null) {
+            $t_dop = $_Query_1[0]->t_dop;
+            $i_dop = $_Query_1[0]->i_dop;
+            // SELECT customer_name, sum(gym_fees) as fee , Month(pay_date) as month FROM invoices WHERE MONTH(pay_date) BETWEEN ' . $i_dop . ' and ' . $t_dop . ' and trainer_name = "' . $data[0]->tname . '" group by customer_name
+            $_Query_2 = DB::select('select concat(first_name, " ", last_name) as name, trainer_name from customers where trainer_name = "' . $data[0]->tname . '"');
 
-        $t_dop = $_Query_1[0]->t_dop;
-        $i_dop = $_Query_1[0]->i_dop;
-        $_Query_2 = DB::select('SELECT * FROM invoices WHERE MONTH(pay_date) BETWEEN ' . $t_dop . ' and ' . $i_dop . ' and trainer_name = "' . $data[0]->tname . '"');
 
-
-
-        dd(range($t_dop, $i_dop));
-        // return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc]);
+            foreach ($_Query_2 as $key => $value) {
+                // $ss = $key;
+                // dd($value);
+                $_Query_3 = DB::select('select MONTH(pay_date) as pdate, customer_name, gym_fees, sum(gym_fees) over () as newcp FROM invoices where MONTH(pay_date) BETWEEN ' . $i_dop . ' and ' . $t_dop . ' and customer_name = "' . $_Query_2[$key]->name . '" and trainer_name = "' . $data[0]->tname . '" order by customer_name, pdate');
+                $array = json_decode(json_encode($_Query_3), true);
+                foreach ($_Query_3 as $value => $key) {
+                    $array[] = [$value, 'like', $key];
+                    $n = array_column($array, 'pdate');
+                    if (count($n) == 3) {
+                        $range = range($t_dop, $i_dop);
+                        if ($n[0] == $range[3] && $n[1] == $range[2] && $n[2] == $range[1]) {
+                            $value = array_sum(array_column($array, 'gym_fees'));
+                            $rule1 = DB::select('select * from rules where rules_token = "RC_A1004"')[0];
+                            $result1 = round($value * $rule1->values / 100);
+                        } else {
+                            $result1 = 0;
+                        }
+                    } else {
+                        $result1 = 0;
+                    }
+                }
+                return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => $result1]);
+            }
+        }
+        // return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null]);
     }
 
     public function status_change_index($id)

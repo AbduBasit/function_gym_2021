@@ -98,7 +98,12 @@
                                             <div class="form-group">
                                                 <label class="text-label">Retian Commision</label>
                                                 <h6>
-                                                    Not Available
+                                                    @if ($result)
+                                                        {{ $result }}
+
+                                                    @else
+                                                        Not Available
+                                                    @endif
                                                 </h6>
                                             </div>
                                         </div>
@@ -119,7 +124,7 @@
                                             <div class="form-group">
                                                 <label class="text-label text-primary"><strong>Net Salary</strong></label>
                                                 <h6>
-                                                    {{ round((($datas[0]->gym_fees * $datas[0]->commision) / 100) * $datas[0]->total_session + $datas[0]->fixed_salary + $datas[0]->trainer_fees_per_session + $datas[0]->registration_fees + $inv) }}
+                                                    {{ round((($datas[0]->gym_fees * $datas[0]->commision) / 100) * $datas[0]->total_session + $datas[0]->fixed_salary + $datas[0]->trainer_fees_per_session + $datas[0]->registration_fees + $inv + $result) }}
                                                 </h6>
                                             </div>
                                         </div>
