@@ -62,6 +62,9 @@ return [
 				'invoice_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'status_change_index' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'expense_index' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/datatables/css/jquery.dataTables.min.css',
@@ -674,6 +677,11 @@ return [
 					'js/deznav-init.js',
 				],
 				'invoice_index' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'status_change_index' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

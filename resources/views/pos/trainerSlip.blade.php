@@ -37,11 +37,24 @@
                                     @foreach ($data as $trainer)
                                         <tr>
 
-                                            <td>{{ $trainer->customer_name }}</td>
+                                            <td>{{ $trainer->tname }}</td>
                                             <td>{{ round((($trainer->gym_fees * $trainer->commision) / 100) * $trainer->total_session + $trainer->fixed_salary + $trainer->trainer_fees_per_session + $trainer->registration_fees) }}
                                             </td>
-                                            <td>July</td>
-                                            <td>clear</td>
+                                            <td>{{ $date }}</td>
+                                            <td>
+                                                @if ($trainer->salary_status == 'Paid' || $trainer->salary_status == 'New Trainer')
+                                                    <h6 class="text-success">
+                                                        {{ $trainer->salary_status }}
+                                                    </h6>
+                                                @elseif($trainer->salary_status == 'Unpaid')
+                                                    <a class="text-danger"
+                                                        href="trainer_status/{{ $trainer->trainer_id }}">
+                                                        <h6 class="text-danger">{{ $trainer->salary_status }}</h6>
+                                                    </a>
+                                                @else
+                                                    <p class="text-danger">Invalid Value</p>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-success light sharp"

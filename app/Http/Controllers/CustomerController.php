@@ -15,6 +15,8 @@ class CustomerController extends Controller
     //Create Function of Customer
     public function create_data(Request $req)
     {
+        $inv = new invoice();
+
         $data = "";
         $db = new customer();
         $db->first_name = $req->firstName;
@@ -51,11 +53,34 @@ class CustomerController extends Controller
         $db->advance_month = $req->advance_month;
         $db->discount = $req->discount;
 
+        // invoice add
+
+        $name = $req->firstName . ' ' . $req->lastName;
+        $inv->customer_name = $name;
+        $inv->customer_email = $req->email;
+        $inv->customer_phone = $req->phoneNumber;
+        $inv->trainer_name = $req->tname;
+        $inv->training_type = $req->ttype;
+        $inv->pay_date = $req->doj;
+        $inv->fees_payable = $req->fees_status;
+        $inv->payment_method = 'Cash';
+        $inv->registration_fees = $req->regfee;
+        $inv->reference = $req->reference;
+
+
+
+
         // advance total calculation
         if ($req->advnace_allow == 'yes') {
             $db->avance_total = $req->gymfee * $req->advance_month - $req->discount;
+            $inv->amount = $req->gymfee * $req->advance_month - $req->discount;
+            $inv->gym_fees = $req->gymfee * $req->advance_month - $req->discount;
+            $inv->fee_amount = $req->gymfee * $req->advance_month - $req->discount;
         } else {
             $db->avance_total = 0;
+            $inv->amount = $req->gymfee;
+            $inv->gym_fees = $req->gymfee;
+            $inv->fee_amount = $req->gymfee;
         }
 
         $db->mon_start_time = $req->mondaytimein;
@@ -108,7 +133,11 @@ class CustomerController extends Controller
         $result = $count * 4;
         $db->total_session = $result;
 
+
+        $inv->trainer_fees = $req->trainfee * $result;
+        $inv->net_total = ($req->trainfee * $result) + $req->gymfee + $req->regfee;
         if ($db->save()) {
+            $inv->save();
             $req->session()->flash('customer', $data);
         } else {
             $req->session()->flash('error', $data);

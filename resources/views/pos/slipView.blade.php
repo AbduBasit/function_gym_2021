@@ -7,8 +7,8 @@
         <div class="page-titles">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item"><a href="manage-customer">Trainers</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Trainers View</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Trainers</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Trainers PaySlip</a></li>
             </ol>
         </div>
         <!-- row -->
@@ -26,6 +26,12 @@
                                     <hr />
                                 </div>
                                 <div class="row">
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Date of Pay</label>
+                                            <h6>{{ $datas[0]->date_of_pay }}</h6>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Full Name</label>
@@ -92,7 +98,7 @@
                                             <div class="form-group">
                                                 <label class="text-label">Retian Commision</label>
                                                 <h6>
-                                                    Not Working
+                                                    Not Available
                                                 </h6>
                                             </div>
                                         </div>
@@ -100,15 +106,20 @@
                                             <div class="form-group">
                                                 <label class="text-label">Reference Commision</label>
                                                 <h6>
-                                                    Not Working
+                                                    @if ($inv)
+                                                        {{ $inv }}
+
+                                                    @else
+                                                        Not Available
+                                                    @endif
                                                 </h6>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 mb-2">
+                                        <div class="col-lg-4 mb-2">
                                             <div class="form-group">
                                                 <label class="text-label text-primary"><strong>Net Salary</strong></label>
                                                 <h6>
-                                                    {{ (($datas[0]->gym_fees * $datas[0]->commision) / 100) * $datas[0]->total_session + $datas[0]->fixed_salary + $datas[0]->trainer_fees_per_session + $datas[0]->registration_fees }}
+                                                    {{ round((($datas[0]->gym_fees * $datas[0]->commision) / 100) * $datas[0]->total_session + $datas[0]->fixed_salary + $datas[0]->trainer_fees_per_session + $datas[0]->registration_fees + $inv) }}
                                                 </h6>
                                             </div>
                                         </div>

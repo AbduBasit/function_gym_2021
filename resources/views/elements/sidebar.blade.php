@@ -21,7 +21,7 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-notepad"></i>
+                    <i class="fa fa-user-md" aria-hidden="true"></i>
                     <span class="nav-text">Trainers</span>
                 </a>
                 <ul aria-expanded="false">
@@ -30,16 +30,7 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-layer-1"></i>
-                    <span class="nav-text">Activity</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href={{ url('manage-rules') }}>Manage Rules</a></li>
-                    <li><a href="{!! url('/email-create') !!}">Compose Email   </a></li>
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-notepad"></i>
+                    <i class="fa fa-money" aria-hidden="true"></i>
                     <span class="nav-text">Finance</span>
                 </a>
                 <ul aria-expanded="false">
@@ -50,7 +41,16 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-television"></i>
+                    <i class="flaticon-381-layer-1"></i>
+                    <span class="nav-text">Activity</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href={{ url('manage-rules') }}>Manage Rules</a></li>
+                    <li><a href="{!! url('/email-create') !!}">Compose Email </a></li>
+                </ul>
+            </li>
+            {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i  class="flaticon-381-television"></i>
                     <span class="nav-text">Apps</span>
                 </a>
                 <ul aria-expanded="false">
@@ -77,7 +77,7 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-controls-3"></i>
+                    <i  class="flaticon-381-controls-3"></i>
                     <span class="nav-text">Charts</span>
                 </a>
                 <ul aria-expanded="false">
@@ -90,7 +90,7 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-internet"></i>
+                    <i  class="flaticon-381-internet"></i>
                     <span class="nav-text">Bootstrap</span>
                 </a>
                 <ul aria-expanded="false">
@@ -115,7 +115,7 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-heart"></i>
+                    <i  class="flaticon-381-heart"></i>
                     <span class="nav-text">Plugins</span>
                 </a>
                 <ul aria-expanded="false">
@@ -128,13 +128,13 @@
                 </ul>
             </li>
             <li><a href="{!! url('/widget-basic') !!}" class="ai-icon" aria-expanded="false">
-                    <i class="flaticon-381-settings-2"></i>
+                    <i  class="flaticon-381-settings-2"></i>
                     <span class="nav-text">Widget</span>
                 </a>
             </li>
 
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-network"></i>
+                    <i  class="flaticon-381-network"></i>
                     <span class="nav-text">Table</span>
                 </a>
                 <ul aria-expanded="false">
@@ -143,7 +143,7 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-layer-1"></i>
+                    <i  class="flaticon-381-layer-1"></i>
                     <span class="nav-text">Pages</span>
                 </a>
                 <ul aria-expanded="false">
@@ -160,9 +160,9 @@
                     </li>
                     <li><a href="{!! url('/page-lock-screen') !!}">Lock Screen</a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
-        <div class="drum-box">
+        {{-- <div class="drum-box">
             <img src="{{ asset('images/card/drump.png') }}" alt="">
             <p class="fs-18 font-w500 mb-4">Start Plan Your Workout</p>
             <a class="___class_+?44___" href="javascript:;">Check schedule
@@ -175,6 +175,6 @@
         <div class="copyright">
             <p><strong>Fito Fitness Admin Dashboard</strong> ©All Rights Reserved</p>
             <p>by DexignZone</p>
-        </div>
+        </div> --}}
     </div>
 </div>

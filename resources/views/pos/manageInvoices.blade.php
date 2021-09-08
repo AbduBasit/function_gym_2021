@@ -45,7 +45,7 @@
                                             <td>{{ $member->customer_phone }}</td>
                                             <td>{{ $member->payment_method }}</td>
                                             <td>{{ $member->pay_date }}</td>
-                                            <td>{{ $member->fee_amount }}</td>
+                                            <td>{{ $member->net_total }}</td>
                                             <td>{{ $member->discount }}</td>
                                             <td class="text-success">
                                                 {{ $member->fees_payable }}

@@ -25,6 +25,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('amount')->nullable();
             $table->string('payment_method')->nullable();
             $table->integer('registration_fees')->nullable();
+            $table->string('reference')->nullable();
             $table->integer('gym_fees')->nullable();
             $table->integer('fee_amount')->nullable();
             $table->integer('trainer_fees')->nullable();
