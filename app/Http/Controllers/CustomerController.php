@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    // Trainer_Check
+    public function trainer_check(Request $req){
+        
+        $monday = $req->post('monday') ;
+        $tuesday = $req->post('tuesday');
+        $wednesday = $req->post('wednesday');
+        $thursday = $req->post('thursday');
+        $friday = $req->post('friday');
+        $saturday = $req->post('saturday');
+        $sunday = $req->post('sunday');
+
+
+        // continue
+    }
+
     //Create Function of Customer
     public function create_data(Request $req)
     {
@@ -145,6 +160,7 @@ class CustomerController extends Controller
         return redirect('manage-customer');
     }
 
+    
     // Add PT Details
     public function pt_trainer_details()
     {

@@ -25,9 +25,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('pt-customer-details', [CustomerController::class, 'pt_trainer_details']);
     Route::post('create-pt-details', [CustomerController::class, 'add_pt_details']);
     Route::post('update-pt', [CustomerController::class, 'update_pt']);
-
     Route::get('add_fees/{id}', [CustomerController::class, 'index_fees_add']);
-
+    Route::post('trainer_check', [CustomerController::class, 'trainer_check'])->name('trainer_check');
 
 
     // Trainer Module

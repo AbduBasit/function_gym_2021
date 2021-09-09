@@ -56,7 +56,7 @@
 
                             <div>
                                 @csrf
-                                <h4>Information</h4>
+                                {{-- <h4>Information</h4>
                                 <section class="pl-2 pr-2">
                                     <div class="heading-section mt-lg-2">
                                         <h4>Personal Information</h4>
@@ -138,7 +138,7 @@
                                         </div>
                                     </div>
                                 </section>
-
+ --}}
 
 
 
@@ -291,303 +291,158 @@
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                                <h4>Gym Schedule</h4>
-                                <section class="pl-2 pr-2">
-                                    <div class="row" id="parentOfCheckbox">
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Monday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="mondaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="mondaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="mondaypt" value="1" name="mondaypt" hidden
-                                                            type="checkbox" />
-                                                        <label for="mondaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    {{-- Scheduling Section --}}
+                                    <div class="display">
+                                        <div class="heading-title mt-3">
+                                            <h4>Gym Schedule</h4>
+                                            <hr>
                                         </div>
-
-
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Tuesday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="tuesdaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                        <div class="row">
+                                            <table class="table table-outline-danger table-lg-responsive table-bordered">
+                                                <thead>
+                                                    <th class="width80">PT</th>
+                                                    <th>Days</th>
+                                                    <th>Time Start</th>
+                                                    <th>Time End</th>
+                                                </thead>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="mondaypt" value="yes" name="mondaypt" hidden type="checkbox" />
+                                                            <label for="mondaypt" class="label-default"></label> 
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="tuesdaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>Monday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="mondaytimein" name="mondaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="tuesdaypt" value="1" hidden name="tuesdaypt"
-                                                            type="checkbox" />
-                                                        <label for="tuesdaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Wednesday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="wednesdaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="mondaytimeout" name="mondaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="wednesdaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="tuesdaypt" value="yes" name="tuesdaypt" hidden type="checkbox" />
+                                                            <label for="tuesdaypt" class="label-default"></label> 
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="wednesdaypt" value="1" name="wednesdaypt" hidden
-                                                            type="checkbox" />
-                                                        <label for="wednesdaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Thursday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="thursdaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>Tuesday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="tuesdaytimein" name="tuesdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="thursdaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="tuesdaytimeout" name="tuesdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="thursdaypt" value="1" hidden name="thursdaypt"
-                                                            type="checkbox" />
-                                                        <label for="thursdaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Friday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="fridaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="wednesdaypt" value="yes" name="wednesdaypt" hidden type="checkbox" />
+                                                            <label for="wednesdaypt" class="label-default"></label> 
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="fridaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>Wednesday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="wednesdaytimein" name="wednesdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="fridaypt" value="1" name="fridaypt" hidden
-                                                            type="checkbox" />
-                                                        <label for="fridaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Saturday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="saturdaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="wednesdaytimeout" name="wednesdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="saturdaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="thursdaypt" value="yes" name="thursdaypt" hidden type="checkbox" />
+                                                            <label for="thursdaypt" class="label-default"></label> 
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="saturdaypt" value="1" hidden name="saturdaypt"
-                                                            type="checkbox" />
-                                                        <label for="saturdaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card bg-card-form-customer">
-                                                <div class="card-header border-0 pb-0">
-                                                    <h5 class="card-title">Sunday</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label>Start Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="09:30"
-                                                                    name="sundaytimein"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>Thursday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="thursdaytimein" name="thursdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <label>End Timming</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" value="10:30"
-                                                                    name="sundaytimeout"> <span
-                                                                    class="input-group-append"><span
-                                                                        class="input-group-text"><i
-                                                                            class="fa fa-clock-o"></i></span></span>
-                                                            </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="thursdaytimeout" name="thursdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer display border-0 pt-0 display-none">
-                                                    <p class="card-text d-inline">Person Training (PT)?</p>
-                                                    <div class="material-switch data-input mt-3 float-right">
-                                                        <input id="sundaypt" hidden name="sundaypt" value="1"
-                                                            type="checkbox" />
-                                                        <label for="sundaypt" class="label-default"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="fridaypt" value="yes" name="fridaypt" hidden type="checkbox" />
+                                                            <label for="fridaypt" class="label-default"></label> 
+                                                        </div>
+                                                    </td>
+                                                    <td>Friday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="fridaytimein" name="fridaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="fridaytimeout" name="fridaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="saturdaypt" value="yes" name="saturdaypt" hidden type="checkbox" />
+                                                            <label for="saturdaypt" class="label-default"></label> 
+                                                        </div>
+                                                    </td>
+                                                    <td>Saturday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="saturdaytimein" name="saturdaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="saturdaytimeout" name="saturdaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="material-switch data-input mt-3 float-right">
+                                                            <input id="sundaypt" value="yes" name="sundaypt" hidden type="checkbox" />
+                                                            <label for="sundaypt" class="label-default"></label> 
+                                                        </div>
+                                                    </td>
+                                                    <td>Sunday</td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="sundaytimein" name="sundaytimein"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                            <input type="text" class="form-control clock-n disable" disabled id="sundaytimeout" name="sundaytimeout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </section>
+                                
                                 <h4>Confirmation</h4>
                                 <section>
                                     <div class="checkout-name text-center mt-5 pt-5">
@@ -605,6 +460,49 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('./js/jquery.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#mondaytimein , #tuesdaytimein, #wednesdaytimein, #thursdaytimein, #fridaytimein, #saturdaytimein, #sundaytimein ').on('change', ()=>{
+                let mon = $('#mondaytimein').val();
+                let tue = $('#tuesdaytimein').val();
+                let wed = $('#wednesdaytimein').val();
+                let thu = $('#thursdaytimein').val();
+                let fri = $('#fridaytimein').val();
+                let sat = $('#saturdaytimein').val();
+                let sun = $('#sundaytimein').val();
+
+                var values = {
+                        monday:mon,
+                        tuesday:tue,
+                        wednesday:wed,
+                        thursday:thu,
+                        friday:fri,
+                        saturday:sat,
+                        sunday:sun,
+                        
+                };
+
+                // console.log(values);
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('trainer_check')}}",
+                    data: values,
+                    success: function (response) {
+                        console.log(response)
+                    }
+                });
+                
+            })
+        });
+    </script>
 
 
 
