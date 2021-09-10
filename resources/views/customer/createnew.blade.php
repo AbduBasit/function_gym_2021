@@ -1,3 +1,91 @@
+<script src="{{ asset('./js/jquery.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#mondaytimein , #tuesdaytimein, #wednesdaytimein, #thursdaytimein, #fridaytimein, #saturdaytimein, #sundaytimein ').on('change', ()=>{
+            var mon1 = $('#mondaytimein').val();
+            var tue1 = $('#tuesdaytimein').val();
+            var wed1 = $('#wednesdaytimein').val();
+            var thu1 = $('#thursdaytimein').val();
+            var fri1 = $('#fridaytimein').val();
+            var sat1 = $('#saturdaytimein').val();
+            var sun1 = $('#sundaytimein').val();
+
+
+            let mon_m = mon1.split('')[5] +mon1.split('')[6]
+            let tue_m = tue1.split('')[5] +tue1.split('')[6]
+            let wed_m = wed1.split('')[5] +wed1.split('')[6]
+            let thu_m = thu1.split('')[5] +thu1.split('')[6]
+            let fri_m = fri1.split('')[5] +fri1.split('')[6]
+            let sat_m = sat1.split('')[5] +sat1.split('')[6]
+            let sun_m = sun1.split('')[5] +sun1.split('')[6]
+
+
+
+            let mon = mon1.split(':')[0]
+            let tue = tue1.split(':')[0]
+            let wed = wed1.split(':')[0]
+            let thu = thu1.split(':')[0]
+            let fri = fri1.split(':')[0]
+            let sat = sat1.split(':')[0]
+            let sun = sun1.split(':')[0]
+
+            var values = {
+                    monday:mon,
+                    tuesday:tue,
+                    wednesday:wed,
+                    thursday:thu,
+                    friday:fri,
+                    saturday:sat,
+                    sunday:sun,
+
+                    monday_m:mon_m,
+                    tuesday_m:tue_m,
+                    wednesday_m:wed_m,
+                    thursday_m:thu_m,
+                    friday_m:fri_m,
+                    saturday_m:sat_m,
+                    sunday_m:sun_m,
+                    
+            };
+
+            // console.log(values);
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+            $.ajax({
+                type: "post",
+                url: "{{ route('trainer_check')}}",
+                data: values,
+                success: function (response) {
+
+                    if(response){
+                        for(i=0; i<response.length; i++){
+                        if(response[i]['mon_start']==3 || response[i]['tue_start']==3 || response[i]['wed_start']==3 || response[i]['thu_start']==3 || response[i]['fri_start']==3 || response[i]['sat_start']==3 || response[i]['sun_start']==3){
+                            console.log(response[i]['trainer_name'] + ' Full');
+                        }
+                        else if(response[i]['mon_start']==2 || response[i]['tue_start']==2 || response[i]['wed_start']==2 || response[i]['thu_start']==2 || response[i]['fri_start']==2 || response[i]['sat_start']==2 || response[i]['sun_start']==2){
+                            console.log(response[i]['trainer_name'] + ' only One are input');
+                        }
+                        else if(response[i]['mon_start']==1 || response[i]['tue_start']==1 || response[i]['wed_start']==1 || response[i]['thu_start']==1 || response[i]['fri_start']==1 || response[i]['sat_start']==1 || response[i]['sun_start']==1){
+                            console.log(response[i]['trainer_name'] + ' only two are input');
+                        }
+                        else if(!response){
+                            console.log(response[i]['trainer_name'] + 'Allow input');
+                        }
+                        else{
+                        console.log('Error Secondary');
+                        }
+                        }
+                    }
+                    
+                }
+            });
+        })
+    });
+</script>
 <style>
     .bootstrap-select.form-control-lg .dropdown-toggle,
     .new-lg {
@@ -461,48 +549,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('./js/jquery.js') }}"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#mondaytimein , #tuesdaytimein, #wednesdaytimein, #thursdaytimein, #fridaytimein, #saturdaytimein, #sundaytimein ').on('change', ()=>{
-                let mon = $('#mondaytimein').val();
-                let tue = $('#tuesdaytimein').val();
-                let wed = $('#wednesdaytimein').val();
-                let thu = $('#thursdaytimein').val();
-                let fri = $('#fridaytimein').val();
-                let sat = $('#saturdaytimein').val();
-                let sun = $('#sundaytimein').val();
-
-                var values = {
-                        monday:mon,
-                        tuesday:tue,
-                        wednesday:wed,
-                        thursday:thu,
-                        friday:fri,
-                        saturday:sat,
-                        sunday:sun,
-                        
-                };
-
-                // console.log(values);
-                $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-                });
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('trainer_check')}}",
-                    data: values,
-                    success: function (response) {
-                        console.log(response)
-                    }
-                });
-                
-            })
-        });
-    </script>
+  
 
 
 

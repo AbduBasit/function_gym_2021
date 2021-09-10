@@ -23,7 +23,46 @@ class CustomerController extends Controller
         $saturday = $req->post('saturday');
         $sunday = $req->post('sunday');
 
+        $monday_m = $req->post('monday_m') ;
+        $tuesday_m = $req->post('tuesday_m');
+        $wednesday_m = $req->post('wednesday_m');
+        $thursday_m = $req->post('thursday_m');
+        $friday_m = $req->post('friday_m');
+        $saturday_m = $req->post('saturday_m');
+        $sunday_m = $req->post('sunday_m');
 
+
+
+        if($monday!=null || $tuesday!=null || $wednesday!=null || $thursday!=null|| $friday!=null|| $saturday!=null|| $sunday!=null){
+            $data = DB::select('SELECT 
+            count(trainer_name) as total_customer,
+            count(mon_start_time) as mon_start,
+            count(tue_start_time) as tue_start,
+            count(wed_start_time) as wed_start,
+            count(thu_start_time) as thu_start,
+            count(fri_start_time) as fri_start,
+            count(sat_start_time) as sat_start,
+            count(sun_start_time) as sun_start,
+            trainer_name FROM `customers` where
+             mon_start_time like "'.$monday.'%'.$monday_m.'" or 
+             tue_start_time like "'.$tuesday.'%'.$tuesday_m.'" or
+             wed_start_time like "'.$wednesday.'%'.$wednesday_m.'" or  
+             thu_start_time like "'.$thursday.'%'.$thursday_m.'" or
+             fri_start_time like "'.$friday.'%'.$friday_m.'" or
+             sat_start_time like "'.$saturday.'%'.$saturday_m.'" or
+             sun_start_time like "'.$sunday.'%'.$sunday_m.'"
+             GROUP by 
+           trainer_name
+             ');
+
+             if($data!=null){
+                 return $data;
+             }
+
+        }
+
+
+        // return $monday;
         // continue
     }
 
