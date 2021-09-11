@@ -2,14 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TrainerExport;
+use App\Imports\TrainerImport;
 use App\Models\customer;
 use App\Models\trainer;
+use Dotenv\Parser\Value;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Excel;
 
 class TrainerController extends Controller
 {
+
+    public function export_trainer($value){
+        if($value=='trainer_xlsx'){
+            return Excel::download(new TrainerExport, 'trainer_list.xlsx');
+            return redirect('manage-trainer');
+        }
+        elseif($value=='trainer_csv'){
+            return Excel::download(new TrainerExport, 'trainer_list.csv');
+            return redirect('manage-trainer');
+        }
+        else{
+            return 'Error';
+        }
+    }
+
+    public function import_trainer(Request $req){
+
+        // dd($req->file('file_trainer'));
+        Excel::import(new TrainerImport, $req->file('file_trainer'));
+        return redirect('manage-trainer');
+    }
+
+
     //Move to Page
     public function create_data()
     {

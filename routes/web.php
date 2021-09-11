@@ -39,6 +39,9 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('update_trainer', [TrainerController::class, 'update']);
     Route::get('trainer-schedule/{id}', [TrainerController::class, 'schedule_manage']);
 
+    Route::get('trainer-export/{value}', [TrainerController::class, 'export_trainer']);
+    Route::post('trainer_import', [TrainerController::class, 'import_trainer'])->name('trainer-imp');
+
 
     // Activity
     Route::get('manage-rules', [ActivityController::class, 'rules_index']);

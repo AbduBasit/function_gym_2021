@@ -81,6 +81,7 @@ return [
 				],
 				'trainer_manage'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/dropzone/dist/dropzone.css',
 				],
 				'rules_index'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -737,6 +738,7 @@ return [
 				'trainer_manage' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
+					'vendor/dropzone/dist/dropzone.js',
 					'js/deznav-init.js',
 				],
 				'rules_index' => [

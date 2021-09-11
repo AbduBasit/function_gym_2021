@@ -55,9 +55,14 @@ class CustomerController extends Controller
            trainer_name
              ');
 
+            // foreach($data as $key=> $value){
+                $trainer = DB::select('SELECT concat(first_name, " " , last_name) as trainer_name FROM `trainers`');
+            //     return $trainer[$key];
+            // }
              if($data!=null){
-                 return $data;
+                return [$data, $trainer];
              }
+             else{return 0;}
 
         }
 
