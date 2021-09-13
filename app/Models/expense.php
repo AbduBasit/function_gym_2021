@@ -4,17 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class expense extends Model
 {
     public $fillable = [
-        'exp_title',
-        'exp_desc',
-        'exp_amount',
-        'exp_quan',
-        'exp_disc',
-        'exp_tax',
-        'exp_net'
+        'title',
+        'desc',
+        'amount',
+        'quan',
+        'disc',
+        'tax',
+        'net'
     ];
     use HasFactory;
+    public static function getExpense(){
+        $records = DB::select('select 
+        `title`,
+        `desc`,
+        `amount`,
+        `quan`,
+        `disc`,
+        `tax`,
+        `net`
+        from expenses');
+        return $records;
+    }
 }

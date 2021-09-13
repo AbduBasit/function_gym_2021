@@ -7,12 +7,13 @@ use App\Http\Controllers\CustomerController,
     App\Http\Controllers\ActivityController,
     App\Http\Controllers\PosController;
 
+
 Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
 Route::post('login_process', [UserController::class, 'checkpoint']);
 Route::get('logout', [UserController::class, 'logout']);
 Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
-
+    
     // Complete Customer Module
     Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
     Route::post('create-customer', [CustomerController::class, 'create_data']);
@@ -27,6 +28,10 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('update-pt', [CustomerController::class, 'update_pt']);
     Route::get('add_fees/{id}', [CustomerController::class, 'index_fees_add']);
     Route::post('trainer_check', [CustomerController::class, 'trainer_check'])->name('trainer_check');
+    Route::post('trainer_check-3', [CustomerController::class, 'trainer_check_3'])->name('three-info');
+    Route::get('customer-export/{value}', [CustomerController::class, 'export_customer']);
+    Route::post('customer_import', [CustomerController::class, 'import_customer'])->name('customer-imp');
+
 
 
     // Trainer Module
@@ -38,7 +43,6 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('trainer-edit/{id}', [TrainerController::class, 'update_trainer']);
     Route::post('update_trainer', [TrainerController::class, 'update']);
     Route::get('trainer-schedule/{id}', [TrainerController::class, 'schedule_manage']);
-
     Route::get('trainer-export/{value}', [TrainerController::class, 'export_trainer']);
     Route::post('trainer_import', [TrainerController::class, 'import_trainer'])->name('trainer-imp');
 
@@ -47,7 +51,6 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('manage-rules', [ActivityController::class, 'rules_index']);
     Route::get('update_rule_show/{id}', [ActivityController::class, 'update_rule_show']);
     Route::post('update_rule', [ActivityController::class, 'update_rule']);
-
     Route::get('email-create', [ActivityController::class, 'email_index']);
     Route::post('send_mail', [ActivityController::class, 'email_send'])->name('send_mail');
 
@@ -68,7 +71,13 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('/insertFees/{id}', [CustomerController::class, 'insertFees']);
     Route::get('payslip/{id}', [PosController::class, 'trainer_payslip_index']);
     Route::get('trainer_status/{id}', [PosController::class, 'status_change_index']);
+    Route::get('invoice/{id}', [PosController::class, 'invoicePrint']);
     Route::post('trainer_status_change/', [PosController::class, 'status_change']);
+    Route::get('trainer_availability', [PosController::class, 'index_status']);
+    Route::get('expense-export/{value}', [PosController::class, 'export_expense']);
+    Route::get('invoice-export/{value}', [PosController::class, 'export_invoice']);
+    Route::post('expense_import', [PosController::class, 'import_expense'])->name('expense-imp');
+    Route::post('invoice_import', [PosController::class, 'import_invoice'])->name('invoice-imp');
 });
 
 

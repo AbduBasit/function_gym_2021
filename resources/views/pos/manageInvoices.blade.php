@@ -22,6 +22,53 @@
                         <h4 class="card-title">Invoices</h4>
                     </div>
                     <div class="card-body">
+
+                        <div class="row mb-3 ie-section">
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3 ">
+                               <div class="mr-md-3 text-right">
+                                <button class="btn btn-outline-light btn-sm" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                    Export <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" href="{{url('invoice-export/invoice_xlsx')}}">Export to Excel (.xlsx) </a>
+                                    <a class="dropdown-item" href="{{url('invoice-export/invoice_csv')}}">Export to CSV (.csv)</a>
+                                </div>
+                                    <button type="button" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#trainer_import">
+                                        Import <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    </button>    
+                                   
+                               </div>
+                            </div>  
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="trainer_import" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Import CSV</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{route('invoice-imp')}}" enctype="multipart/form-data" method="POST" class="dropzone">
+                                            @csrf
+                                            <div class="fallback">
+                                                <input name="file_invoice" type="file"/>
+                                            </div>
+                                      
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="table-responsive">
                             <table class="table table-sm-responsive table-hover">
                                 <thead>
@@ -68,7 +115,7 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item"
-                                                            href="customer-view/{{ $member->id }}">Check Invoice</a>
+                                                            href="{{url('invoice/'.$member->id )}}">Check Invoice</a>
                                                     </div>
                                                 </div>
                                             </td>

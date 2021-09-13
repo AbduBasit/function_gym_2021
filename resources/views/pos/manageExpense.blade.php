@@ -22,6 +22,52 @@
                     <a href="{{url('create-expense')}}" class="btn btn-outline-primary btn-md">+ Create New</a>
                 </div>
                 <div class="card-body">
+                    <div class="row mb-3 ie-section">
+                        <div class="col-md-9"></div>
+                        <div class="col-md-3 ">
+                           <div class="mr-md-3 text-right">
+                            <button class="btn btn-outline-light btn-sm" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                                Export <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                <a class="dropdown-item" href="{{url('expense-export/expense_xlsx')}}">Export to Excel (.xlsx) </a>
+                                <a class="dropdown-item" href="{{url('expense-export/expense_csv')}}">Export to CSV (.csv)</a>
+                            </div>
+                                <button type="button" class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#trainer_import">
+                                    Import <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                </button>    
+                               
+                           </div>
+                        </div>  
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="trainer_import" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Import CSV</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{route('expense-imp')}}" enctype="multipart/form-data" method="POST" class="dropzone">
+                                        @csrf
+                                        <div class="fallback">
+                                            <input name="file_expense" type="file"/>
+                                        </div>
+                                  
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
                         <table id="example3" class="display min-w850">
                             <thead>

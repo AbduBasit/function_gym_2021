@@ -46,13 +46,12 @@
                                                     <h6 class="text-success">
                                                         {{ $trainer->salary_status }}
                                                     </h6>
-                                                @elseif($trainer->salary_status == 'Unpaid')
+                                                @else
                                                     <a class="text-danger"
                                                         href="trainer_status/{{ $trainer->trainer_id }}">
-                                                        <h6 class="text-danger">{{ $trainer->salary_status }}</h6>
+                                                        <h6 class="text-danger pt-2">Unpaid</h6>
                                                     </a>
-                                                @else
-                                                    <p class="text-danger">Invalid Value</p>
+                                               
                                                 @endif
                                             </td>
                                             <td>

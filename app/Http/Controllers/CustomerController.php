@@ -2,16 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CustomerExport;
 use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Http\Controllers\Controller;
+use App\Imports\CustomerImport;
 use App\Models\invoice;
 use App\Models\rule;
 use App\Models\trainer;
 use Illuminate\Support\Facades\DB;
+use Excel;
 
 class CustomerController extends Controller
 {
+
+    
+    public function export_customer($value){
+        if($value=='customer_xlsx'){
+            return Excel::download(new CustomerExport, 'customers_list.xlsx');
+            return redirect('manage-customer');
+        }
+        elseif($value=='customer_csv'){
+            return Excel::download(new CustomerExport, 'customers_list.csv');
+            return redirect('manage-customer');
+        }
+        else{
+            return 'Error';
+        }
+    }
+
+    public function import_customer(Request $req){
+
+        // dd($req->file('file_trainer'));
+        Excel::import(new CustomerImport, $req->file('file_trainer'));
+        return redirect('manage-trainer');
+    }
+
+
     // Trainer_Check
     public function trainer_check(Request $req){
         
@@ -69,6 +96,88 @@ class CustomerController extends Controller
 
         // return $monday;
         // continue
+    }
+
+    public function trainer_check_3(Request $req){
+        $mon_sm = explode(":", $req->mondaytimein);
+        $tue_sm = explode(":", $req->tuesdaytimein);
+        $wed_sm = explode(":", $req->wednesdaytimein);
+        $thu_sm = explode(":", $req->thursdaytimein);
+        $fri_sm = explode(":", $req->fridaytimein);
+        $sat_sm = explode(":", $req->saturdaytimein);
+        $sun_sm = explode(":", $req->sundaytimein);
+
+        $tue_m = null;
+        $wed_m = null;
+        $thu_m = null;
+        $fri_m = null;
+        $sat_m = null;
+        $sun_m = null;
+            if($mon_sm[0]!=null){
+                $mon_m = implode($mon_sm)[4] .implode($mon_sm)[5];
+            }
+            if($tue_sm[0]!=null){
+                $tue_m = implode($tue_sm)[4] .implode($tue_sm)[5];
+            }
+            if($wed_sm[0]!=null){
+                $wed_m = implode($wed_sm)[4] .implode($wed_sm)[5];
+            }
+            if($thu_sm[0]!=null){
+                $thu_m = implode($tue_sm)[4] .implode($tue_sm)[5];
+            }
+            if($fri_sm[0]!=null){
+                $fri_m = implode($tue_sm)[4] .implode($tue_sm)[5];
+            }
+            if($sat_sm[0]!=null){
+                $sat_m = implode($tue_sm)[4] .implode($tue_sm)[5];
+            }
+            if($sun_sm[0]!=null){
+                $sun_m = implode($sun_sm)[4] .implode($sun_sm)[5];
+            }
+
+
+        
+        
+        $mon = $mon_sm[0];
+         $tue = $tue_sm[0];
+         $wed = $wed_sm[0];
+         $thu = $thu_sm[0];
+         $fri = $fri_sm[0];
+         $sat = $sat_sm[0];
+         $sun = $sun_sm[0];
+
+         if($mon==3||$tue==3||$wed==3||$thu==3||$fri==3||$sat==3||$sun==3){
+            $data = DB::select('SELECT 
+            count(trainer_name) as total_customer,
+            count(mon_start_time) as mon_start,
+            count(tue_start_time) as tue_start,
+            count(wed_start_time) as wed_start,
+            count(thu_start_time) as thu_start,
+            count(fri_start_time) as fri_start,
+            count(sat_start_time) as sat_start,
+            count(sun_start_time) as sun_start,
+            trainer_name FROM `customers` where
+             mon_start_time like "'.$mon.'%'.$mon_m.'" or 
+             tue_start_time like "'.$tue.'%'.$tue_m.'" or
+             wed_start_time like "'.$wed.'%'.$wed_m.'" or  
+             thu_start_time like "'.$thu.'%'.$thu_m.'" or
+             fri_start_time like "'.$fri.'%'.$fri_m.'" or
+             sat_start_time like "'.$sat.'%'.$sat_m.'" or
+             sun_start_time like "'.$sun.'%'.$sun_m.'"
+             GROUP by 
+           trainer_name
+             ');
+
+             
+             foreach($data as $item => $value){
+                return $data;
+                
+             }
+
+             
+
+          
+         }
     }
 
     //Create Function of Customer

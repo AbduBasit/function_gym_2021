@@ -38,6 +38,7 @@
                     <li><a href="{{ url('/manage-expense') }}">Expenses Reports</a></li>
                     <li><a href="{{ url('/expense_category') }}">Manage Expense Categories</a></li>
                     <li><a href="{{ url('/trainer_payslip') }}">Trainer Pay Slip</a></li>
+                    <li><a href="{{ url('/trainer_availability') }}">Trainer Availability</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

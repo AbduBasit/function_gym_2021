@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpensesExport;
+use App\Exports\InvoicesExport;
+use App\Imports\ExpensesImport;
+use App\Imports\InvoicesImport;
 use App\Models\cat_expense;
 use App\Models\customer;
 use App\Models\expense;
@@ -12,9 +16,55 @@ use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\While_;
+use Excel;
 
 class PosController extends Controller
 {
+
+
+    public function export_invoice($value){
+        if($value=='invoice_xlsx'){
+            return Excel::download(new InvoicesExport, 'invoices_list.xlsx');
+            return redirect('manage-invoice');
+        }
+        elseif($value=='invoice_csv'){
+            return Excel::download(new InvoicesExport, 'invoices_list.csv');
+            return redirect('manage-invoice');
+        }
+        else{
+            return 'Error';
+        }
+    }
+
+    public function import_invoice(Request $req){
+
+        // dd($req->file('file_trainer'));
+        Excel::import(new InvoicesImport, $req->file('file_invoice'));
+        return redirect('manage-invoice');
+    }
+
+
+
+    public function export_expense($value){
+        if($value=='expense_xlsx'){
+            return Excel::download(new ExpensesExport, 'expenses_list.xlsx');
+            return redirect('manage-expense');
+        }
+        elseif($value=='expense_csv'){
+            return Excel::download(new ExpensesExport, 'expenses_list.csv');
+            return redirect('manage-expense');
+        }
+        else{
+            return 'Error';
+        }
+    }
+
+    public function import_expense(Request $req){
+
+        // dd($req->file('file_trainer'));
+        Excel::import(new ExpensesImport, $req->file('file_expense'));
+        return redirect('manage-expense');
+    }
 
 
     public $result = null;
@@ -52,7 +102,6 @@ class PosController extends Controller
         $db = new expense();
 
         $values = [
-
             'title' => $req->post('title')[0],
             'desc' => $req->post('desc')[0],
             'amount' => $req->post('amount')[0],
@@ -202,7 +251,14 @@ class PosController extends Controller
         }
         // return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null]);
     }
-
+    public function invoicePrint($id){
+        $page_title = 'Invoice';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        $db = new invoice();
+        $data = $db->all()->find($id);
+        return view('pos.invoice', compact('page_title', 'page_description', 'action'), ['data' => $data]);
+    }
     public function status_change_index($id)
     {
         $page_title = 'Trainer Pay Slip';
@@ -217,6 +273,12 @@ class PosController extends Controller
 
         // dd($data[0]);
         return view('pos.indexStatus', compact('page_title', 'page_description', 'action'), ['data' => $data[0], 'id' => $tid]);
+    }
+    public function index_status(){
+        $page_title = 'Trainer Scheduling';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        return view('pos.trainerStatus', compact('page_title', 'page_description', 'action'));
     }
     public function status_change(Request $req)
     {
