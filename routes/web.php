@@ -72,6 +72,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('payslip/{id}', [PosController::class, 'trainer_payslip_index']);
     Route::get('trainer_status/{id}', [PosController::class, 'status_change_index']);
     Route::get('invoice/{id}', [PosController::class, 'invoicePrint']);
+    Route::view('invoice_customer', 'customer.invoice');
     Route::post('trainer_status_change/', [PosController::class, 'status_change']);
     Route::get('trainer_availability', [PosController::class, 'index_status']);
     Route::get('expense-export/{value}', [PosController::class, 'export_expense']);

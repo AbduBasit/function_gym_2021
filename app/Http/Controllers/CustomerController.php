@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Http\Controllers\Controller;
 use App\Imports\CustomerImport;
+use App\Mail\InvoiceMail;
 use App\Models\invoice;
 use App\Models\rule;
 use App\Models\trainer;
 use Illuminate\Support\Facades\DB;
 use Excel;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -168,10 +170,11 @@ class CustomerController extends Controller
            trainer_name
              ');
 
-             
+              
              foreach($data as $item => $value){
-                return $data;
-                
+
+                $n = DB::select('select concat(first_name, " ", last_name) as traine_name from trainers where not  concat(first_name, " ", last_name) = "'.$data[$item]->trainer_name.'"');
+                return $n;
              }
 
              
@@ -303,9 +306,22 @@ class CustomerController extends Controller
 
 
         $inv->trainer_fees = $req->trainfee * $result;
-        $inv->net_total = ($req->trainfee * $result) + $req->gymfee + $req->regfee;
+
+        $net_total =($req->trainfee * $result) + $req->gymfee + $req->regfee;
+        $inv->net_total = $net_total;
+
+
+        
         if ($db->save()) {
             $inv->save();
+
+            
+        if($req->email){
+            $data = $req->all();
+            Mail::to($req->email)->send(new InvoiceMail([$data, $net_total]));
+        }
+            
+
             $req->session()->flash('customer', $data);
         } else {
             $req->session()->flash('error', $data);
