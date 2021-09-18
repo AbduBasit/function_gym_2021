@@ -17,6 +17,48 @@ use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
+    public function index_customer(Request $req)
+    {
+
+        $page_title = 'Manage Customers';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        $db = new customer();
+        if($req->post()){
+            $in = $req->post('t_in');
+            $out = $req->post('t_out');
+            $data = DB::select("SELECT * FROM customers WHERE date_of_joining BETWEEN '$in' and '$out'");
+            if($data){
+                $target = $data;
+                return $target;
+            }
+        }
+        else{
+            $data = $db::all();
+            $target= $data;
+           
+        }    return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members' => $data]);
+    }
+
+    public function manage_data(Request $req){
+        $data = null;
+        $db = new customer();
+
+        if($req->post()){
+            $in = $req->post('t_in');
+            $out = $req->post('t_out');
+            $data = DB::select("SELECT * FROM customers WHERE date_of_joining BETWEEN '$in' and '$out'");
+            if($data){
+                $target = $data;
+                return $target;
+            }
+        }
+        else{
+            $data = $db::all();
+            $target= $data;
+            return $target;
+        }
+    }
 
     
     public function export_customer($value){
@@ -624,6 +666,16 @@ class CustomerController extends Controller
         $db = new customer();
         $data = $db->all()->find($id);
         $data->fees_clear = $req->fees_status;
+        $data->renew_joining = $req->doj_new;
+        // $data->renew_month_end = $req->renew_month_end;
+
+        $data1 = DB::select("select * from rules where rules_token = 'ME_A1002'");
+        if ($req->doj_new) {
+            $Date2 = date('Y-m-d', strtotime($req->doj_new . "+ 1 month + " . $data1[0]->values . " day"));
+            $data->renew_month_end = $Date2;
+        } else {
+            $db->month_end = null;
+        }
         $val = new invoice();
         $val->customer_name = $data->first_name . " " . $data->last_name;
         $val->customer_phone = $data->phone_number;

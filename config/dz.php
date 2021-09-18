@@ -257,8 +257,14 @@ return [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'vendor/jqvmap/css/jqvmap.min.css',
 				],
-				'table_bootstrap_basic' => [
+				'index_customer' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/dropzone/dist/dropzone.css',
+					'vendor/bootstrap-daterangepicker/daterangepicker.css',
+					'vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
+					'vendor/pickadate/themes/default.css',
+					'vendor/datatables/css/jquery.dataTables.min.css',
+					'vendor/pickadate/themes/default.date.css',
 				],
 				'table_datatable_basic' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -720,8 +726,21 @@ return [
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],
-				'table_bootstrap_basic' => [
+				'index_customer' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'vendor/dropzone/dist/dropzone.js',
+					'vendor/moment/moment.min.js',
+					'vendor/bootstrap-daterangepicker/daterangepicker.js',
+					'vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js',
+					'vendor/pickadate/picker.js',
+					'vendor/pickadate/picker.time.js',
+					'vendor/pickadate/picker.date.js',
+					'js/plugins-init/bs-daterange-picker-init.js',
+					'js/plugins-init/material-date-picker-init.js',
+					'js/plugins-init/pickadate-init.js',
+					'vendor/datatables/js/jquery.dataTables.min.js',
+					'js/plugins-init/datatables.init.js',
+					'js/script.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],

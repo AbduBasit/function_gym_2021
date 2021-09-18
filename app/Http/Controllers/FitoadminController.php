@@ -433,16 +433,16 @@ class FitoadminController extends Controller
     }
 
     // Manage Customer 
-    public function table_bootstrap_basic()
-    {
+    // public function table_bootstrap_basic()
+    // {
 
-        $page_title = 'Manage Customers';
-        $page_description = 'Some description for the page';
-        $action = __FUNCTION__;
-        $db = new customer();
-        $data = $db::all();
-        return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members' => $data]);
-    }
+    //     $page_title = 'Manage Customers';
+    //     $page_description = 'Some description for the page';
+    //     $action = __FUNCTION__;
+    //     $db = new customer();
+    //     $data = $db::all();
+    //     return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members' => $data]);
+    // }
 
     // Table Datatable Basic
     public function table_datatable_basic()

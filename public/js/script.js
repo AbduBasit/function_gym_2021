@@ -23,7 +23,7 @@ jQuery(document).ready(() => {
         jQuery('.display').show(); 
           
     }
-
+ 
     dateCalc = (value, data) => {
         var ruleDays = data;
         var chooseDate = new Date(value);
@@ -64,6 +64,8 @@ jQuery(document).ready(() => {
             // console.log(result)
         }
     })
+    
+        
     $('#fridaypt').on('click', ()=>{
         if ($('#fridaypt').prop('checked')==true){ 
             ob.fridaypt = document.getElementById('fridaypt').value
@@ -316,9 +318,6 @@ jQuery(document).ready(function(){
             jQuery('#sundaytimein').attr('disabled','disabled');
         }
     })
-
-    // SELECT count(trainer_name) FROM `customers` where mon_start_time = "03:15PM" GROUP by trainer_name;
-
 
 
     

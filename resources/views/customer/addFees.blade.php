@@ -8,6 +8,9 @@
     .new-input {
         height: 40px !important;
     }
+    .display{
+        display: none;
+    }
 </style>
 <div class="container-fluid">
     <div class="page-titles">
@@ -57,13 +60,13 @@
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
                                     <label class="text-label">Date of Pay</label>
-                                    <input type="date" name="pay_date" id="" placeholder="10" required class="form-control">
+                                    <input type="date" name="pay_date" id="pay_date" placeholder="10" required class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
                                     <label class="text-label">Amount</label>
-                                    <input type="text" name="amount" placeholder="0" required class="form-control">
+                                    <input type="text" name="amount" placeholder="0" required value="{{round(($value->trainer_fees_per_session * $value->total_session) + $value->gym_fees)}}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-2">
@@ -72,18 +75,41 @@
                                     <input type="text" name="discount" placeholder="0" class="form-control">
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="material-switch data-input mt-3">
+                                    <p>Are you want to change the Invoice Date?</p>
+                                        <input id="renew" value="yes" name="renew" hidden type="checkbox" />
+                                        <label for="renew" class="label-default"></label> 
+                                </div>
+                            </div>
                             
                         </div>
-
-                        </table>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div class="row">
-                    <div class="btn-group ml-auto">
-                        <button type="submit" id="save" class="btn btn-outline-info shadow btn-md mr-1"> Submit</button>
-                    </div>
+                        <div class="row mt-4">
+                            <div class="col-lg-6 display mb-2">
+                                <div class="form-group">
+                                    <label class="text-label">Date of Invoice*</label>
+                                    <input type="date" name="doj_new" class="form-control"
+                                        onchange="dateCalc1(this.value)"
+                                        placeholder="Cellophane Square" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 display mb-2">
+                                <div class="form-group">
+                                    <label class="text-label">Month End Date</label>
+                                    <input type="text" class="form-control disable" id="renew_month-end" name="mde_new"
+                                        value="undefine" disabled>
+                                </div>
+                            </div>
+                        </div>
+                     
+                            
+                     
+                        
+                        <div class="row mt-4">
+                            <div class="btn-group ml-auto">
+                                <button type="submit" id="save" class="btn btn-outline-info shadow btn-md mr-1"> Submit</button>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -91,6 +117,31 @@
     </form>
 </div>
 </div>
-
-
+<script src="{{ asset('./js/jquery.js') }}"></script>
+<script>
+      $('#renew').on('click', ()=>{
+        if ($('#renew').prop('checked')==true){ 
+            $('.display').fadeIn()
+        }
+        else{
+            $('.display').fadeOut()
+        }
+    })
+       dateCalc1 = (value) => {
+        var chooseDate = new Date(value);
+        chooseDate.setDate(chooseDate.getUTCDate());
+        var futureDate = chooseDate.getFullYear() + '-' + ('0' + (chooseDate.getMonth() + 2)).slice(-2) + '-' + ('0' + (chooseDate.getDate())).slice(-2);
+        $("#renew_month-end").val(function() {
+            $('#renew_month-end').val(futureDate)
+            return futureDate;
+        });
+        
+    }
+    Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+    document.getElementById('pay_date').value = new Date().toDateInputValue();
+</script>
 @endsection

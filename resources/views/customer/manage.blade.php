@@ -1,7 +1,92 @@
 {{-- Extends layout --}}
 @extends('layout.default')
+<script src="{{ asset('./js/jquery.js') }}"></script>
+<script>
+    //   $.ajax({
+    //         type: "get",
+    //         url: "{{route('manage_data')}}",
+    //         dataType: 'json',
+    //         success: function (response) {
+    //             if(response){
+    //                 if(response){
+    //                 var output="";
+    //                 for(var i = 0; i < response.length; i++){
+    //                     output += '<tr><td>'+response[i]["id"]+'</td>';
+    //                     output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
+    //                     output += '<td>'+response[i]["address"]+'</td>';
+    //                     output += '<td>'+response[i]["date_of_birth"]+'</td>';
+    //                     output += '<td>'+response[i]["date_of_joining"]+'</td>';
+    //                     output += '<td>'+response[i]["training_type"]+'</td>';
+    //                     output += '<td>'+response[i]["trainer_name"]+'</td>';
+    //                     output += '<td>'+response[i]["status"]+'</td>';
+                       
+    //                     if(response[i]["fees_clear"]=="All Clear"){
+    //                         output += '<td class="text-success"> All Clear </td>';
+    //                     }
+    //                     else if(response[i]["fees_clear"]=="Unpaid"){
+    //                         output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+    //                     }
+    //                     output += '</tr>';
+    //                 }
+    //                 $('#example3 tbody').html(output)
 
+                    
+    //             }
+    //             }
+    //         }
+    //     });
+    $(document).on('submit', '#customer-form', (e)=>{
+        e.preventDefault();
+       let val = document.getElementById('daterange').value;
+       var n = val.split(' - ');
+       tin_0 = n[0].split('/')
+       var tin = tin_0[2]+'-'+tin_0[0]+'-'+tin_0[1];
+       tout_0 = n[1].split('/')
+       var tout = tout_0[2]+'-'+tout_0[0]+'-'+tout_0[1];
+       var value = {
+           t_in : tin,
+           t_out : tout,
+       }
+    //    console.log(tout);
 
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+        $.ajax({
+            type: "get",
+            url: "{{route('manage_data')}}",
+            data: value,
+            success: function (response) {
+                if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+response[i]["id"]+'</td>';
+                        output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
+                        output += '<td>'+response[i]["address"]+'</td>';
+                        output += '<td>'+response[i]["date_of_birth"]+'</td>';
+                        output += '<td>'+response[i]["date_of_joining"]+'</td>';
+                        output += '<td>'+response[i]["training_type"]+'</td>';
+                        output += '<td>'+response[i]["trainer_name"]+'</td>';
+                        output += '<td>'+response[i]["status"]+'</td>';
+                       
+                        if(response[i]["fees_clear"]=="All Clear"){
+                            output += '<td class="text-success"> All Clear </td>';
+                        }
+                        else if(response[i]["fees_clear"]=="Unpaid"){
+                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                        }
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+            }
+        });
+    })
+</script>
 
 {{-- Content --}}
 @section('content')
@@ -24,7 +109,18 @@
                 <div class="card-body">
 
                     <div class="row mb-3 ie-section">
-                        <div class="col-md-9"></div>
+                        <div class="col-md-3">
+                           <form action="" method="get" id="customer-form">
+                            <div class="input-group example mb-3">
+                                @csrf
+                                <input type="text" class="form-control input-daterange-datepicker border-light" required id="daterange" >
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-light btn-sm" id="submit-btn" type="submit">Submit</button>
+                                </div>
+                              </div>
+                           </form>
+                        </div>
+                        <div class="col-md-6"></div>
                         <div class="col-md-3 ">
                            <div class="mr-md-3 text-right">
                             <button class="btn btn-outline-light btn-sm" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -72,7 +168,7 @@
 
 
                     <div class="table-responsive">
-                        <table class="table table-responsive table-hover">
+                        <table id="example3" class="display min-w850 table table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th class="width80"><strong>#</strong></th>
@@ -84,7 +180,7 @@
                                     <th><strong>Trainer Name</strong></th>
                                     <th><strong>Status</strong></th>
                                     <th><strong>Fees Payable</strong></th>
-                                    <th>Action</th>
+                                    <th><strong>Action</strong></th>
                                 </tr>
                             </thead>
                             <tbody>

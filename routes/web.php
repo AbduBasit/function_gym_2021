@@ -17,7 +17,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     // Complete Customer Module
     Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
     Route::post('create-customer', [CustomerController::class, 'create_data']);
-    Route::get('manage-customer', 'App\Http\Controllers\FitoadminController@table_bootstrap_basic');
+    Route::get('manage-customer', [CustomerController::class, 'index_customer'])->name('customer_data');
+    Route::get('manage_data', [CustomerController::class, 'index_customer'])->name('manage_data');
     Route::get('customer-view/{id}', [CustomerController::class, 'customer_view']);
     Route::get('customer-delete/{id}', [CustomerController::class, 'customer_delete']);
     Route::get('customer-edit/{id}', [CustomerController::class, 'customer_update_show']);

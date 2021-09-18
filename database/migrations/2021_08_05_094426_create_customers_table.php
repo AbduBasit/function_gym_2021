@@ -91,6 +91,8 @@ class CreateCustomersTable extends Migration
             // Accounts
             $table->string('date_of_joining')->nullable();
             $table->string('month_end')->nullable();
+            $table->string('renew_joining')->nullable();
+            $table->string('renew_month_end')->nullable();
             $table->string('training_type')->nullable();
             $table->string('trainer_name')->nullable();
             $table->string('status')->nullable();

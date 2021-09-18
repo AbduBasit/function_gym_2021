@@ -23,7 +23,12 @@
                 </div>
                 <div class="card-body">
                     <div class="row mb-3 ie-section">
-                        <div class="col-md-9"></div>
+                        <div class="col-md-3">
+                            <div class="example">
+                            <input class="form-control input-daterange-datepicker border-light" type="text" name="daterange">
+                        </div>
+                        </div>
+                        <div class="col-md-6"></div>
                         <div class="col-md-3 ">
                            <div class="mr-md-3 text-right">
                             <button class="btn btn-outline-light btn-sm" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
