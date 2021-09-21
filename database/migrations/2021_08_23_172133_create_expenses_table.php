@@ -17,6 +17,7 @@ class CreateExpensesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('desc')->nullable();
+            $table->string('pay_date')->nullable();
             $table->string('amount')->nullable();
             $table->string('quan')->nullable();
             $table->string('disc')->nullable();

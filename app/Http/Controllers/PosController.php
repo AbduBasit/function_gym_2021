@@ -73,9 +73,29 @@ class PosController extends Controller
         $page_title = 'Manage Invoices';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
+        return view('pos.manageInvoices', compact('page_title', 'page_description', 'action'));
+    }
+    public function manage_invoice_data(Request $req){
+        $data = null;
         $db = new invoice();
-        $data = $db->all();
-        return view('pos.manageInvoices', compact('page_title', 'page_description', 'action'), ['members' => $data]);
+
+        if($req->post()){
+           if($req->post('t_in') && $req->post('t_out')){
+            $in = $req->post('t_in');
+            $out = $req->post('t_out');
+            $data = DB::select("SELECT * FROM invoices WHERE pay_date BETWEEN '$in' and '$out'");
+            if($data){
+                $target = $data;
+                return $target;
+            }
+           }
+     
+        }
+        else{
+            $data = $db::all();
+            $target= $data;
+            return $target;
+        }
     }
 
     public function expense_index()
@@ -83,10 +103,31 @@ class PosController extends Controller
         $page_title = 'Expenses Report';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        $db = new expense();
-        $data = $db->all();
-        return view('pos.manageExpense', compact('page_title', 'page_description', 'action'), ['datas' => $data]);
+        return view('pos.manageExpense', compact('page_title', 'page_description', 'action'));
     }
+    public function manage_expense_data(Request $req){
+        $data = null;
+        $db = new expense();
+
+        if($req->post()){
+           if($req->post('t_in') && $req->post('t_out')){
+            $in = $req->post('t_in');
+            $out = $req->post('t_out');
+            $data = DB::select("SELECT * FROM expenses WHERE pay_date BETWEEN '$in' and '$out'");
+            if($data){
+                $target = $data;
+                return $target;
+            }
+           }
+     
+        }
+        else{
+            $data = $db::all();
+            $target= $data;
+            return $target;
+        }
+    }
+
     public function expense_create()
     {
         $page_title = 'Add Expenses';
@@ -104,10 +145,12 @@ class PosController extends Controller
         $values = [
             'title' => $req->post('title')[0],
             'desc' => $req->post('desc')[0],
+            'pay_date' => $req->post('date')[0],
             'amount' => $req->post('amount')[0],
             'quan' => $req->post('quan')[0],
             'disc' => $req->post('disc')[0],
             'tax' => $req->post('tax')[0],
+            'net' => ($req->post('amount')[0] * $req->post('quan')[0])-$req->post('disc')[0]+$req->post('tax')[0],
         ];
         DB::table('expenses')->insert($values);
     }
@@ -137,11 +180,12 @@ class PosController extends Controller
 
         $data->title = $req->exp_title;
         $data->desc = $req->exp_desc;
+        $data->pay_date = $req->exp_date;
         $data->amount = $req->exp_amount;
         $data->quan = $req->exp_quan;
         $data->disc = $req->exp_disc;
         $data->tax = $req->exp_tax;
-        $data->net = $req->exp_net;
+        $data->net = ($req->exp_amount * $req->exp_quan)-$req->exp_disc+$req->exp_tax;
 
         $data->save();
         return redirect('manage-expense');
@@ -291,6 +335,7 @@ class PosController extends Controller
         $exp->title = $trainer_name;
         $exp->desc = 'Salary Expense';
         $exp->amount = $req->amount;
+        $exp->pay_date = $req->pay_date;
         $exp->quan = 1;
         $exp->disc = 0;
         $exp->tax = 0;

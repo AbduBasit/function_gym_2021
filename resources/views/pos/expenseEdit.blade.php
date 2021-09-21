@@ -31,6 +31,7 @@
                                 <tr>
                                     <th><strong>Particular</strong></th>
                                     <th><strong>Description</strong></th>
+                                    <th><strong>Expense Date</strong></th>
                                     <th><strong>Amount</strong></th>
                                     <th><strong>Quantity</strong></th>
                                     <th><strong>Discount</strong></th>
@@ -45,6 +46,7 @@
                                         @csrf
                                         <td> <input type="text" value="{{$datas->title}}" name="exp_title" required class="form-control border-primary new-input"> </td>
                                         <td> <input type="text" value="{{$datas->desc}}" name="exp_desc" class="form-control new-input  border-primary"> </td>
+                                        <td> <input type="date" value="{{$datas->pay_date}}" name="exp_date" class="form-control new-input  border-primary"> </td>
                                         <td> <input type="number" value="{{$datas->amount}}" name="exp_amount" value="0" min="0" required class="form-control new-input  border-primary"> </td>
                                         <td> <input type="number" value="{{$datas->quan}}" name="exp_quan" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>
                                         <td> <input type="number" value="{{$datas->disc}}" name="exp_disc" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>

@@ -22,6 +22,7 @@ class CreateTrainersTable extends Migration
             $table->string('address')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('cnic')->nullable();
+            $table->string('date_of_joining')->nullable();
             $table->string('fixed_salary')->nullable();
             $table->string('commision')->nullable();
             $table->string('salary_status')->nullable();

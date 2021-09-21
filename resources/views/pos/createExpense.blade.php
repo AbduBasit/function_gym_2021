@@ -5,8 +5,20 @@
 @section('content')
 
     <style>
+        button.btn.dropdown-toggle.btn-light {
+            font-size: 15px !important;
+    margin-top: 8px;
+    }
+    select{
+    border: 1px solid #1B75BC !important;
+    font-size: 15px !important;
+    /* margin-top: 8px; */
+    height: 40px !important;
+    width: 100% !important ;
+}
         .new-input {
             height: 40px !important;
+            border: 1px solid #1B75BC !important;
         }
 
         .bootstrap-select .btn,
@@ -38,6 +50,7 @@
                                         <th><strong>Particular</strong></th>
 
                                         <th><strong>Expense Type</strong></th>
+                                        <th><strong>Expense Date</strong></th>
                                         <th><strong>Amount</strong></th>
                                         <th><strong>Quantity</strong></th>
                                         <th><strong>Discount</strong></th>
@@ -64,6 +77,10 @@
                                                     @endforeach
                                                 </select>
                                             </td>
+                                            <td> <input type="date" id="exp_date0" required
+                                                    class="form-control border-primary new-input"> </td>
+
+                                            
                                             <td> <input type="number" id="exp_amount0" value="0" min="0"
                                                     required class="form-control new-input  border-primary"> </td>
                                             <td> <input type="number" id="exp_quan0" value="1" min="0"
@@ -112,6 +129,8 @@
                 '<td> <input type="text" id="exp_title'+ count +'" required class="form-control border-primary title new-input"> </td>';
             html_code +=
                 '<td> <select id="exp_desc'+ count +'"  class="form-control new-lg form-control-lg" required> <option hidden>Expense Category</option> @foreach ($data as $item) <option value="{{ $item->expense_title }}"> {{ $item->expense_title }} </option> @endforeach </select> </td>';
+                html_code +=
+                '<td> <input type="date" id="exp_date'+ count +'" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
             html_code +=
                 '<td> <input type="number" id="exp_amount'+ count +'" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
             html_code +=
@@ -143,6 +162,7 @@
            
             while( i <= document.getElementsByClassName('title').length){
                 let title = document.getElementById('exp_title'+i);
+                let date = document.getElementById('exp_date'+i);
                 let desc = document.getElementById('exp_desc'+i);
                 let amount = document.getElementById('exp_amount'+i);
                 let quan = document.getElementById('exp_quan'+i);
@@ -153,6 +173,7 @@
 
                 var data = {
                         title:[title.value],
+                        date:[date.value],
                         desc:[desc.value],
                         amount:[amount.value],
                         quan:[quan.value],

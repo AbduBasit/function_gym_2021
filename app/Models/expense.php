@@ -11,6 +11,7 @@ class expense extends Model
     public $fillable = [
         'title',
         'desc',
+        'pay_date',
         'amount',
         'quan',
         'disc',
@@ -22,6 +23,7 @@ class expense extends Model
         $records = DB::select('select 
         `title`,
         `desc`,
+        `pay_date`,
         `amount`,
         `quan`,
         `disc`,

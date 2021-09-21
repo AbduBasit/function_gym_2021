@@ -1,5 +1,228 @@
 {{-- Extends layout --}}
 @extends('layout.default')
+<script src="{{ asset('./js/jquery.js') }}"></script>
+<script>
+    $(document).ready(function () {
+          
+        $('#fees_payable').on('change',()=>{
+            let filter_fees = document.getElementById('fees_payable').value;
+            var value = {
+                filter_fees:filter_fees
+            }
+            // console.log(value);
+            $.ajax({
+                type: "get",
+                url: "{{route('manage_invoice_data')}}",
+                data: value,
+                success: function (response) {
+                    if(response){
+                    if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+[i+1]+'</td>';
+                        output += '<td>'+response[i]["customer_name"]+'</td>';
+                        output += '<td>'+response[i]["customer_phone"]+'</td>';
+                        output += '<td>'+response[i]["payment_method"]+'</td>';
+                        output += '<td>'+response[i]["pay_date"]+'</td>';
+                        if(response[i]["discount"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["discount"]+'</td>';
+                        }
+                        if(response[i]["fees_payable"]=="All Clear"){
+                            output += '<td class="text-success"> All Clear </td>';
+                        }
+                        else if(response[i]["fees_payable"]=="Unpaid"){
+                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                        }
+                        output += '<td><b>'+response[i]["net_total"]+'.00</b></td>';
+                        
+                        
+                            output+= '<td>\
+                                                <div class="dropdown">\
+                                                    <button type="button" class="btn btn-info light sharp"\
+                                                        data-toggle="dropdown">\
+                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
+                                                            <g stroke="none" stroke-width="1" fill="none"\
+                                                                fill-rule="evenodd">\
+                                                                <rect x="0" y="0" width="24" height="24" />\
+                                                                <circle fill="#000000" cx="5" cy="12" r="2" />\
+                                                                <circle fill="#000000" cx="12" cy="12" r="2" />\
+                                                                <circle fill="#000000" cx="19" cy="12" r="2" />\
+                                                            </g>\
+                                                        </svg>\
+                                                    </button>\
+                                                    <div class="dropdown-menu">\
+                                                        <a class="dropdown-item"\
+                                                            href="invoice/'+response[i]["id"]+'">Check Invoice</a>\
+                                                    <a class="dropdown-item"\
+                                                            href="update_fees/'+response[i]["id"]+'">Edit</a>\
+                                                             <a class="dropdown-item"\
+                                                            href="delete_fees/'+response[i]["id"]+'">Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </td>'
+                        
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+                }  
+                }
+            });
+        })
+    });
+
+$(document).on('click', '#reset-btn', ()=>{
+        location.reload()
+        });
+      $.ajax({
+            type: "get",
+            url: "{{route('manage_invoice_data')}}",
+            dataType: 'json',
+            success: function (response) {
+                if(response){
+                    if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+[i+1]+'</td>';
+                        output += '<td>'+response[i]["customer_name"]+'</td>';
+                        output += '<td>'+response[i]["customer_phone"]+'</td>';
+                        output += '<td>'+response[i]["payment_method"]+'</td>';
+                        output += '<td>'+response[i]["pay_date"]+'</td>';
+                        if(response[i]["discount"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["discount"]+'</td>';
+                        }
+                        if(response[i]["fees_payable"]=="All Clear"){
+                            output += '<td class="text-success"> All Clear </td>';
+                        }
+                        else if(response[i]["fees_payable"]=="Unpaid"){
+                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                        }
+                        output += '<td><b>'+response[i]["net_total"]+'.00</b></td>';
+                        
+                            output+= '<td>\
+                                                <div class="dropdown">\
+                                                    <button type="button" class="btn btn-info light sharp"\
+                                                        data-toggle="dropdown">\
+                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
+                                                            <g stroke="none" stroke-width="1" fill="none"\
+                                                                fill-rule="evenodd">\
+                                                                <rect x="0" y="0" width="24" height="24" />\
+                                                                <circle fill="#000000" cx="5" cy="12" r="2" />\
+                                                                <circle fill="#000000" cx="12" cy="12" r="2" />\
+                                                                <circle fill="#000000" cx="19" cy="12" r="2" />\
+                                                            </g>\
+                                                        </svg>\
+                                                    </button>\
+                                                    <div class="dropdown-menu">\
+                                                        <a class="dropdown-item"\
+                                                            href="invoice/'+response[i]["id"]+'">Check Invoice</a>\
+                                                    <a class="dropdown-item"\
+                                                            href="update_fees/'+response[i]["id"]+'">Edit</a>\
+                                                             <a class="dropdown-item"\
+                                                            href="delete_fees/'+response[i]["id"]+'">Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </td>'
+                        
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+                }
+            }
+        });
+      
+    $(document).on('submit', '#customer-form', (e)=>{
+        e.preventDefault();
+       let val = document.getElementById('daterange').value;
+       var n = val.split(' - ');
+       tin_0 = n[0].split('/')
+       var tin = tin_0[2]+'-'+tin_0[0]+'-'+tin_0[1];
+       tout_0 = n[1].split('/')
+       var tout = tout_0[2]+'-'+tout_0[0]+'-'+tout_0[1];
+       var value = {
+           t_in : tin,
+           t_out : tout,
+       }
+    //    console.log(tout);
+
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+        $.ajax({
+            type: "get",
+            url: "{{route('manage_invoice_data')}}",
+            data: value,
+            success: function (response) {
+                if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+[i+1]+'</td>';
+                        output += '<td>'+response[i]["customer_name"]+'</td>';
+                        output += '<td>'+response[i]["customer_phone"]+'</td>';
+                        output += '<td>'+response[i]["payment_method"]+'</td>';
+                        output += '<td>'+response[i]["pay_date"]+'</td>';
+                        if(response[i]["discount"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["discount"]+'</td>';
+                        }
+                        if(response[i]["fees_payable"]=="All Clear"){
+                            output += '<td class="text-success"> All Clear </td>';
+                        }
+                        else if(response[i]["fees_payable"]=="Unpaid"){
+                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                        }
+                        output += '<td><b>'+response[i]["net_total"]+'.00</b></td>';
+                        
+                            output+= '<td>\
+                                                <div class="dropdown">\
+                                                    <button type="button" class="btn btn-info light sharp"\
+                                                        data-toggle="dropdown">\
+                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
+                                                            <g stroke="none" stroke-width="1" fill="none"\
+                                                                fill-rule="evenodd">\
+                                                                <rect x="0" y="0" width="24" height="24" />\
+                                                                <circle fill="#000000" cx="5" cy="12" r="2" />\
+                                                                <circle fill="#000000" cx="12" cy="12" r="2" />\
+                                                                <circle fill="#000000" cx="19" cy="12" r="2" />\
+                                                            </g>\
+                                                        </svg>\
+                                                    </button>\
+                                                    <div class="dropdown-menu">\
+                                                        <a class="dropdown-item"\
+                                                            href="invoice/'+response[i]["id"]+'">Check Invoice</a>\
+                                                    <a class="dropdown-item"\
+                                                            href="update_fees/'+response[i]["id"]+'">Edit</a>\
+                                                             <a class="dropdown-item"\
+                                                            href="delete_fees/'+response[i]["id"]+'">Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </td>'
+                        
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+            }
+        });
+    })
+</script>
 
 
 
@@ -24,7 +247,22 @@
                     <div class="card-body">
 
                         <div class="row mb-3 ie-section">
-                            <div class="col-md-9"></div>
+                            <div class="col-md-3">
+                                <form action="" method="get" id="customer-form">
+                                 <div class="input-group example mb-3">
+                                     @csrf
+                                     <input type="text" class="form-control input-daterange-datepicker border-light" required id="daterange" >
+                                     <div class="input-group-append">
+                                         <button class="btn btn-outline-light btn-sm" id="reset-btn">Reset</button>
+                                       <button class="btn btn-outline-light btn-sm" id="submit-btn" type="submit">Submit</button>
+                                     </div>
+                                   </div>
+                                </form>
+                             </div>
+                             <div class="col-md-3">
+                                 
+                             </div>
+                             <div class="col-md-3"></div>
                             <div class="col-md-3 ">
                                <div class="mr-md-3 text-right">
                                 <button class="btn btn-outline-light btn-sm" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -70,7 +308,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-sm-responsive table-hover">
+                            <table id="example3" class="table table-sm-responsive table-hover">
                                 <thead>
                                     <tr>
                                         <th class="width80"><strong>#</strong></th>
@@ -78,49 +316,14 @@
                                         <th><strong>Phone</strong></th>
                                         <th><strong>Payment Type</strong></th>
                                         <th><strong>Payment Date</strong></th>
-                                        <th><strong>Amount</strong></th>
                                         <th><strong>Discount</strong></th>
                                         <th><strong>Fees Payable</strong></th>
+                                        <th><strong>Total Amount</strong></th>
                                         <th><strong>Action</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($members as $member)
-                                        <tr>
-                                            <td>{{ $member->id }}</td>
-                                            <td>{{ $member->customer_name }}</td>
-                                            <td>{{ $member->customer_phone }}</td>
-                                            <td>{{ $member->payment_method }}</td>
-                                            <td>{{ $member->pay_date }}</td>
-                                            <td>{{ $member->net_total }}</td>
-                                            <td>{{ $member->discount }}</td>
-                                            <td class="text-success">
-                                                {{ $member->fees_payable }}
-                                            </td>
-
-
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn btn-info light sharp"
-                                                        data-toggle="dropdown">
-                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
-                                                            <g stroke="none" stroke-width="1" fill="none"
-                                                                fill-rule="evenodd">
-                                                                <rect x="0" y="0" width="24" height="24" />
-                                                                <circle fill="#000000" cx="5" cy="12" r="2" />
-                                                                <circle fill="#000000" cx="12" cy="12" r="2" />
-                                                                <circle fill="#000000" cx="19" cy="12" r="2" />
-                                                            </g>
-                                                        </svg>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item"
-                                                            href="{{url('invoice/'.$member->id )}}">Check Invoice</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                              
                                 </tbody>
                             </table>
                         </div>

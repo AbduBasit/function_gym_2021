@@ -18,7 +18,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
     Route::post('create-customer', [CustomerController::class, 'create_data']);
     Route::get('manage-customer', [CustomerController::class, 'index_customer'])->name('customer_data');
-    Route::get('manage_data', [CustomerController::class, 'index_customer'])->name('manage_data');
+    Route::get('manage_data', [CustomerController::class, 'manage_data'])->name('manage_data');
     Route::get('customer-view/{id}', [CustomerController::class, 'customer_view']);
     Route::get('customer-delete/{id}', [CustomerController::class, 'customer_delete']);
     Route::get('customer-edit/{id}', [CustomerController::class, 'customer_update_show']);
@@ -38,7 +38,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     // Trainer Module
     Route::get('/create-trainer', [TrainerController::class, 'create_data']);
     Route::post('/create-trainer', [TrainerController::class, 'create_new_trainer']);
-    Route::get('manage-trainer', [TrainerController::class, 'trainer_manage']);
+    Route::get('manage-trainer', [TrainerController::class, 'trainer_manage'])->name('trainer_data');
+    Route::get('manage_trainer_data', [TrainerController::class, 'manage_data'])->name('manage_trainer_data');
     Route::get('trainer-view/{id}', [TrainerController::class, 'trainer_view']);
     Route::get('trainer-delete/{id}', [TrainerController::class, 'trainer_delete']);
     Route::get('trainer-edit/{id}', [TrainerController::class, 'update_trainer']);
@@ -59,7 +60,9 @@ Route::group(['middleware' => ['protectedCMS']], function () {
 
     // Finance / Point of Sale (POS)
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);
+    Route::get('manage_invoice_data', [PosController::class, 'manage_invoice_data'])->name('manage_invoice_data');
     Route::get('manage-expense', [PosController::class, 'expense_index']);
+    Route::get('manage_expense_data', [PosController::class, 'manage_expense_data'])->name('manage_expense_data');
     Route::get('create-expense', [PosController::class, 'expense_create'])->name('create-expense');
     Route::post('expense-add', [PosController::class, 'add_expense'])->name('expense-add');
     Route::get('deleteExpense/{id}', [PosController::class, 'expense_delete']);

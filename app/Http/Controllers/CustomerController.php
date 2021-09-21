@@ -23,21 +23,22 @@ class CustomerController extends Controller
         $page_title = 'Manage Customers';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        $db = new customer();
-        if($req->post()){
-            $in = $req->post('t_in');
-            $out = $req->post('t_out');
-            $data = DB::select("SELECT * FROM customers WHERE date_of_joining BETWEEN '$in' and '$out'");
-            if($data){
-                $target = $data;
-                return $target;
-            }
-        }
-        else{
-            $data = $db::all();
-            $target= $data;
+        // $db = new customer();
+        // if($req->post()){
+        //     $in = $req->post('t_in');
+        //     $out = $req->post('t_out');
+        //     $data = DB::select("SELECT * FROM customers WHERE date_of_joining BETWEEN '$in' and '$out'");
+        //     if($data){
+        //         $target = $data;
+        //         return $target;
+        //     }
+        // }
+        // else{
+        //     $data = $db::all();
+        //     $target= $data;
            
-        }    return view('customer.manage', compact('page_title', 'page_description', 'action'), ['members' => $data]);
+        // }
+        return view('customer.manage', compact('page_title', 'page_description', 'action'));
     }
 
     public function manage_data(Request $req){
@@ -45,6 +46,7 @@ class CustomerController extends Controller
         $db = new customer();
 
         if($req->post()){
+           if($req->post('t_in') && $req->post('t_out')){
             $in = $req->post('t_in');
             $out = $req->post('t_out');
             $data = DB::select("SELECT * FROM customers WHERE date_of_joining BETWEEN '$in' and '$out'");
@@ -52,6 +54,21 @@ class CustomerController extends Controller
                 $target = $data;
                 return $target;
             }
+           }
+           
+
+        if($req->post('filter_fees')){
+            // return $req->post('filter_fees');
+            $filter_value = $req->post('filter_fees');
+            $data = DB::select("SELECT * FROM customers WHERE fees_clear = '$filter_value'");
+            if($data){
+                $target = $data;
+                return $target;
+            }
+        }
+
+        
+     
         }
         else{
             $data = $db::all();

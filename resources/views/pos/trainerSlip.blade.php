@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-md-responsive table-hover">
+                            <table id="example3" class="table table-md-responsive table-hover">
                                 <thead>
                                     <tr>
                                         <th><strong>Trainer Name</strong></th>

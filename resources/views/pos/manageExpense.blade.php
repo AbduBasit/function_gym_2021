@@ -1,5 +1,177 @@
 {{-- Extends layout --}}
 @extends('layout.default')
+<script src="{{ asset('./js/jquery.js') }}"></script>
+<script>
+    $(document).ready(function () {
+          
+        $('#fees_payable').on('change',()=>{
+            let filter_fees = document.getElementById('fees_payable').value;
+            var value = {
+                filter_fees:filter_fees
+            }
+            // console.log(value);
+            $.ajax({
+                type: "get",
+                url: "{{route('manage_expense_data')}}",
+                data: value,
+                success: function (response) {
+                    if(response){
+                    if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+[i+1]+'</td>';
+                        output += '<td>'+response[i]["pay_date"]+'</td>';
+                        output += '<td>'+response[i]["title"]+'</td>';
+                        output += '<td>'+response[i]["desc"]+'</td>';
+                        output += '<td>'+response[i]["amount"]+'</td>';
+                        output += '<td>'+response[i]["quan"]+'</td>';
+                        if(response[i]["disc"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["disc"]+'</td>';
+                        }
+                        if(response[i]["tax"]==null){
+                            output += '<td class=""> No Tax </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["tax"]+'</td>';
+                        }
+                        output += '<td><b>'+response[i]["net"]+'.00</b></td>';
+                        
+                        
+                            output+= '<td>\
+                                        <div class="d-flex">\
+                                            <a href="editExpense/'+response[i]["id"]+'" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>\
+                                            <a href="deleteExpense/'+response[i]["id"]+'" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>\
+                                        </div>\
+                                    </td>'
+                        
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+                }  
+                }
+            });
+        })
+    });
+
+$(document).on('click', '#reset-btn', ()=>{
+        location.reload()
+        });
+      $.ajax({
+            type: "get",
+            url: "{{route('manage_expense_data')}}",
+            dataType: 'json',
+            success: function (response) {
+                if(response){
+                    if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+[i+1]+'</td>';
+                        output += '<td>'+response[i]["pay_date"]+'</td>';
+                        output += '<td>'+response[i]["title"]+'</td>';
+                        output += '<td>'+response[i]["desc"]+'</td>';
+                        output += '<td>'+response[i]["amount"]+'</td>';
+                        output += '<td>'+response[i]["quan"]+'</td>';
+                        if(response[i]["disc"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["disc"]+'</td>';
+                        }
+                        if(response[i]["tax"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["tax"]+'</td>';
+                        }
+                        output += '<td><b>'+response[i]["net"]+'.00</b></td>';
+                        
+                            output+= '<td>\
+                                        <div class="d-flex">\
+                                            <a href="editExpense/'+response[i]["id"]+'" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>\
+                                            <a href="deleteExpense/'+response[i]["id"]+'" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>\
+                                        </div>\
+                                    </td>'
+                        
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+                }
+            }
+        });
+      
+    $(document).on('submit', '#customer-form', (e)=>{
+        e.preventDefault();
+       let val = document.getElementById('daterange').value;
+       var n = val.split(' - ');
+       tin_0 = n[0].split('/')
+       var tin = tin_0[2]+'-'+tin_0[0]+'-'+tin_0[1];
+       tout_0 = n[1].split('/')
+       var tout = tout_0[2]+'-'+tout_0[0]+'-'+tout_0[1];
+       var value = {
+           t_in : tin,
+           t_out : tout,
+       }
+    //    console.log(tout);
+
+       $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+        $.ajax({
+            type: "get",
+            url: "{{route('manage_expense_data')}}",
+            data: value,
+            success: function (response) {
+                if(response){
+                    var output="";
+                    for(var i = 0; i < response.length; i++){
+                        output += '<tr><td>'+[i+1]+'</td>';
+                        output += '<td>'+response[i]["pay_date"]+'</td>';
+                        output += '<td>'+response[i]["title"]+'</td>';
+                        output += '<td>'+response[i]["desc"]+'</td>';
+                        output += '<td>'+response[i]["amount"]+'</td>';
+                        output += '<td>'+response[i]["quan"]+'</td>';
+                        if(response[i]["disc"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["disc"]+'</td>';
+                        }
+                        if(response[i]["tax"]==null){
+                            output += '<td class=""> No Discount </td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["tax"]+'</td>';
+                        }
+                        output += '<td><b>'+response[i]["net"]+'.00</b></td>';
+                        
+                            output+= '<td>\
+                                        <div class="d-flex">\
+                                            <a href="editExpense/'+response[i]["id"]+'" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>\
+                                            <a href="deleteExpense/'+response[i]["id"]+'" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>\
+                                        </div>\
+                                    </td>'
+                        
+                        output += '</tr>';
+                    }
+                    $('#example3 tbody').html(output)
+
+                    
+                }
+            }
+        });
+    })
+</script>
 
 
 
@@ -24,11 +196,21 @@
                 <div class="card-body">
                     <div class="row mb-3 ie-section">
                         <div class="col-md-3">
-                            <div class="example">
-                            <input class="form-control input-daterange-datepicker border-light" type="text" name="daterange">
-                        </div>
-                        </div>
-                        <div class="col-md-6"></div>
+                            <form action="" method="get" id="customer-form">
+                             <div class="input-group example mb-3">
+                                 @csrf
+                                 <input type="text" class="form-control input-daterange-datepicker border-light" required id="daterange" >
+                                 <div class="input-group-append">
+                                     <button class="btn btn-outline-light btn-sm" id="reset-btn">Reset</button>
+                                   <button class="btn btn-outline-light btn-sm" id="submit-btn" type="submit">Submit</button>
+                                 </div>
+                               </div>
+                            </form>
+                         </div>
+                         <div class="col-md-3">
+                             
+                         </div>
+                         <div class="col-md-3"></div>
                         <div class="col-md-3 ">
                            <div class="mr-md-3 text-right">
                             <button class="btn btn-outline-light btn-sm" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -76,7 +258,8 @@
                     <div class="table-responsive">
                         <table id="example3" class="display min-w850">
                             <thead>
-                                <tr>
+                                <tr><th>#</th>
+                                    <th>Date</th>
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Amount</th>
@@ -88,23 +271,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($datas as $data)
-                                <tr>
-                                    <td>{{$data->title}}</td>
-                                    <td>{{$data->desc}}</td>
-                                    <td>{{$data->amount}}</td>
-                                    <td>{{$data->quan}}</td>
-                                    <td>{{$data->disc}}</td>
-                                    <td>{{$data->tax}}</td>
-                                    <td>{{$data->net}}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <a href="{{url('editExpense/'.$data->id)}}" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                            <a href="deleteExpense/{{$data->id}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                              
                             </tbody>
                         </table>
                     </div>

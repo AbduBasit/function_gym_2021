@@ -74,9 +74,30 @@ class TrainerController extends Controller
         $page_title = 'Manage Trainers';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
+        return view('trainer.manage', compact('page_title', 'page_description', 'action'));
+    }
+
+    public function manage_data(Request $req){
+        $data = null;
         $db = new trainer();
-        $data = $db::all();
-        return view('trainer.manage', compact('page_title', 'page_description', 'action'), ['datas' => $data]);
+
+        if($req->post()){
+           if($req->post('t_in') && $req->post('t_out')){
+            $in = $req->post('t_in');
+            $out = $req->post('t_out');
+            $data = DB::select("SELECT * FROM trainers WHERE date_of_joining BETWEEN '$in' and '$out'");
+            if($data){
+                $target = $data;
+                return $target;
+            }
+           }
+     
+        }
+        else{
+            $data = $db::all();
+            $target= $data;
+            return $target;
+        }
     }
 
     public function trainer_view($id)
