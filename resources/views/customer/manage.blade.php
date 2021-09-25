@@ -1,9 +1,37 @@
 {{-- Extends layout --}}
 @extends('layout.default')
+<style>
+    table button.btn.dropdown-toggle.btn-light{
+    border: 1px solid #1B75BC !important;
+    }
+</style>
 <script src="{{ asset('./js/jquery.js') }}"></script>
 <script>
     $(document).ready(function () {
-          
+        $('tr').find('.dataPut select').each((i)=>{
+            $(this).find('.dataAjax'+i+'').on('change', (e)=>{
+                let val = $('.dataAjax'+i+' select').val()
+                var value = {val:val}
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                $.ajax({
+                    type: "post",
+                    url: "{{route('status_change_customer')}}",
+                    data: value,
+                    success: function (response) {
+                        if(response==1){
+                            location.reload();
+                        }
+                        else{
+                            console.log(response);
+                        }
+                    }
+                });
+            })
+        })
         $('#fees_payable').on('change',()=>{
             let filter_fees = document.getElementById('fees_payable').value;
             var value = {
@@ -26,13 +54,29 @@
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
                         output += '<td>'+response[i]["trainer_name"]+'</td>';
-                        output += '<td>'+response[i]["status"]+'</td>';
+                        if(response[i]["status"]=="active"){
+                            output += '<td>'+response[i]["status"]+'</td>';
+                        }
+                        else{
+                            output += '<td class="dataPut">\
+                                        <select class="form-control" onchange="dataPut('+response[i]['id']+')" id="dropdown">\
+                                            <option value="inactive">inactive</option>\
+                                            <option value="active">active</option>\
+                                        </select>\
+                                        </div>\
+                            </td>'
+                        }
                        
                         if(response[i]["fees_clear"]=="All Clear"){
                             output += '<td class="text-success"> All Clear </td>';
                         }
                         else if(response[i]["fees_clear"]=="Unpaid"){
-                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            if(response[i]["status"]=="active"){
+                                   output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            }
+                            else{
+                                   output += '<td class="text-success"> <a class="text-mute mute">Unpaid</a></td>'
+                            }
                         }
 
                         if(response[i]["trainer_name"]==null || response[i]["trainer_name"] == "Select Trainer"){
@@ -73,8 +117,27 @@
                                                 <a class="dropdown-item" href="customer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="customer-edit/'+response[i]["id"]+'">Edit Basic Information</a>\
                                                 <a class="dropdown-item" href="customer-edit-pt/'+response[i]["id"]+'">Edit PT Information</a>\
-                                                <a class="dropdown-item" href="customer-delete/'+response[i]["id"]+'">Delete</a>\
+                                                <a data-toggle="modal" class="dropdown-item" data-target="#customer-delete'+response[i]["id"]+'">Delete</a>\
                                             </div>\
+                                            <div class="modal mt-5 fade" id="customer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="customer-delete/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                         </div>\
                                     </td>'
                         }
@@ -109,13 +172,29 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
                         output += '<td>'+response[i]["trainer_name"]+'</td>';
-                        output += '<td>'+response[i]["status"]+'</td>';
+                        if(response[i]["status"]=="active"){
+                            output += '<td>'+response[i]["status"]+'</td>';
+                        }
+                        else{
+                            output += '<td class="dataPut">\
+                                        <select class="form-control" onchange="dataPut('+response[i]['id']+')" id="dropdown">\
+                                            <option value="inactive">inactive</option>\
+                                            <option value="active">active</option>\
+                                        </select>\
+                                        </div>\
+                            </td>'
+                        }
                        
                         if(response[i]["fees_clear"]=="All Clear"){
                             output += '<td class="text-success"> All Clear </td>';
                         }
                         else if(response[i]["fees_clear"]=="Unpaid"){
-                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            if(response[i]["status"]=="active"){
+                                   output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            }
+                            else{
+                                   output += '<td class="text-success"> <a class="text-mute mute">Unpaid</a></td>'
+                            }
                         }
 
                         if(response[i]["trainer_name"]==null || response[i]["trainer_name"] == "Select Trainer"){
@@ -156,8 +235,27 @@ $(document).on('click', '#reset-btn', ()=>{
                                                 <a class="dropdown-item" href="customer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="customer-edit/'+response[i]["id"]+'">Edit Basic Information</a>\
                                                 <a class="dropdown-item" href="customer-edit-pt/'+response[i]["id"]+'">Edit PT Information</a>\
-                                                <a class="dropdown-item" href="customer-delete/'+response[i]["id"]+'">Delete</a>\
+                                                <a data-toggle="modal" class="dropdown-item" data-target="#customer-delete'+response[i]["id"]+'">Delete</a>\
                                             </div>\
+                                            <div class="modal mt-5 fade" id="customer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="customer-delete/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                         </div>\
                                     </td>'
                         }
@@ -205,13 +303,29 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
                         output += '<td>'+response[i]["trainer_name"]+'</td>';
-                        output += '<td>'+response[i]["status"]+'</td>';
+                        if(response[i]["status"]=="active"){
+                            output += '<td>'+response[i]["status"]+'</td>';
+                        }
+                        else{
+                            output += '<td class="dataPut">\
+                                        <select class="form-control" onchange="dataPut('+response[i]['id']+')" id="dropdown">\
+                                            <option value="inactive">inactive</option>\
+                                            <option value="active">active</option>\
+                                        </select>\
+                                        </div>\
+                            </td>'
+                        }
                        
                         if(response[i]["fees_clear"]=="All Clear"){
                             output += '<td class="text-success"> All Clear </td>';
                         }
                         else if(response[i]["fees_clear"]=="Unpaid"){
-                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            if(response[i]["status"]=="active"){
+                                   output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            }
+                            else{
+                                   output += '<td class="text-success"> <a class="text-mute mute">Unpaid</a></td>'
+                            }
                         }
 
                         if(response[i]["trainer_name"]==null || response[i]["trainer_name"] == "Select Trainer"){
@@ -252,8 +366,27 @@ $(document).on('click', '#reset-btn', ()=>{
                                                 <a class="dropdown-item" href="customer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="customer-edit/'+response[i]["id"]+'">Edit Basic Information</a>\
                                                 <a class="dropdown-item" href="customer-edit-pt/'+response[i]["id"]+'">Edit PT Information</a>\
-                                                <a class="dropdown-item" href="customer-delete/'+response[i]["id"]+'">Delete</a>\
+                                                <a data-toggle="modal" class="dropdown-item" data-target="#customer-delete'+response[i]["id"]+'">Delete</a>\
                                             </div>\
+                                            <div class="modal mt-5 fade" id="customer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="customer-delete/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                         </div>\
                                     </td>'
                         }
@@ -266,6 +399,8 @@ $(document).on('click', '#reset-btn', ()=>{
             }
         });
     })
+
+    
 </script>
 
 {{-- Content --}}
@@ -287,9 +422,11 @@ $(document).on('click', '#reset-btn', ()=>{
                     <h4 class="card-title">Manage Customers</h4>
                 </div>
                 <div class="card-body">
-
+                
                     <div class="row mb-3 ie-section">
-                        
+                        <div class="col-md-12 mb-3">
+                            <a class="btn btn-outline-primary btn-md" href="{{url('create-customer')}}" >Create New +</a>
+                        </div>
                         <div class="col-md-3">
                            <form action="" method="get" id="customer-form">
                             <div class="input-group example mb-3">

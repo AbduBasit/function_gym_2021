@@ -34,7 +34,7 @@
                             output += '<td class="text-success"> All Clear </td>';
                         }
                         else if(response[i]["fees_payable"]=="Unpaid"){
-                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            output += '<td class="text-success"> <a href="update_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
                         }
                         output += '<td><b>'+response[i]["net_total"]+'.00</b></td>';
                         
@@ -59,8 +59,27 @@
                                                     <a class="dropdown-item"\
                                                             href="update_fees/'+response[i]["id"]+'">Edit</a>\
                                                              <a class="dropdown-item"\
-                                                            href="delete_fees/'+response[i]["id"]+'">Delete</a>\
+                                                            data-toggle="modal" data-target="#delete_fees'+response[i]["id"]+'">Delete</a>\
                                                     </div>\
+                                                    <div class="modal mt-5 fade" id="delete_fees'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="delete_fees/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                                 </div>\
                                             </td>'
                         
@@ -103,7 +122,7 @@ $(document).on('click', '#reset-btn', ()=>{
                             output += '<td class="text-success"> All Clear </td>';
                         }
                         else if(response[i]["fees_payable"]=="Unpaid"){
-                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            output += '<td class="text-success"> <a href="update_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
                         }
                         output += '<td><b>'+response[i]["net_total"]+'.00</b></td>';
                         
@@ -127,8 +146,27 @@ $(document).on('click', '#reset-btn', ()=>{
                                                     <a class="dropdown-item"\
                                                             href="update_fees/'+response[i]["id"]+'">Edit</a>\
                                                              <a class="dropdown-item"\
-                                                            href="delete_fees/'+response[i]["id"]+'">Delete</a>\
+                                                            data-toggle="modal" data-target="#delete_fees'+response[i]["id"]+'">Delete</a>\
                                                     </div>\
+                                                    <div class="modal mt-5 fade" id="delete_fees'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="delete_fees/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                                 </div>\
                                             </td>'
                         
@@ -184,7 +222,7 @@ $(document).on('click', '#reset-btn', ()=>{
                             output += '<td class="text-success"> All Clear </td>';
                         }
                         else if(response[i]["fees_payable"]=="Unpaid"){
-                            output += '<td class="text-success"> <a href="add_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
+                            output += '<td class="text-success"> <a href="update_fees/'+response[i]["id"]+'" class="text-danger">Unpaid</a></td>'
                         }
                         output += '<td><b>'+response[i]["net_total"]+'.00</b></td>';
                         
@@ -208,8 +246,27 @@ $(document).on('click', '#reset-btn', ()=>{
                                                     <a class="dropdown-item"\
                                                             href="update_fees/'+response[i]["id"]+'">Edit</a>\
                                                              <a class="dropdown-item"\
-                                                            href="delete_fees/'+response[i]["id"]+'">Delete</a>\
+                                                            data-toggle="modal" data-target="#delete_fees'+response[i]["id"]+'">Delete</a>\
                                                     </div>\
+                                                    <div class="modal mt-5 fade" id="delete_fees'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="delete_fees/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                                 </div>\
                                             </td>'
                         

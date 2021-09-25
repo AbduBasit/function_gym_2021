@@ -393,11 +393,12 @@ class CustomerController extends Controller
     public function pt_trainer_details()
     {
         $db = new customer();
-        $data = DB::select("SELECT * FROM customers where training_type = 'PT'");
+        $data = DB::select("SELECT id FROM customers where training_type = 'PT' and not daily_routine and not daily_diet and not prev_injury and not strength_core_activation and not strength_glute_activation and not strength_squat_activation");
+        $data2 = DB::select('Select * from customers where NOT id='.$data[0]->id.'');
         $page_title = 'Add Person Training Details';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        return view('customer.addPtDetails', compact('page_title', 'page_description', 'action'), ['customers' => $data]);
+        return view('customer.addPtDetails', compact('page_title', 'page_description', 'action'), ['customers' => $data2]);
     }
 
 
@@ -419,6 +420,26 @@ class CustomerController extends Controller
         $data = $db::all()->find($id);
         $data->delete();
         return redirect('manage-customer');
+    }
+
+    public function status_change_customer(Request $req){
+        $random = explode('-', $req->post('val'));
+        $id=$random[1];
+        $value=$random[0];
+        if($req->post()){
+            if($value == "active"){
+                $db = new customer();
+                $data = $db->all()->find($id);
+                $data->status = $value;
+                if($data->save()){
+                    return 1;    
+                }
+                else{
+                    return 'error';
+                }
+            }
+        }
+        
     }
 
     public function customer_update_show($id)
@@ -554,6 +575,7 @@ class CustomerController extends Controller
         $data->daily_routine = $req->dailyroutine;
         $data->medical_condition = $req->medicon;
         $data->medical_condition_description = $req->injury;
+        $data->prev_injury = $req->prev_injury;
         $data->previous_excersice = $req->preexcersice;
         $data->daily_diet = $req->dailydiet;
         $data->test1_core_activation = $req->tva1;
@@ -614,6 +636,7 @@ class CustomerController extends Controller
         $data->daily_routine = $req->dailyroutine;
         $data->medical_condition = $req->medicon;
         $data->medical_condition_description = $req->injury;
+        $data->prev_injury = $req->prev_injury;
         $data->previous_excersice = $req->preexcersice;
         $data->daily_diet = $req->dailydiet;
         $data->test1_core_activation = $req->tva1;

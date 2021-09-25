@@ -97,7 +97,35 @@ class PosController extends Controller
             return $target;
         }
     }
+    public function invoice_update_fees($id){
+        $page_title = 'Update Invoice';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
 
+        $db = new invoice();
+        $data = $db->all()->find($id);
+        return view('pos.updateFees', compact('page_title', 'page_description', 'action'), ['value'=>$data]);
+    }
+    public function update_invoice(Request $req, $id){
+        $db = new invoice();
+        $data = $db->all()->find($id);
+        $data->fees_payable = $req->fees_status;
+        $data->payment_method = $req->payment_type;
+        $data->pay_date = $req->pay_date;
+        $data->net_total = $req->amount;
+        $data->discount = $req->discount;
+        if($data->save()){
+            return redirect('manage-invoice');
+        }
+
+    }
+    public function invoice_delete_fees($id){
+        $db = new invoice();
+        $data = $db->all()->find($id);
+        if($data->delete()){
+            return redirect('manage-invoice');
+        }
+    }
     public function expense_index()
     {
         $page_title = 'Expenses Report';
@@ -150,7 +178,7 @@ class PosController extends Controller
             'quan' => $req->post('quan')[0],
             'disc' => $req->post('disc')[0],
             'tax' => $req->post('tax')[0],
-            'net' => ($req->post('amount')[0] * $req->post('quan')[0])-$req->post('disc')[0]+$req->post('tax')[0],
+            'net' => ($req->post('amount')[0] * $req->post('quan')[0])-$req->post('disc')[0]+($req->post('amount')[0] * $req->post('tax')[0] / 100),
         ];
         DB::table('expenses')->insert($values);
     }

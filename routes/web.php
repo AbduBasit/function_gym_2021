@@ -19,6 +19,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('create-customer', [CustomerController::class, 'create_data']);
     Route::get('manage-customer', [CustomerController::class, 'index_customer'])->name('customer_data');
     Route::get('manage_data', [CustomerController::class, 'manage_data'])->name('manage_data');
+    Route::post('manage_data', [CustomerController::class, 'status_change_customer'])->name('status_change_customer');
     Route::get('customer-view/{id}', [CustomerController::class, 'customer_view']);
     Route::get('customer-delete/{id}', [CustomerController::class, 'customer_delete']);
     Route::get('customer-edit/{id}', [CustomerController::class, 'customer_update_show']);
@@ -61,6 +62,9 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     // Finance / Point of Sale (POS)
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);
     Route::get('manage_invoice_data', [PosController::class, 'manage_invoice_data'])->name('manage_invoice_data');
+    Route::get('update_fees/{id}', [PosController::class, 'invoice_update_fees']);
+    Route::get('delete_fees/{id}', [PosController::class, 'invoice_delete_fees']);
+    Route::post('insertInvFees/{id}', [PosController::class, 'update_invoice']);
     Route::get('manage-expense', [PosController::class, 'expense_index']);
     Route::get('manage_expense_data', [PosController::class, 'manage_expense_data'])->name('manage_expense_data');
     Route::get('create-expense', [PosController::class, 'expense_create'])->name('create-expense');
@@ -83,6 +87,7 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('invoice-export/{value}', [PosController::class, 'export_invoice']);
     Route::post('expense_import', [PosController::class, 'import_expense'])->name('expense-imp');
     Route::post('invoice_import', [PosController::class, 'import_invoice'])->name('invoice-imp');
+
 });
 
 

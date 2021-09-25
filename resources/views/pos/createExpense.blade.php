@@ -77,21 +77,21 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td> <input type="date" id="exp_date0" required
-                                                    class="form-control border-primary new-input"> </td>
+                                            <td> <input type="date"  id="exp_date0" required
+                                                    class="form-control dateNew border-primary new-input"> </td>
 
                                             
-                                            <td> <input type="number" id="exp_amount0" value="0" min="0"
-                                                    required class="form-control new-input  border-primary"> </td>
+                                            <td> <input type="number" id="exp_amount0" min="0"
+                                                    required class="form-control new-input  border-primary amount"> </td>
                                             <td> <input type="number" id="exp_quan0" value="1" min="0"
                                                     max="1000" required
-                                                    class="width80 form-control new-input  border-primary"> </td>
-                                            <td> <input type="number" id="exp_disc0" value="0" min="0"
-                                                    max="100000" class="width80 form-control new-input  border-primary">
+                                                    class="width80 form-control new-input quan  border-primary"> </td>
+                                            <td> <input type="number" id="exp_disc0" min="0"
+                                                    max="100000" class="width80 form-control new-input   discborder-primary">
                                             </td>
-                                            <td> <input type="number" id="exp_tax0" value="0" min="0" max="100"
-                                                    class="width80 form-control new-input  border-primary"> </td>
-                                            <td> <input type="text" id="exp_net0" value="0" disabled
+                                            <td> <input type="number" id="exp_tax0" min="0" max="100"
+                                                    class="width80 form-control new-input  border-primary tax"> </td>
+                                            <td> <input type="text" id="exp_net0" disabled
                                                     class="disable form-control new-input border-primary"> </td>
                                         </tr>
                                     </tbody>
@@ -119,40 +119,68 @@
     <script src="{{ asset('./js/jquery.js') }}"></script>
     <script>
        $(document).ready(function () {
+        $('tbody').find('tr').each((i)=>{
+            $(this).on('keyup || change', {value:i}, function(e){
+                let amount = $(this).find('#exp_amount'+i).val()
+                let quan = $(this).find('#exp_quan'+i).val()
+                let disc = $(this).find('#exp_disc'+i).val()
+                let tax = $(this).find('#exp_tax'+i).val()
+                let result_view = (amount*quan)+((amount*quan)*tax/100) - disc; 
+                $(this).find('#exp_net'+i).val(()=>{
+                    return result_view;
+                });
+            })
+        })
             var count = 0;
         var html_code = '';
         // addRow function
         jQuery('#addRow').on('click', () => {
             count++;
-            html_code = ' <tr id="row' + count + '">';
+            
+            html_code = ' <tr id="row' + count + '" class="rowlex">';
             html_code +=
                 '<td> <input type="text" id="exp_title'+ count +'" required class="form-control border-primary title new-input"> </td>';
             html_code +=
                 '<td> <select id="exp_desc'+ count +'"  class="form-control new-lg form-control-lg" required> <option hidden>Expense Category</option> @foreach ($data as $item) <option value="{{ $item->expense_title }}"> {{ $item->expense_title }} </option> @endforeach </select> </td>';
                 html_code +=
-                '<td> <input type="date" id="exp_date'+ count +'" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
+                '<td> <input type="date" id="exp_date'+ count +'" min="0" required class="form-control new-input  border-primary dateNew"> </td>';
             html_code +=
-                '<td> <input type="number" id="exp_amount'+ count +'" value="0" min="0" required class="form-control new-input  border-primary"> </td>';
+                '<td> <input type="number" id="exp_amount'+ count +'" min="0" required class="form-control new-input  border-primary amount"> </td>';
             html_code +=
-                '<td> <input type="number" id="exp_quan'+ count +'" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary"> </td>';
+                '<td> <input type="number" id="exp_quan'+ count +'" value="1" min="0" max="1000" required class="width80 form-control new-input  border-primary quan"> </td>';
             html_code +=
-                '<td> <input type="number" id="exp_disc'+ count +'" value="0" min="0" max="100000" class="width80 form-control new-input  border-primary"> </td>';
+                '<td> <input type="number" id="exp_disc'+ count +'" min="0" max="100000" class="width80 form-control new-input  border-primary disc"> </td>';
             html_code +=
-                ' <td> <input type="number" id="exp_tax'+ count +'" value="0" min="0" max="100" class="width80 form-control new-input  border-primary"> </td>';
+                ' <td> <input type="number" id="exp_tax'+ count +'" min="0" max="100" class="width80 form-control new-input  border-primary tax"> </td>';
             html_code +=
-                ' <td> <input type="text" id="exp_net'+ count +'" value="0" disabled class="disable form-control new-input border-primary"> </td>';
+                ' <td> <input type="text" id="exp_net'+ count +'" disabled class="disable form-control new-input border-primary net"> </td>';
             html_code +=
                 ' <td class="width80"><button type="button" class="deleteRow btn btn-danger shadow btn-sm sharp" data-row="row' +
                 count + '"><i class="fa fa-trash"></i></button></td>';
             html_code += '</tr>'
             jQuery('.report').append(html_code);
+            $('tbody').find('tr').each((i)=>{
+            $(this).on('keyup || change', {value:i}, function(e){
+                let amount = $(this).find('#exp_amount'+i).val()
+                let quan = $(this).find('#exp_quan'+i).val()
+                let disc = $(this).find('#exp_disc'+i).val()
+                let tax = $(this).find('#exp_tax'+i).val()
+                let result_view = (amount*quan)+((amount*quan)*tax/100) - disc; 
+                $(this).find('#exp_net'+i).val(()=>{
+                    return result_view;
+                });
+            })
         })
+        
+        })
+      
+      
         // delete row
         jQuery(document).on('click', '.deleteRow', function() {
             var delete_row = jQuery(this).data("row");
             jQuery('#' + delete_row).remove();
         })
-
+        
         jQuery(document).on('submit', '#new', (e)=>{
             e.preventDefault();
           
@@ -200,6 +228,8 @@
             location.href="manage-expense";
         })
        });
+
+
     </script>
 
 @endsection

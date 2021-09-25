@@ -104,6 +104,9 @@ return [
 				'index_fees_add' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
+				'invoice_update_fees' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				'expense_edit' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -849,6 +852,12 @@ return [
 					'js/plugins-init/select2-init.js',
 				],
 				'index_fees_add' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+					'js/script.js'
+				],
+				'invoice_update_fees' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',

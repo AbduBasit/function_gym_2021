@@ -64,7 +64,7 @@
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Name of Customer</label>
-                                            <select name="customer_id" id="single-select" disabled class="disable form-control disable new-lg form-control-lg" required>
+                                            <select name="customer_id" id="single-select" disabled class="disable form-control disable new-lg form-control-lg">
                                                 <option value="{{$datas->id}}">{{$datas->first_name . ' '. $datas->last_name}}</option>
                                             </select>
                                         </div>
@@ -76,7 +76,7 @@
 
                                         <div class="form-group mb-4">
                                             <label class="text-label">Tell me about your current activity level*</label>
-                                            <select name="activity" class="form-control form-control-lg" required>
+                                            <select name="activity" class="form-control form-control-lg">
                                                 <option hidden value="{{$datas->current_activity_level}}">{{$datas->current_activity_level}}</option>
                                                 <option value="minimal">Minimal</option>
                                                 <option value="low">Low</option>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="text-label">Tell me about your family and occupational life, what do you for a living? What does a day look like in your life?*</label>
-                                            <textarea type="text" name="dailyroutine" class="form-control text-area-hight" placeholder="Describe Briefly..." required>{{$datas->daily_routine}}</textarea>
+                                            <textarea type="text" name="dailyroutine" class="form-control text-area-hight" placeholder="Describe Briefly...">{{$datas->daily_routine}}</textarea>
                                         </div>
                                     </div>
 
@@ -94,27 +94,33 @@
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group mb-4">
                                             <label class="text-label">Do you have any medical condition</label>
-                                            <select name="medicon" id="medicon" class="form-control form-control-lg" required>
+                                            <select name="medicon" id="medicon" class="form-control form-control-lg">
                                                 <option value="{{$datas->medical_condition}}" hidden>{{$datas->medical_condition}}</option>
                                                 <option value="no">No</option>
                                                 <option value="yes">Yes</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="text-label">Have you had any injuries previously? Please give a clear timeline and description.*</label>
+                                            <label class="text-label">Describe</label>
                                             <textarea type="text" id="medicon-desc" name="injury" class="form-control text-area-hight" placeholder="Describe Briefly...">{{$datas->medical_condition_description}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
+                                            <label class="text-label">Have you had any injuries previously? Please give a clear timeline and description.</label>
+                                            <textarea type="text" name="prev_injury" class="form-control text-area-hight" placeholder="Describe Briefly...">{{$datas->prev_injury}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group">
                                             <label class="text-label">What kind of exercise have you done previously? Please go in order, starting from the very beginning and ending at your most recent training regimen. *</label>
-                                            <textarea type="text" name="preexcersice" class="form-control text-area-hight" placeholder="Describe Briefly..." required>{{$datas->previous_excersice}}</textarea>
+                                            <textarea type="text" name="preexcersice" class="form-control text-area-hight" placeholder="Describe Briefly...">{{$datas->previous_excersice}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label class="text-label">Please tell us your diet*</label>
-                                            <textarea type="text" name="dailydiet" class="form-control text-area-hight" placeholder="Describe Briefly..." required>{{$datas->daily_diet}}</textarea>
+                                            <textarea type="text" name="dailydiet" class="form-control text-area-hight" placeholder="Describe Briefly...">{{$datas->daily_diet}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -216,7 +222,7 @@
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of Abs Strength*</label>
-                                                            <select name="absstrength" class="form-control form-control-lg" id="coreweak" required>
+                                                            <select name="absstrength" class="form-control form-control-lg" id="coreweak">
                                                                 <option hidden value="{{$datas->strength_core_activation}}">{{$datas->strength_core_activation}}</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
@@ -284,7 +290,7 @@
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of Glute Strength*</label>
-                                                            <select name="glutestrength" class="form-control form-control-lg" id="gluteweak" required>
+                                                            <select name="glutestrength" class="form-control form-control-lg" id="gluteweak">
                                                                 <option hidden value="{{$datas->strength_glute_activation}}">{{$datas->strength_glute_activation}}</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
@@ -349,7 +355,7 @@
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of clamshell Strength*</label>
-                                                            <select name="clamshellstrength" class="form-control form-control-lg" id="clamshellweak" required>
+                                                            <select name="clamshellstrength" class="form-control form-control-lg" id="clamshellweak">
                                                                 <option hidden value="{{$datas->strength_clamshells_activation}}">{{$datas->strength_clamshells_activation}}</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
@@ -391,7 +397,7 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Calculation Unit</label>
-                                                            <select name="mcal" class="form-control form-control-lg" id="mcal" required>
+                                                            <select name="mcal" class="form-control form-control-lg" id="mcal">
                                                                 <option value="{{$datas->measurement_cal_unit}}" hidden>{{$datas->measurement_cal_unit}}</option>
                                                                 <option value="cm">Centimeter (cm)</option>
                                                                 <option value="inch">Inches (inch)</option>
@@ -401,19 +407,19 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Chest*</label>
-                                                            <input type="text" name="chest" required class="form-control" value="{{$datas->chest}}" placeholder="56">
+                                                            <input type="text" name="chest" class="form-control" value="{{$datas->chest}}" placeholder="56">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Waist*</label>
-                                                            <input type="text" class="form-control" placeholder="86" name="waist" value="{{$datas->waist}}" required>
+                                                            <input type="text" class="form-control" placeholder="86" name="waist" value="{{$datas->waist}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Hips*</label>
-                                                            <input type="text" name="hips" class="form-control" value="{{$datas->hips}}" placeholder="36" required>
+                                                            <input type="text" name="hips" class="form-control" value="{{$datas->hips}}" placeholder="36">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -427,7 +433,7 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Weight Unit</label>
-                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight" required>
+                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight">
                                                                 <option value="{{$datas->weight_cal_unit}}" hidden>{{$datas->weight_cal_unit}}</option>
                                                                 <option value="kilogram">Kilogram</option>
                                                                 <option value="pound">Pounds</option>
@@ -437,19 +443,19 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Body Weight*</label>
-                                                            <input type="number" min="0" name="weight" value="{{$datas->body_weight}}" required class="form-control" placeholder="56">
+                                                            <input type="number" min="0" name="weight" value="{{$datas->body_weight}}" class="form-control" placeholder="56">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Body FAT %*</label>
-                                                            <input type="number" min="0" class="form-control" value="{{$datas->body_fat}}" placeholder="86" name="fat" required>
+                                                            <input type="number" min="0" class="form-control" value="{{$datas->body_fat}}" placeholder="86" name="fat">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Muscles Mass %*</label>
-                                                            <input type="number" min="0" name="muscles" class="form-control" value="{{$datas->muscles_mass}}" placeholder="16" required>
+                                                            <input type="number" min="0" name="muscles" class="form-control" value="{{$datas->muscles_mass}}" placeholder="16">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -483,7 +489,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc1" class="form-control form-control-lg" id="sc1" required>
+                                                            <select name="sc1" class="form-control form-control-lg" id="sc1">
                                                                 <option value="{{$datas->squat_test_1}}" hidden>{{$datas->squat_test_1}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -505,7 +511,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc2" class="form-control form-control-lg" id="sc2" required>
+                                                            <select name="sc2" class="form-control form-control-lg" id="sc2">
                                                                 <option value="{{$datas->squat_test_2}}" hidden>{{$datas->squat_test_2}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -528,7 +534,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc3" class="form-control form-control-lg" id="sc3" required>
+                                                            <select name="sc3" class="form-control form-control-lg" id="sc3">
                                                                 <option value="{{$datas->squat_test_3}}" hidden>{{$datas->squat_test_3}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -552,7 +558,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc4" class="form-control form-control-lg" id="sc4" required>
+                                                            <select name="sc4" class="form-control form-control-lg" id="sc4">
                                                                 <option value="{{$datas->squat_test_4}}" hidden>{{$datas->squat_test_4}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -575,7 +581,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc5" class="form-control form-control-lg" id="sc5" required>
+                                                            <select name="sc5" class="form-control form-control-lg" id="sc5">
                                                                 <option value="{{$datas->squat_test_5}}" hidden>{{$datas->squat_test_5}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -598,7 +604,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc6" class="form-control form-control-lg" id="sc6" required>
+                                                            <select name="sc6" class="form-control form-control-lg" id="sc6">
                                                                 <option value="{{$datas->squat_test_6}}" hidden>{{$datas->squat_test_6}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -622,7 +628,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc7" class="form-control form-control-lg" id="sc8" required>
+                                                            <select name="sc7" class="form-control form-control-lg" id="sc8">
                                                                 <option value="{{$datas->squat_test_7}}" hidden>{{$datas->squat_test_7}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -645,7 +651,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc8" class="form-control form-control-lg" id="sc8" required>
+                                                            <select name="sc8" class="form-control form-control-lg" id="sc8">
                                                                 <option value="{{$datas->squat_test_8}}" hidden>{{$datas->squat_test_8}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -669,7 +675,7 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc9" class="form-control form-control-lg" id="sc9" required>
+                                                            <select name="sc9" class="form-control form-control-lg" id="sc9">
                                                                 <option value="{{$datas->squat_test_9}}" hidden>{{$datas->squat_test_9}}</option>
                                                                 <option value="no">No</option>
                                                                 <option value="yes">Yes</option>
@@ -689,7 +695,7 @@
                                                     <div class="col-lg-6 mt-3">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of Squat Strength*</label>
-                                                            <select name="squatstrength" class="form-control form-control-lg" id="squatweak" required>
+                                                            <select name="squatstrength" class="form-control form-control-lg" id="squatweak">
                                                                 <option hidden value="{{$datas->strength_squat_activation}}">{{$datas->strength_squat_activation}}</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>

@@ -43,8 +43,27 @@
                                             <div class="dropdown-menu">\
                                                 <a class="dropdown-item" href="trainer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="trainer-edit/'+response[i]["id"]+'">Edit</a>\
-                                                <a class="dropdown-item" href="trainer-delete/'+response[i]["id"]+'">Delete</a>\
+                                                <a class="dropdown-item" data-target="#trainer-delete'+response[i]["id"]+'" data-toggle="modal">Delete</a>\
                                             </div>\
+                                            <div class="modal mt-5 fade" id="trainer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="trainer-delete/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                         </div>\
                                     </td>'
                         
@@ -96,8 +115,27 @@ $(document).on('click', '#reset-btn', ()=>{
                                             <div class="dropdown-menu">\
                                                 <a class="dropdown-item" href="trainer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="trainer-edit/'+response[i]["id"]+'">Edit</a>\
-                                                <a class="dropdown-item" href="trainer-delete/'+response[i]["id"]+'">Delete</a>\
+                                                <a class="dropdown-item" data-target="#trainer-delete'+response[i]["id"]+'" data-toggle="modal">Delete</a>\
                                             </div>\
+                                            <div class="modal mt-5 fade" id="trainer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="trainer-delete/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                         </div>\
                                     </td>'
                         
@@ -162,8 +200,27 @@ $(document).on('click', '#reset-btn', ()=>{
                                             <div class="dropdown-menu">\
                                                 <a class="dropdown-item" href="trainer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="trainer-edit/'+response[i]["id"]+'">Edit</a>\
-                                                <a class="dropdown-item" href="trainer-delete/'+response[i]["id"]+'">Delete</a>\
+                                                <a class="dropdown-item" data-target="#trainer-delete'+response[i]["id"]+'" data-toggle="modal">Delete</a>\
                                             </div>\
+                                            <div class="modal mt-5 fade" id="trainer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
+                                            <div class="modal-dialog" role="document">\
+                                                <div class="modal-content">\
+                                                    <div class="modal-header">\
+                                                        <h5 class="modal-title">Confirmation</h5>\
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+                                                                <span aria-hidden="true">&times;</span>\
+                                                            </button>\
+                                                    </div>\
+                                                    <div class="modal-body text-center pt-5">\
+                                                        <h2 class="mt-3">Are you sure to delete ?</h2>\
+                                                    </div>\
+                                                    <div class="modal-footer">\
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>\
+                                                        <a href="trainer-delete/'+response[i]["id"]+'" class="btn btn-danger"><i class="fa fa-check" aria-hidden="true"></i> Delete</a>\
+                                                    </div>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
                                         </div>\
                                     </td>'
                         

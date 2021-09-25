@@ -62,7 +62,7 @@
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Select Name from here</label>
-                                            <select name="customer_id" id="single-select" class="form-control new-lg form-control-lg" required>
+                                            <select name="customer_id" id="single-select" class="form-control new-lg form-control-lg">
                                                 @foreach ($customers as $customer)
                                                 <option value="{{$customer->id}}">{{$customer->first_name . ' '. $customer->last_name}}</option>
                                                 @endforeach
@@ -76,7 +76,7 @@
 
                                         <div class="form-group mb-4">
                                             <label class="text-label">Tell me about your current activity level*</label>
-                                            <select name="activity" class="form-control form-control-lg" required>
+                                            <select name="activity" class="form-control form-control-lg">
                                                 <option hidden>Select activity level</option>
                                                 <option value="minimal">Minimal</option>
                                                 <option value="low">Low</option>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="text-label">Tell me about your family and occupational life, what do you for a living? What does a day look like in your life?*</label>
-                                            <textarea type="text" name="dailyroutine" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                            <textarea type="text" name="dailyroutine" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
 
@@ -94,26 +94,32 @@
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group mb-4">
                                             <label class="text-label">Do you have any medical condition</label>
-                                            <select name="medicon" id="medicon" class="form-control form-control-lg" required>
-                                                <option value="no">No</option>
+                                            <select name="medicon" id="medicon" class="form-control form-control-lg">
                                                 <option value="yes">Yes</option>
+                                                <option value="no">No</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="text-label">Have you had any injuries previously? Please give a clear timeline and description.*</label>
-                                            <textarea type="text" id="medicon-desc" name="injury" disabled class="form-control disable text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                            <label class="text-label">Describe</label>
+                                            <textarea type="text" id="medicon-desc" name="injury" disabled class="form-control disable text-area-hight" placeholder="Describe Briefly..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="text-label">Have you had any injuries previously? Please give a clear timeline and description.</label>
+                                            <textarea type="text" name="prev_injury" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label class="text-label">What kind of exercise have you done previously? Please go in order, starting from the very beginning and ending at your most recent training regimen. *</label>
-                                            <textarea type="text" name="preexcersice" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                            <textarea type="text" name="preexcersice" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
                                             <label class="text-label">Please tell us your diet*</label>
-                                            <textarea type="text" name="dailydiet" class="form-control text-area-hight" placeholder="Describe Briefly..." required></textarea>
+                                            <textarea type="text" name="dailydiet" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +151,7 @@
                                                             <div class="col-md-3 pt-2">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <input type="radio" value="yes" id="tva-1-1" name="tva1">
+                                                                        <input type="radio" value="yes" checked id="tva-1-1" name="tva1">
                                                                         <label for="tva-1-1">Yes</label>
                                                                     </div>
                                                                     <div class="col-6">
@@ -172,7 +178,7 @@
                                                             <div class="col-lg-3 pt-lg-2">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <input type="radio" id="tva-2-1" value="yes" name="tva2">
+                                                                        <input type="radio" id="tva-2-1" checked value="yes" name="tva2">
                                                                         <label for="tva-2-1">Yes</label>
                                                                     </div>
                                                                     <div class="col-6">
@@ -193,7 +199,7 @@
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of Abs Strength*</label>
-                                                            <select name="absstrength" class="form-control form-control-lg" id="coreweak" required>
+                                                            <select name="absstrength" class="form-control form-control-lg" id="coreweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
@@ -224,7 +230,7 @@
                                                             <div class="col-md-3 pt-2">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <input type="radio" id="glute-1-1" name="glute" value="yes">
+                                                                        <input type="radio" id="glute-1-1" checked name="glute" value="yes">
                                                                         <label for="glute-1-1">Yes</label>
                                                                     </div>
                                                                     <div class="col-6">
@@ -246,7 +252,7 @@
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of Glute Strength*</label>
-                                                            <select name="glutestrength" class="form-control form-control-lg" id="gluteweak" required>
+                                                            <select name="glutestrength" class="form-control form-control-lg" id="gluteweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
@@ -278,7 +284,7 @@
                                                             <div class="col-md-3 pt-2">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <input type="radio" id="clamshell-1-1" name="clamshell" value="yes">
+                                                                        <input type="radio" id="clamshell-1-1" checked name="clamshell" value="yes">
                                                                         <label for="clamshell-1-1">Yes</label>
                                                                     </div>
                                                                     <div class="col-6">
@@ -300,7 +306,7 @@
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of clamshell Strength*</label>
-                                                            <select name="clamshellstrength" class="form-control form-control-lg" id="clamshellweak" required>
+                                                            <select name="clamshellstrength" class="form-control form-control-lg" id="clamshellweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
@@ -342,7 +348,7 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Calculation Unit</label>
-                                                            <select name="mcal" class="form-control form-control-lg" id="mcal" required>
+                                                            <select name="mcal" class="form-control form-control-lg" id="mcal">
                                                                 <option value="cm">Centimeter (cm)</option>
                                                                 <option value="inch">Inches (inch)</option>
                                                             </select>
@@ -351,19 +357,19 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Chest*</label>
-                                                            <input type="text" name="chest" required class="form-control" placeholder="56">
+                                                            <input type="text" name="chest" class="form-control" placeholder="56">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Waist*</label>
-                                                            <input type="text" class="form-control" placeholder="86" name="waist" required>
+                                                            <input type="text" class="form-control" placeholder="86" name="waist">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Hips*</label>
-                                                            <input type="text" name="hips" class="form-control" placeholder="36" required>
+                                                            <input type="text" name="hips" class="form-control" placeholder="36">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -377,7 +383,7 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Weight Unit</label>
-                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight" required>
+                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight">
                                                                 <option value="kilogram">Kilogram</option>
                                                                 <option value="pound">Pounds</option>
                                                             </select>
@@ -386,19 +392,19 @@
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Body Weight*</label>
-                                                            <input type="number" min="0" name="weight" required class="form-control" placeholder="56">
+                                                            <input type="number" min="0" name="weight" class="form-control" placeholder="56">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Body FAT %*</label>
-                                                            <input type="number" min="0" class="form-control" placeholder="86" name="fat" required>
+                                                            <input type="number" min="0" class="form-control" placeholder="86" name="fat">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
                                                             <label class="text-label">Muscles Mass %*</label>
-                                                            <input type="number" min="0" name="muscles" class="form-control" placeholder="16" required>
+                                                            <input type="number" min="0" name="muscles" class="form-control" placeholder="16">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -432,9 +438,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc1" class="form-control form-control-lg" id="sc1" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc1" class="form-control form-control-lg" id="sc1">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -453,9 +459,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc2" class="form-control form-control-lg" id="sc2" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc2" class="form-control form-control-lg" id="sc2">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -475,9 +481,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc3" class="form-control form-control-lg" id="sc3" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc3" class="form-control form-control-lg" id="sc3">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -498,9 +504,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc4" class="form-control form-control-lg" id="sc4" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc4" class="form-control form-control-lg" id="sc4">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -520,9 +526,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc5" class="form-control form-control-lg" id="sc5" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc5" class="form-control form-control-lg" id="sc5">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -542,9 +548,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc6" class="form-control form-control-lg" id="sc6" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc6" class="form-control form-control-lg" id="sc6">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -565,9 +571,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc7" class="form-control form-control-lg" id="sc8" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc7" class="form-control form-control-lg" id="sc8">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -587,9 +593,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc8" class="form-control form-control-lg" id="sc8" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc8" class="form-control form-control-lg" id="sc8">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -610,9 +616,9 @@
                                                     </div>
                                                     <div class="col-lg-2 mb-2">
                                                         <div class="form-group">
-                                                            <select name="sc9" class="form-control form-control-lg" id="sc9" required>
-                                                                <option value="no">No</option>
+                                                            <select name="sc9" class="form-control form-control-lg" id="sc9">
                                                                 <option value="yes">Yes</option>
+                                                                <option value="no">No</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -629,7 +635,7 @@
                                                     <div class="col-lg-6 mt-3">
                                                         <div class="form-group mb-4">
                                                             <label class="text-label">Level of Squat Strength*</label>
-                                                            <select name="squatstrength" class="form-control form-control-lg" id="squatweak" required>
+                                                            <select name="squatstrength" class="form-control form-control-lg" id="squatweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
                                                                 <option value="moderate">Moderate</option>
