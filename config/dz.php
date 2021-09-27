@@ -64,7 +64,6 @@ return [
 				],
 				'index_status' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 					'vendor/bootstrap-daterangepicker/daterangepicker.css',
 					'vendor/clockpicker/css/bootstrap-clockpicker.min.css',
@@ -122,6 +121,15 @@ return [
 					'vendor/datatables/css/jquery.dataTables.min.css',
 					'vendor/pickadate/themes/default.date.css',
 				],
+				'user_manage'  => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'vendor/dropzone/dist/dropzone.css',
+					'vendor/bootstrap-daterangepicker/daterangepicker.css',
+					'vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
+					'vendor/pickadate/themes/default.css',
+					'vendor/datatables/css/jquery.dataTables.min.css',
+					'vendor/pickadate/themes/default.date.css',
+				],
 				'rules_index'  => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
@@ -130,7 +138,12 @@ return [
 				],
 				'create_data' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
+				],
+				'create_users_data' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
+				'user_edit' => [
+					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				],
 				'distance_map' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -248,7 +261,6 @@ return [
 				],
 				'form_wizard' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 					'vendor/bootstrap-daterangepicker/daterangepicker.css',
 					'vendor/clockpicker/css/bootstrap-clockpicker.min.css',
@@ -259,22 +271,18 @@ return [
 				],
 				'update_rule_show' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 				],
 				'pt_trainer_details' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 				],
 				'customer_update_pt' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 				],
 				'customer_update_show' => [
 					'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'vendor/jquery-steps/css/jquery.steps.css',
 					'vendor/select2/css/select2.min.css',
 
 				],
@@ -521,10 +529,8 @@ return [
 				'index_status' => [
 					
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 					'vendor/select2/js/select2.full.min.js',
@@ -628,10 +634,8 @@ return [
 				],
 				'form_wizard' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 					'vendor/select2/js/select2.full.min.js',
@@ -654,10 +658,8 @@ return [
 				],
 				'update_rule_show' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 					'vendor/select2/js/select2.full.min.js',
@@ -665,10 +667,8 @@ return [
 				],
 				'pt_trainer_details' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 					'vendor/select2/js/select2.full.min.js',
@@ -676,10 +676,8 @@ return [
 				],
 				'customer_update_pt' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 					'vendor/select2/js/select2.full.min.js',
@@ -687,10 +685,8 @@ return [
 				],
 				'customer_update_show' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 					'vendor/select2/js/select2.full.min.js',
@@ -886,6 +882,24 @@ return [
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],
+				'user_manage' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'vendor/dropzone/dist/dropzone.js',
+					'vendor/moment/moment.min.js',
+					'vendor/bootstrap-daterangepicker/daterangepicker.js',
+					'vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js',
+					'vendor/pickadate/picker.js',
+					'vendor/pickadate/picker.time.js',
+					'vendor/pickadate/picker.date.js',
+					'js/plugins-init/bs-daterange-picker-init.js',
+					'js/plugins-init/material-date-picker-init.js',
+					'js/plugins-init/pickadate-init.js',
+					'vendor/datatables/js/jquery.dataTables.min.js',
+					'js/plugins-init/datatables.init.js',
+					'js/script.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
 				'rules_index' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'js/custom.min.js',
@@ -904,10 +918,22 @@ return [
 				],
 				'create_data' => [
 					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'vendor/jquery-steps/build/jquery.steps.min.js',
 					'vendor/jquery-validation/jquery.validate.min.js',
 					'js/plugins-init/jquery.validate-init.js',
-					'js/plugins-init/jquery-steps-init.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'create_users_data' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'vendor/jquery-validation/jquery.validate.min.js',
+					'js/plugins-init/jquery.validate-init.js',
+					'js/custom.min.js',
+					'js/deznav-init.js',
+				],
+				'user_edit' => [
+					'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'vendor/jquery-validation/jquery.validate.min.js',
+					'js/plugins-init/jquery.validate-init.js',
 					'js/custom.min.js',
 					'js/deznav-init.js',
 				],

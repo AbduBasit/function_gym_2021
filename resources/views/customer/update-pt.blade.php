@@ -52,10 +52,8 @@
                         <div>
                             @csrf
                             <input type="text" value="{{$datas->id}}" name="id" hidden>
-                            <h4>Information</h4>
                             <section class="pl-2 pr-2">
-                                
-                                <div class="heading-section mb-5">
+                                <div class="heading-section mb-3">
                                     <h4>General Information</h4>
                                     <hr />
                                 </div>
@@ -126,10 +124,12 @@
                                 </div>
                             </section>
 
-
-                            <h4>Initial Assessment</h4>
                             <section class="pl-2 pr-2">
-
+                                <div class="heading-section mb-3 ">
+                                    <h4>Initial Assessment</h4>
+                                    <hr />
+                                </div>
+                                
                                 <!-- Funtional Screening accordion -->
                                 <div id="accordion-one" class="accordion accordion-primary">
                                     <div class="accordion__item">
@@ -160,7 +160,7 @@
                                                                         <input type="radio" value="no" id="glute-2-1" name="tva1">
                                                                         <label for="glute-2-1">No</label>
                                                                     </div>
-                                                                    @elseif($datas->test1_core_activation == 'no')
+                                                                    @elseif($datas->test1_core_activation == 'no' || $datas->test1_core_activation == null)
                                                                     <div class="col-6">
                                                                         <input type="radio" value="yes" id="tva-1-1" name="tva1">
                                                                         <label for="tva-1-1">Yes</label>
@@ -198,7 +198,7 @@
                                                                         <input type="radio" id="tva-2-2" value="no" name="tva2">
                                                                         <label for="tva-2-2">No</label>
                                                                     </div>
-                                                                    @elseif($datas->test2_core_activation == 'no')
+                                                                    @elseif($datas->test2_core_activation == 'no' || $datas->test2_core_activation == null)
                                                                     <div class="col-6">
                                                                         <input type="radio" id="tva-2-1" value="yes" name="tva2" checked>
                                                                         <label for="tva-2-1">Yes</label>
@@ -263,7 +263,7 @@
                                                                         <input type="radio" id="glute-2" name="glute" value="no">
                                                                         <label for="glute-2">No</label>
                                                                     </div>
-                                                                    @elseif($datas->test_glute_activation=='no')
+                                                                    @elseif($datas->test_glute_activation=='no' || $datas->test_glute_activation==null)
 
                                                                     <div class="col-6">
                                                                         <input type="radio" id="glute-1-1" name="glute" value="yes" checked>
@@ -330,7 +330,7 @@
                                                                         <input type="radio" id="clamshell-2" name="clamshell" value="no">
                                                                         <label for="clamshell-2">No</label>
                                                                     </div>
-                                                                    @elseif($datas->test_clamshells_activation=='no')
+                                                                    @elseif($datas->test_clamshells_activation=='no' || $datas->test_clamshells_activation==null)
                                                                     <div class="col-6">
                                                                         <input type="radio" id="clamshell-1-1" name="clamshell" value="yes">
                                                                         <label for="clamshell-1-1">Yes</label>
@@ -716,15 +716,14 @@
                                     </div>
                             </section>
 
-                            <h4>Confirmation</h4>
-                            <section>
-                                <div class="checkout-name text-center mt-5 pt-5">
-                                    <img src="{{asset('./images/custom/check.png')}}" alt="check image" width="100px">
-                                    <h1 class="display-5 mt-3">Your Form is Update</h1>
-                                    <p class="lead">Check Your Detail again? or Finish Your Process</p>
+                            <footer>
+                                <div class="row">
+                                    <div class="btn-group ml-auto">
+                                        <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                                        <button type="submit" class="btn btn-md mt-3 mr-2 btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i> Update</button>
+                                    </div>
                                 </div>
-
-                            </section>
+                            </footer>
                         </div>
                     </form>
                 </div>

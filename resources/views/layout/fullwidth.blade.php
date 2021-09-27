@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ config('dz.name') }} | Invoice</title>
+    <title>{{ config('dz.name') }}</title>
     {{-- <meta name="description" content="@yield('page_description', $page_description ?? '')"/> --}}
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">

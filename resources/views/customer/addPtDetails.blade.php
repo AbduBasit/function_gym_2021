@@ -49,10 +49,9 @@
 
                         <div>
                             @csrf
-                            <h4>Information</h4>
                             <section class="pl-2 pr-2">
 
-                                <div class="heading-section mb-5 ">
+                                <div class="heading-section mb-3 ">
                                     <h4>General Information</h4>
                                     <hr />
                                 </div>
@@ -126,9 +125,12 @@
                             </section>
 
 
-                            <h4>Initial Assessment</h4>
+                            
                             <section class="pl-2 pr-2">
-
+                                <div class="heading-section mb-3 ">
+                                    <h4>Initial Assesment</h4>
+                                    <hr />
+                                </div>
                                 <!-- Funtional Screening accordion -->
                                 <div id="accordion-one" class="accordion accordion-primary">
                                     <div class="accordion__item">
@@ -659,15 +661,14 @@
 
 
 
-                            <h4>Confirmation</h4>
-                            <section>
-                                <div class="checkout-name text-center mt-5 pt-5">
-                                    <img src="{{asset('./images/custom/check.png')}}" alt="check image" width="100px">
-                                    <h1 class="display-5 mt-3">Your Form is Done</h1>
-                                    <p class="lead">Check Your Detail again? or Finish Your Process</p>
+                            <footer>
+                                <div class="row">
+                                    <div class="btn-group ml-auto">
+                                        <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                                        <button type="submit" class="btn btn-md mt-3 mr-2 btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i> Submit</button>
+                                    </div>
                                 </div>
-
-                            </section>
+                            </footer>
                         </div>
                     </form>
                 </div>

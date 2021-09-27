@@ -6,6 +6,7 @@ use App\Exports\ExpensesExport;
 use App\Exports\InvoicesExport;
 use App\Imports\ExpensesImport;
 use App\Imports\InvoicesImport;
+use App\Mail\PosMail;
 use App\Models\cat_expense;
 use App\Models\customer;
 use App\Models\expense;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\While_;
 use Excel;
+use Illuminate\Support\Facades\Mail;
 
 class PosController extends Controller
 {
@@ -107,6 +109,7 @@ class PosController extends Controller
         return view('pos.updateFees', compact('page_title', 'page_description', 'action'), ['value'=>$data]);
     }
     public function update_invoice(Request $req, $id){
+        // dd($req->all());
         $db = new invoice();
         $data = $db->all()->find($id);
         $data->fees_payable = $req->fees_status;
@@ -114,7 +117,12 @@ class PosController extends Controller
         $data->pay_date = $req->pay_date;
         $data->net_total = $req->amount;
         $data->discount = $req->discount;
+        $net_total = $req->amount - $req->discount;;
         if($data->save()){
+            if($data->customer_email){
+                // dd($data);
+                Mail::to($data->customer_email)->send(new PosMail($data));
+            }
             return redirect('manage-invoice');
         }
 

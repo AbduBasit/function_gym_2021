@@ -148,7 +148,6 @@
 
                             <div>
                                 @csrf
-                                <h4>Information</h4>
                                 <section class="pl-2 pr-2">
                                     <div class="heading-section mt-lg-2">
                                         <h4>Personal Information</h4>
@@ -235,7 +234,8 @@
 
 
 
-                                <h4>Account Details</h4>
+                                <h4 class="mb-2 mt-5 ml-2">Account Details</h4>
+                                <hr class="mb-4"/>
                                 <section>
                                     <div class="row pl-2 pr-2">
                                         <div class="col-lg-6 mb-2">
@@ -534,17 +534,16 @@
                                         </div>
                                     </div>
                                 </section>
-                                
-                                <h4>Confirmation</h4>
-                                <section>
-                                    <div class="checkout-name text-center mt-5 pt-5">
-                                        <img src="{{ asset('./images/custom/check.png') }}" alt="check image"
-                                            width="100px">
-                                        <h1 class="display-5 mt-3">Your Form is Done</h1>
-                                        <p class="lead">Check Your Detail again? or Finish Your Process</p>
-                                    </div>
 
-                                </section>
+                                <footer>
+                                    <div class="row">
+                                        <div class="btn-group ml-auto">
+                                            <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                                            <button type="submit" class="btn btn-md mt-3 mr-2 btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i> Register</button>
+                                        </div>
+                                    </div>
+                                </footer>
+                                
                             </div>
                         </form>
                     </div>

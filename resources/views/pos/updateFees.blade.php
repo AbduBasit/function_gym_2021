@@ -67,13 +67,13 @@
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
                                     <label class="text-label">Amount</label>
-                                    <input type="text" name="amount" disabled placeholder="0" required value="{{round($value->net_total-$value->discount)}}" class="disable form-control">
+                                    <input type="text" name="amount"  required value="{{round($value->net_total-$value->discount)}}" class=" form-control">
                                 </div>
                             </div>
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group ">
                                     <label class="text-label">Discount</label>
-                                    <input type="text" name="discount" placeholder="0" class="form-control" value="{{$value->discount}}">
+                                    <input type="text" name="discount" class="form-control" value="{{$value->discount}}">
                                 </div>
                             </div>
                             <div class="col-12">

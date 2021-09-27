@@ -30,6 +30,15 @@
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span class="nav-text">Users</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="/create-user">Add User</a></li>
+                <li><a href="{!! url('/manage-user') !!}">Manage User</a></li>
+            </ul>
+        </li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="fa fa-money" aria-hidden="true"></i>
                     <span class="nav-text">Finance</span>
                 </a>

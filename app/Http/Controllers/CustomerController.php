@@ -8,6 +8,7 @@ use App\Models\customer;
 use App\Http\Controllers\Controller;
 use App\Imports\CustomerImport;
 use App\Mail\InvoiceMail;
+use App\Mail\monthlyMailInv;
 use App\Models\invoice;
 use App\Models\rule;
 use App\Models\trainer;
@@ -394,7 +395,12 @@ class CustomerController extends Controller
     {
         $db = new customer();
         $data = DB::select("SELECT id FROM customers where training_type = 'PT' and not daily_routine and not daily_diet and not prev_injury and not strength_core_activation and not strength_glute_activation and not strength_squat_activation");
-        $data2 = DB::select('Select * from customers where NOT id='.$data[0]->id.'');
+        if($data){
+            $data2 = DB::select('Select * from customers where NOT id='.$data[0]->id.'');
+        }
+        else{
+            $data2 = DB::select('Select * from customers');
+        }
         $page_title = 'Add Person Training Details';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
@@ -729,9 +735,20 @@ class CustomerController extends Controller
         $val->fee_amount = $req->amount;
         $val->discount = $req->discount;
         $val->net_total = $req->amount - $req->discount;
-
-        $data->save();
-        $val->save();
+        // dd($data);
+        $value = [
+            'name' => $data->first_name . " " . $data->last_name,
+            'net_amount' => $req->amount - $req->discount,
+            'phone' => $data->phone_number,
+            'pay_date' => $req->pay_date,
+            'email' => $data->email,
+            'fees' => $req->fees_status,
+        ];
+        // dd($value);
+        if($data->save()){
+            $val->save();
+            Mail::to($data->email)->send(new monthlyMailInv($value));
+        }
         return redirect('manage-customer');
     }
 }

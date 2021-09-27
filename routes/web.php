@@ -50,6 +50,15 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::post('trainer_import', [TrainerController::class, 'import_trainer'])->name('trainer-imp');
 
 
+    // User Module
+    Route::get('/create-user', [UserController::class, 'create_users_data']);
+    Route::post('/create-user_data', [UserController::class, 'create_new_user']);
+    Route::get('manage-user', [UserController::class, 'user_manage']);
+    Route::get('manage-user_new', [UserController::class, 'user_manage_fetch'])->name('user_data');
+    Route::get('user-delete/{id}', [UserController::class, 'user_delete']);
+    Route::get('user-edit/{id}', [UserController::class, 'user_edit']);
+    Route::post('update_user_data', [UserController::class, 'update_user_data']);
+
     // Activity
     Route::get('manage-rules', [ActivityController::class, 'rules_index']);
     Route::get('update_rule_show/{id}', [ActivityController::class, 'update_rule_show']);

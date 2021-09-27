@@ -8,10 +8,11 @@
 <script src="{{ asset('./js/jquery.js') }}"></script>
 <script>
     $(document).ready(function () {
-        $('tr').find('.dataPut select').each((i)=>{
-            $(this).find('.dataAjax'+i+'').on('change', (e)=>{
-                let val = $('.dataAjax'+i+' select').val()
+        $('tr').find('.dataPut select').each(()=>{
+                $(this).on('change', (e)=>{
+                let val = e.target.value;
                 var value = {val:val}
+                // console.log(val);
                 $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -53,15 +54,22 @@
                         output += '<td>'+response[i]["date_of_birth"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
-                        output += '<td>'+response[i]["trainer_name"]+'</td>';
+
+                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
+                            output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["trainer_name"]+'</td>';
+                        }
+
                         if(response[i]["status"]=="active"){
                             output += '<td>'+response[i]["status"]+'</td>';
                         }
                         else{
                             output += '<td class="dataPut">\
-                                        <select class="form-control" onchange="dataPut('+response[i]['id']+')" id="dropdown">\
-                                            <option value="inactive">inactive</option>\
-                                            <option value="active">active</option>\
+                                        <select class="form-control" id="dropdown">\
+                                            <option value="inactive-'+response[i]["id"]+'">inactive</option>\
+                                            <option value="active-'+response[i]["id"]+'">active</option>\
                                         </select>\
                                         </div>\
                             </td>'
@@ -79,7 +87,7 @@
                             }
                         }
 
-                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"] == "Select Trainer"){
+                        if(response[i]["training_type"]=="GT"){
                             output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
@@ -117,6 +125,7 @@
                                                 <a class="dropdown-item" href="customer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="customer-edit/'+response[i]["id"]+'">Edit Basic Information</a>\
                                                 <a class="dropdown-item" href="customer-edit-pt/'+response[i]["id"]+'">Edit PT Information</a>\
+                                                <a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="dropdown-item">Change Trainer</a>\
                                                 <a data-toggle="modal" class="dropdown-item" data-target="#customer-delete'+response[i]["id"]+'">Delete</a>\
                                             </div>\
                                             <div class="modal mt-5 fade" id="customer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
@@ -171,15 +180,22 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["date_of_birth"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
-                        output += '<td>'+response[i]["trainer_name"]+'</td>';
+
+                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
+                            output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["trainer_name"]+'</td>';
+                        }
+
                         if(response[i]["status"]=="active"){
                             output += '<td>'+response[i]["status"]+'</td>';
                         }
                         else{
                             output += '<td class="dataPut">\
-                                        <select class="form-control" onchange="dataPut('+response[i]['id']+')" id="dropdown">\
-                                            <option value="inactive">inactive</option>\
-                                            <option value="active">active</option>\
+                                        <select class="form-control" id="dropdown">\
+                                            <option value="inactive-'+response[i]["id"]+'">inactive</option>\
+                                            <option value="active-'+response[i]["id"]+'">active</option>\
                                         </select>\
                                         </div>\
                             </td>'
@@ -197,7 +213,7 @@ $(document).on('click', '#reset-btn', ()=>{
                             }
                         }
 
-                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"] == "Select Trainer"){
+                        if(response[i]["training_type"]=="GT"){
                             output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
@@ -235,6 +251,7 @@ $(document).on('click', '#reset-btn', ()=>{
                                                 <a class="dropdown-item" href="customer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="customer-edit/'+response[i]["id"]+'">Edit Basic Information</a>\
                                                 <a class="dropdown-item" href="customer-edit-pt/'+response[i]["id"]+'">Edit PT Information</a>\
+                                                <a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="dropdown-item">Change Trainer</a>\
                                                 <a data-toggle="modal" class="dropdown-item" data-target="#customer-delete'+response[i]["id"]+'">Delete</a>\
                                             </div>\
                                             <div class="modal mt-5 fade" id="customer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
@@ -302,15 +319,22 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["date_of_birth"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
-                        output += '<td>'+response[i]["trainer_name"]+'</td>';
+
+                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
+                            output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
+                        }
+                        else{
+                            output += '<td>'+response[i]["trainer_name"]+'</td>';
+                        }
+
                         if(response[i]["status"]=="active"){
                             output += '<td>'+response[i]["status"]+'</td>';
                         }
                         else{
                             output += '<td class="dataPut">\
-                                        <select class="form-control" onchange="dataPut('+response[i]['id']+')" id="dropdown">\
-                                            <option value="inactive">inactive</option>\
-                                            <option value="active">active</option>\
+                                        <select class="form-control" id="dropdown">\
+                                            <option value="inactive-'+response[i]["id"]+'">inactive</option>\
+                                            <option value="active-'+response[i]["id"]+'">active</option>\
                                         </select>\
                                         </div>\
                             </td>'
@@ -328,7 +352,7 @@ $(document).on('click', '#reset-btn', ()=>{
                             }
                         }
 
-                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"] == "Select Trainer"){
+                        if(response[i]["training_type"]=="GT"){
                             output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
@@ -366,6 +390,7 @@ $(document).on('click', '#reset-btn', ()=>{
                                                 <a class="dropdown-item" href="customer-view/'+response[i]["id"]+'">View</a>\
                                                 <a class="dropdown-item" href="customer-edit/'+response[i]["id"]+'">Edit Basic Information</a>\
                                                 <a class="dropdown-item" href="customer-edit-pt/'+response[i]["id"]+'">Edit PT Information</a>\
+                                                <a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="dropdown-item">Change Trainer</a>\
                                                 <a data-toggle="modal" class="dropdown-item" data-target="#customer-delete'+response[i]["id"]+'">Delete</a>\
                                             </div>\
                                             <div class="modal mt-5 fade" id="customer-delete'+response[i]["id"]+'" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">\
