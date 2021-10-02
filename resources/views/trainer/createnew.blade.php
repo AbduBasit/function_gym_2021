@@ -84,13 +84,19 @@
                                             <input type="text" name="place" class="form-control" placeholder="101 House, Street 1A, Area, City">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mb-2">
+                                    <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Date of Birth</label>
                                             <input type="date" name="dob" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mb-2">
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Date of Joining</label>
+                                            <input type="date" name="doj" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">CNIC</label>
                                             <input type="text" name="cnic" class="form-control" placeholder="42874-7358088-1">
@@ -114,14 +120,18 @@
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Timing In</label>
-                                            <input type="text" name="tin" class="form-control">
+                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                <input type="text" class="form-control clock-n" name="tin"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Timing Out</label>
-                                            <input type="text" name="tout" class="form-control">
+                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                <input type="text" class="form-control clock-n" name="tout"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                            </div>
                                         </div>
                                     </div>
 

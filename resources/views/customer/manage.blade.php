@@ -8,6 +8,21 @@
 <script src="{{ asset('./js/jquery.js') }}"></script>
 <script>
     $(document).ready(function () {
+        $('#daterange').daterangepicker({
+            "showDropdowns": true,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            "startDate": "09/23/2021",
+            "endDate": "09/29/2021"
+        }, function(start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+        });
         $('tr').find('.dataPut select').each(()=>{
                 $(this).on('change', (e)=>{
                 let val = e.target.value;
@@ -55,7 +70,7 @@
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
 
-                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
+                        if(response[i]["trainer_name"]==null ||response[i]["trainer_name"]=="UA" || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
                             output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
                         }
                         else{
@@ -181,7 +196,7 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
 
-                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
+                        if(response[i]["trainer_name"]==null ||response[i]["trainer_name"]=="UA" || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
                             output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
                         }
                         else{
@@ -320,7 +335,7 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
 
-                        if(response[i]["trainer_name"]==null || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
+                        if(response[i]["trainer_name"]==null ||response[i]["trainer_name"]=="UA" || response[i]["trainer_name"]=="" || response[i]["trainer_name"]=="Select Trainer"  && response[i]["training_type"]=="PT"){
                             output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
                         }
                         else{
@@ -536,7 +551,7 @@ $(document).on('click', '#reset-btn', ()=>{
                                     <th><strong>Training Type</strong></th>
                                     <th><strong>Trainer Name</strong></th>
                                     <th><strong>Status</strong></th>
-                                    <th><strong>Fees Payable</strong></th>
+                                    <th><strong>Dues</strong></th>
                                     <th><strong>Action</strong></th>
                                 </tr>
                             </thead>

@@ -28,7 +28,7 @@ jQuery(document).ready(() => {
         var ruleDays = data;
         var chooseDate = new Date(value);
         chooseDate.setDate(chooseDate.getUTCDate() + ruleDays);
-        var futureDate = chooseDate.getFullYear() + '-' + ('0' + (chooseDate.getMonth() + 2)).slice(-2) + '-' + ('0' + (chooseDate.getDate())).slice(-2);
+        var futureDate = ('0' + (chooseDate.getMonth() + 2)).slice(-2)+ '/' + ('0' + (chooseDate.getDate())).slice(-2) + '/' + chooseDate.getFullYear();
         $("#month-end").val(function() {
             return futureDate;
         });

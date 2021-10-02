@@ -172,7 +172,7 @@
                                         <div class="col-lg-4 mb-2">
                                             <div class="form-group">
                                                 <label class="text-label">Email Address*</label>
-                                                <input type="email" class="form-control" name="email"
+                                                <input type="email"  class="form-control" name="email"
                                                     placeholder="abc@xyz.com" required>
                                             </div>
                                         </div>
@@ -228,7 +228,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </section>
+                               
 
 
 
@@ -236,13 +236,13 @@
 
                                 <h4 class="mb-2 mt-5 ml-2">Account Details</h4>
                                 <hr class="mb-4"/>
-                                <section>
+                              
                                     <div class="row pl-2 pr-2">
                                         <div class="col-lg-6 mb-2">
                                             <div class="form-group">
                                                 <label class="text-label">Date of Joining*</label>
                                                 <input type="date" name="doj" class="form-control"
-                                                    onchange="dateCalc(this.value, {{ $rul[0]->values }})"
+                                                    onchange="dateCalc(this.value, 0)"
                                                     placeholder="Cellophane Square" required>
                                             </div>
                                         </div>
@@ -290,7 +290,7 @@
                                         </div>
                                         <div class="col-lg-3 mb-2">
                                             <div class="form-group">
-                                                <label class="text-label">Due Fees*</label>
+                                                <label class="text-label">Dues*</label>
                                                 <select name="fees_status" class="form-control form-control-lg" required>
                                                     <option hidden>Select status</option>
                                                     <option value="All Clear">All Clear</option>
@@ -333,13 +333,6 @@
                                                 <label class="text-label">Trainer Fee Per Session*</label>
                                                 <input type="text" name="trainfee" class="form-control"
                                                     placeholder="2000">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 mb-2 display">
-                                            <div class="form-group">
-                                                <label class="text-label">Total Session</label>
-                                                <input type="number" name="tsession" id="total_session"
-                                                    class="form-control disable" value="0" disabled>
                                             </div>
                                         </div>
 
@@ -390,6 +383,13 @@
                                             <hr>
                                         </div>
                                         <div class="row">
+                                            <div class="col-lg-3 mb-2 ml-auto display">
+                                                <div class="form-group">
+                                                    <label class="text-label">Total Session</label>
+                                                    <input type="number" name="tsession" id="total_session"
+                                                        class="form-control disable" value="0" disabled>
+                                                </div>
+                                            </div>
                                             <table class="table table-outline-danger table-lg-responsive table-bordered">
                                                 <thead>
                                                     <th class="width80">PT</th>
@@ -538,7 +538,7 @@
                                 <footer>
                                     <div class="row">
                                         <div class="btn-group ml-auto">
-                                            <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                                             {{-- <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a> --}}
                                             <button type="submit" class="btn btn-md mt-3 mr-2 btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i> Register</button>
                                         </div>
                                     </div>

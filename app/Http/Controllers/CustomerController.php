@@ -260,7 +260,11 @@ class CustomerController extends Controller
         $db->cnic = $req->cnic;
         // Image Section
         if ($req->file('cfile')) {
-            $db->image = $req->file('cfile')->store('customer_images');
+            $image_original = $req->file('cfile');
+            $extension = $image_original->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $image_original->move('upload/customer_images/', $fileName);
+            $db->image = $fileName;
         }
         $db->date_of_joining = $req->doj;
         // date_end function
@@ -378,13 +382,10 @@ class CustomerController extends Controller
             
         if($req->email){
             $data = $req->all();
-            Mail::to($req->email)->send(new InvoiceMail([$data, $net_total]));
-        }
-            
-
-            $req->session()->flash('customer', $data);
-        } else {
-            $req->session()->flash('error', $data);
+            if($req->fees_status == "All Clear"){
+                Mail::to($req->email)->send(new InvoiceMail([$data, $net_total]));
+            }
+        }   
         }
         return redirect('manage-customer');
     }
@@ -475,7 +476,11 @@ class CustomerController extends Controller
         $data->cnic = $req->cnic;
         // Image Section
         if ($req->file('cfile')) {
-            $data->image = $req->file('cfile')->store('customer_images');
+            $image_original = $req->file('cfile');
+            $extension = $image_original->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $image_original->move('upload/customer_images/', $fileName);
+            $data->image = $fileName;
         }
         $data->date_of_joining = $req->doj;
         // date_end function
@@ -698,7 +703,7 @@ class CustomerController extends Controller
 
     public function index_fees_add($id)
     {
-        $page_title = 'Add Fees';
+        $page_title = 'Invoice';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         $db = new customer();
@@ -735,7 +740,8 @@ class CustomerController extends Controller
         $val->fee_amount = $req->amount;
         $val->discount = $req->discount;
         $val->net_total = $req->amount - $req->discount;
-        // dd($data);
+        // dd($value);
+        if($data->save() &&  $val->save()){
         $value = [
             'name' => $data->first_name . " " . $data->last_name,
             'net_amount' => $req->amount - $req->discount,
@@ -744,10 +750,12 @@ class CustomerController extends Controller
             'email' => $data->email,
             'fees' => $req->fees_status,
         ];
-        // dd($value);
-        if($data->save()){
-            $val->save();
-            Mail::to($data->email)->send(new monthlyMailInv($value));
+            if($req->fees_status == "All Clear"){
+                Mail::to($data->email)->send(new monthlyMailInv($value)); 
+            }
+        }
+        else{
+            dd('error');
         }
         return redirect('manage-customer');
     }

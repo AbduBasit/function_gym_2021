@@ -84,16 +84,22 @@
                                             <input type="text" name="place" value={{$datas->address}} class="form-control" placeholder="101 House, Street 1A, Area, City">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mb-2">
+                                    <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Date of Birth</label>
                                             <input type="date" name="dob" value={{$datas->date_of_birth}} class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mb-2">
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Date of Joining</label>
+                                            <input type="date" name="doj" value={{$datas->date_of_joining}} class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">CNIC</label>
-                                            <input type="text" name="cnic" value={{$datas->cnic}} class="form-control" placeholder="42874-7358088-1">
+                                            <input type="text" name="cnic" value="{{$datas->cnic}}" class="form-control" placeholder="42874-7358088-1">
                                         </div>
                                     </div>
 

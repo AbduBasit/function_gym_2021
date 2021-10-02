@@ -16,7 +16,7 @@
     <div class="page-titles">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Finance</a></li>
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Expenses</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Invoice</a></li>
         </ol>
     </div>
     <!-- row -->
@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Add Expenses</h4>
+                    <h4 class="card-title">Invoice</h4>
                 </div>
                 <div class="card-body">
 
@@ -37,7 +37,7 @@
                                     
                             <div class="col-lg-4 mb-2">
                                 <div class="form-group">
-                                    <label class="text-label">Due Fees*</label>
+                                    <label class="text-label">Dues*</label>
                                     <select name="fees_status" class="form-control form-control-lg" required>
                                         <option value="Unpaid">Unpaid</option>
                                         <option value="All Clear">All Clear</option>

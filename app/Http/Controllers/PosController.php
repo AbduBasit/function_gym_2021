@@ -121,7 +121,9 @@ class PosController extends Controller
         if($data->save()){
             if($data->customer_email){
                 // dd($data);
-                Mail::to($data->customer_email)->send(new PosMail($data));
+                if($req->fees_status == "All Clear"){
+                    Mail::to($data->customer_email)->send(new PosMail($data));
+                }
             }
             return redirect('manage-invoice');
         }
@@ -274,41 +276,48 @@ class PosController extends Controller
 
     public function trainer_payslip_index($id)
     {
-
-
+        // Page Details
         $page_title = 'Trainer Pay Slip';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
+        // Action Here
         $db = new trainer();
         $name = "Syed Ghazanfar";
-        // $data = DB::select('SELECT  customers.id as customer_id, concat(customers.first_name, " ", customers.last_name) as customer_name, customers.date_of_joining, customers.month_end, customers.training_type, customers.trainer_name, customers.status, customers.fees_clear, customers.reference_name, customers.registration_fees, customers.gym_fees, customers.trainer_fees_per_session, customers.total_session, customers.advnace_allow, customers.advance_month, customers.discount, customers.avance_total, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name)');
-        $data = DB::select('SELECT trainers.date_of_pay, customers.reference_name, SUM(customers.registration_fees) as registration_fees , SUM(customers.gym_fees) as gym_fees, SUM(customers.trainer_fees_per_session) as trainer_fees_per_session, SUM(customers.total_session) as total_session, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name) WHERE trainers.id =' . $id);
+        $data = DB::select('SELECT trainers.date_of_pay, customers.reference_name, SUM(customers.registration_fees) as registration_fees , SUM(customers.gym_fees) as gym_fees, SUM(customers.trainer_fees_per_session) as trainer_fees_per_session, COUNT(customers.trainer_fees_per_session) as count_trainer, SUM(customers.total_session) as total_session, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name) WHERE trainers.id =' . $id);
 
         // dd($data[0]->tname);
         $data1 = new invoice();
 
         // Reference Commision  
         $date = date("m", strtotime("-1 months"));
-        $inv = DB::select('SELECT sum(registration_fees) as reg_fee from invoices  where reference = "' . $data[0]->tname . '" and MONTH(pay_date) = ' . $date);
+        $inv = DB::select('SELECT * FROM invoices WHERE reference = "'. $data[0]->tname .'"');
 
         $rule = DB::select('select * from rules where rules_token = "RC_A1003"')[0];
-        $calc = $inv[0]->reg_fee * $rule->values / 100;
+        $calc = $data[0]->registration_fees * $rule->values / 100;
+        // $calc = 0;
+        // dd($inv[0]->registration_fees);
 
-        // dd($inv);
         // Retians Commision
-        $date1 = date("m", strtotime("-3 months"));
-        $_Query_1 = DB::select('SELECT customers.trainer_name, MONTH(trainers.date_of_pay) as t_dop, ' . $date1 . ' as i_dop FROM customers inner JOIN trainers ON customers.trainer_name=concat(trainers.first_name, " ", trainers.last_name) inner JOIN invoices ON customers.trainer_name=invoices.trainer_name WHERE invoices.trainer_name = "' . $data[0]->tname . '"');
-        if ($_Query_1 != null) {
-            $t_dop = $_Query_1[0]->t_dop;
-            $i_dop = $_Query_1[0]->i_dop;
-            // SELECT customer_name, sum(gym_fees) as fee , Month(pay_date) as month FROM invoices WHERE MONTH(pay_date) BETWEEN ' . $i_dop . ' and ' . $t_dop . ' and trainer_name = "' . $data[0]->tname . '" group by customer_name
-            $_Query_2 = DB::select('select concat(first_name, " ", last_name) as name, trainer_name from customers where trainer_name = "' . $data[0]->tname . '"');
+        $date1 = date("m-Y", strtotime("-3 months"));
+        
+        // $_Query_1 = DB::select('SELECT customers.trainer_name, MONTH(trainers.date_of_pay) as t_dop, MONTH(invoices.pay_date) as i_dop FROM customers inner JOIN trainers ON customers.trainer_name=concat(trainers.first_name, " ", trainers.last_name) inner JOIN invoices ON customers.trainer_name=invoices.trainer_name WHERE invoices.trainer_name = "'. $data[0]->tname .'"');
+        $_Query_1 = DB::select('SELECT pay_date, trainer_name, concat(MONTH(invoices.pay_date),"-",Year(invoices.pay_date)) as dateInv, SUM(trainer_fees) as total_tfees, customer_name  FROM `invoices` WHERE trainer_name = "'.$data[0]->tname.'" GROUP by pay_date');
+        // dd($_Query_1);
+        if ($inv) {
+            $date2 = date("Y-m", strtotime("-1 months"));
+            $t_dop = $date2;
+            $val = count($_Query_1)- 1;
+            $i_dop1 = ;
+            dd($date2);
+            
+            $_Query_2 = DB::select('SELECT customer_name, sum(gym_fees) as fee , Month(pay_date) as month FROM invoices WHERE MONTH(pay_date) BETWEEN ' . $t_dop . ' and ' . $i_dop . ' and trainer_name = "' . $data[0]->tname . '" group by customer_name');
 
-
+            dd($_Query_2);
             foreach ($_Query_2 as $key => $value) {
                 // $ss = $key;
                 // dd($value);
                 $_Query_3 = DB::select('select MONTH(pay_date) as pdate, customer_name, gym_fees, sum(gym_fees) over () as newcp FROM invoices where MONTH(pay_date) BETWEEN ' . $i_dop . ' and ' . $t_dop . ' and customer_name = "' . $_Query_2[$key]->name . '" and trainer_name = "' . $data[0]->tname . '" order by customer_name, pdate');
+                dd($_Query_3);
                 $array = json_decode(json_encode($_Query_3), true);
                 foreach ($_Query_3 as $value => $key) {
                     $array[] = [$value, 'like', $key];
@@ -329,7 +338,7 @@ class PosController extends Controller
                 return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => $result1]);
             }
         }
-        // return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null]);
+        return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null]);
     }
     public function invoicePrint($id){
         $page_title = 'Invoice';
@@ -337,7 +346,9 @@ class PosController extends Controller
         $action = __FUNCTION__;
         $db = new invoice();
         $data = $db->all()->find($id);
-        return view('pos.invoice', compact('page_title', 'page_description', 'action'), ['data' => $data]);
+        $date1 = explode('-', $data->pay_date);
+        $date = $date1[2].'/'.$date1[1].'/'.$date1[0];
+        return view('pos.invoice', compact('page_title', 'page_description', 'action'), ['data' => $data, 'date'=>$date]);
     }
     public function status_change_index($id)
     {

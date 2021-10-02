@@ -74,7 +74,7 @@
                                     <div class="col-lg-6 mb-3">
 
                                         <div class="form-group mb-4">
-                                            <label class="text-label">Tell me about your current activity level*</label>
+                                            <label class="text-label">Tell me about your current activity level</label>
                                             <select name="activity" class="form-control form-control-lg">
                                                 <option hidden>Select activity level</option>
                                                 <option value="minimal">Minimal</option>
@@ -84,7 +84,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="text-label">Tell me about your family and occupational life, what do you for a living? What does a day look like in your life?*</label>
+                                            <label class="text-label">Tell me about your family and occupational life, what do you for a living? What does a day look like in your life?</label>
                                             <textarea type="text" name="dailyroutine" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
@@ -111,13 +111,13 @@
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
-                                            <label class="text-label">What kind of exercise have you done previously? Please go in order, starting from the very beginning and ending at your most recent training regimen. *</label>
+                                            <label class="text-label">What kind of exercise have you done previously? Please go in order, starting from the very beginning and ending at your most recent training regimen. </label>
                                             <textarea type="text" name="preexcersice" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <div class="form-group">
-                                            <label class="text-label">Please tell us your diet*</label>
+                                            <label class="text-label">Please tell us your diet</label>
                                             <textarea type="text" name="dailydiet" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@
 
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label">Level of Abs Strength*</label>
+                                                            <label class="text-label">Level of Abs Strength</label>
                                                             <select name="absstrength" class="form-control form-control-lg" id="coreweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
@@ -211,7 +211,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mt-4 core-weak">
                                                         <div class="form-group">
-                                                            <label class="text-label">If weak core activation, Describe Briefly*</label>
+                                                            <label class="text-label">If weak core activation, Describe Briefly</label>
                                                             <textarea type="text" name="weakcore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
@@ -253,7 +253,7 @@
 
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label">Level of Glute Strength*</label>
+                                                            <label class="text-label">Level of Glute Strength</label>
                                                             <select name="glutestrength" class="form-control form-control-lg" id="gluteweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
@@ -264,7 +264,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mt-4 glute-weak">
                                                         <div class="form-group">
-                                                            <label class="text-label">If weak Glute activation, Describe Briefly*</label>
+                                                            <label class="text-label">If weak Glute activation, Describe Briefly</label>
                                                             <textarea type="text" name="glutecore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
@@ -280,7 +280,7 @@
                                                 <div class="row mt-3">
                                                     <div class="col-lg-6 mb-2 ">
                                                         <div class="form-group ">
-                                                            <p>Are they able to use the glute medius to perform the movement*</p>
+                                                            <p>Are they able to use the glute medius to perform the movement</p>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-3 pt-2">
@@ -307,7 +307,7 @@
 
                                                     <div class="col-lg-6 mt-4">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label">Level of clamshell Strength*</label>
+                                                            <label class="text-label">Level of clamshell Strength</label>
                                                             <select name="clamshellstrength" class="form-control form-control-lg" id="clamshellweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
@@ -318,7 +318,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mt-4 clamshell-weak">
                                                         <div class="form-group">
-                                                            <label class="text-label">If weak clamshell activation, Describe Briefly*</label>
+                                                            <label class="text-label">If weak clamshell activation, Describe Briefly</label>
                                                             <textarea type="text" name="clamshellcore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
@@ -358,19 +358,19 @@
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
-                                                            <label class="text-label">Chest*</label>
+                                                            <label class="text-label">Chest</label>
                                                             <input type="text" name="chest" class="form-control" placeholder="56">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
-                                                            <label class="text-label">Waist*</label>
+                                                            <label class="text-label">Waist</label>
                                                             <input type="text" class="form-control" placeholder="86" name="waist">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
-                                                            <label class="text-label">Hips*</label>
+                                                            <label class="text-label">Hips</label>
                                                             <input type="text" name="hips" class="form-control" placeholder="36">
                                                         </div>
                                                     </div>
@@ -393,19 +393,19 @@
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
-                                                            <label class="text-label">Body Weight*</label>
+                                                            <label class="text-label">Body Weight</label>
                                                             <input type="number" min="0" name="weight" class="form-control" placeholder="56">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
-                                                            <label class="text-label">Body FAT %*</label>
+                                                            <label class="text-label">Body FAT %</label>
                                                             <input type="number" min="0" class="form-control" placeholder="86" name="fat">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 mb-2">
                                                         <div class="form-group">
-                                                            <label class="text-label">Muscles Mass %*</label>
+                                                            <label class="text-label">Muscles Mass %</label>
                                                             <input type="number" min="0" name="muscles" class="form-control" placeholder="16">
                                                         </div>
                                                     </div>
@@ -636,7 +636,7 @@
                                                 <div class="row mt-3">
                                                     <div class="col-lg-6 mt-3">
                                                         <div class="form-group mb-4">
-                                                            <label class="text-label">Level of Squat Strength*</label>
+                                                            <label class="text-label">Level of Squat Strength</label>
                                                             <select name="squatstrength" class="form-control form-control-lg" id="squatweak">
                                                                 <option hidden>Select activity level</option>
                                                                 <option value="weak">Weak</option>
@@ -647,7 +647,7 @@
                                                     </div>
                                                     <div class="col-lg-6 mt-4 squat-weak">
                                                         <div class="form-group">
-                                                            <label class="text-label">If weak squat activation, Describe Briefly*</label>
+                                                            <label class="text-label">If weak squat activation, Describe Briefly</label>
                                                             <textarea type="text" name="squatcore" class="form-control text-area-hight" placeholder="Describe Briefly..."></textarea>
                                                         </div>
                                                     </div>
@@ -664,7 +664,7 @@
                             <footer>
                                 <div class="row">
                                     <div class="btn-group ml-auto">
-                                        <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                                        {{-- <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a> --}}
                                         <button type="submit" class="btn btn-md mt-3 mr-2 btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i> Submit</button>
                                     </div>
                                 </div>

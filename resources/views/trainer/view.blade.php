@@ -30,7 +30,7 @@
                                     <div class="col-lg-3">
                                         <label class="text-label">Image</label>
                                         @if($datas->image){
-                                            <img src="" alt="" width="100px"/>
+                                            <a href="{{asset('upload/trainers_images/'.$datas->image)}}" target="_blank"><img src={{asset('upload/trainers_images/'.$datas->image)}} alt="" class="mb-3" width="150px"></a>
                                         }
                                         @else <h6>No Image</h6>
                                         @endif

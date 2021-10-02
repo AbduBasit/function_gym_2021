@@ -208,7 +208,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="text-label">Due Fees*</label>
+                                            <label class="text-label">Dues*</label>
                                             <select name="fees_status" class="form-control form-control-lg" required>
                                                 <option hidden value="{{ $datas->fees_clear }}">{{ $datas->fees_clear }}
                                                 </option>
@@ -729,7 +729,7 @@
                                 <footer>
                                     <div class="row">
                                         <div class="btn-group ml-auto">
-                                            <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                                            {{-- <a href="{{url('manage-customer')}}" class="btn btn-md ml-auto mt-3 btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a> --}}
                                             <button type="submit" class="btn btn-md mt-3 mr-2 btn-primary"><i class="fa fa-clipboard" aria-hidden="true"></i> Update Data</button>
                                         </div>
                                     </div>

@@ -55,6 +55,7 @@ class TrainerController extends Controller
         $db->phone_number = $req->phoneNumber;
         $db->address = $req->place;
         $db->date_of_birth = $req->dob;
+        $db->date_of_joining = $req->doj;
         $db->cnic = $req->cnic;
         $db->fixed_salary = $req->fixed_salary;
         $db->commision = $req->commision;
@@ -62,7 +63,11 @@ class TrainerController extends Controller
         $db->timing_out = $req->tout;
         // Image Section
         if ($req->file('tfile')) {
-            $db->image = $req->file('tfile')->store('trainers_images');
+            $image_original = $req->file('tfile');
+            $extension = $image_original->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $image_original->move('upload/trainers_images/', $fileName);
+            $db->image = $fileName;
         }
         if ($db->save()) {
             return redirect('manage-trainer');
@@ -132,6 +137,8 @@ class TrainerController extends Controller
     {
         $db = new trainer();
         $data = $db::all()->find($id);
+        $name = $data->first_name.' '. $data->last_name;
+        DB::select("UPDATE `customers` SET `trainer_name`='UA' WHERE trainer_name = '$name'");
         $data->delete();
         return redirect('manage-trainer');
     }
@@ -157,6 +164,7 @@ class TrainerController extends Controller
         $data->phone_number = $req->phoneNumber;
         $data->address = $req->place;
         $data->date_of_birth = $req->dob;
+        $data->date_of_joining = $req->doj;
         $data->cnic = $req->cnic;
         $data->fixed_salary = $req->fixed_salary;
         $data->commision = $req->commision;
@@ -164,7 +172,11 @@ class TrainerController extends Controller
         $data->timing_out = $req->tout;
         // Image Section
         if ($req->file('tfile')) {
-            $data->image = $req->file('tfile')->store('trainers_images');
+            $image_original = $req->file('tfile');
+            $extension = $image_original->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $image_original->move('upload/trainers_images/', $fileName);
+            $data->image = $fileName;
         }
         if ($data->save()) {
             return redirect('manage-trainer');

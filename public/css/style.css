@@ -269,7 +269,7 @@ body {
   line-height: 1.5;
   color: #7e7e7e;
   text-align: left;
-  background-color: #F5F9F1; }
+  background-color: #f0f2f7; }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important; }
@@ -30509,4 +30509,19 @@ box-shadow: none !important;
 }
 *{
   scroll-behavior: smooth !important;
+}
+input , select, .dropdown{
+  border-color: #1a75bc !important;
+}
+input:hover , select:hover, .dropdown:hover{
+  border-color: gray !important;
+}
+input:focus , select:focus, .dropdown:focus{
+  border-color: gray !important;
+}
+a:hover {
+  cursor: pointer !important;
+}
+hr {
+  border-color: #1a75bc52 !important;
 }

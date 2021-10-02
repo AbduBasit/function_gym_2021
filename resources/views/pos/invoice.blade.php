@@ -19,7 +19,7 @@
 
                         <div class="col-6 text-right">
                             <p class="font-weight-bold mb-1">Invoice #{{$data->id}}</p>
-                            <p class="text-muted">Due to: {{$data->pay_date}}</p>
+                            <p class="text-muted">Due to: {{$date}}</p>
                         </div>
                     </div>
 
@@ -54,31 +54,23 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="border-0 text-uppercase small font-weight-bold">#</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold">Customer Name</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">Description</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                        <th class="border-0 text-uppercase width80 small font-weight-bold">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>{{$data->customer_name}}</td>
-                                        <td>
-                                            @if ($data->registration_fees || $data->trainer_fees)
-                                                @if ($data->registration_fees)
-                                                Registration Fees is {{$data->registration_fees}} ,
+                                    
+                                        @if ($data->registration_fees || $data->trainer_fees)
+                                         @if ($data->registration_fees) 
+                                         <tr><td>Registration Fees</td><td>{{$data->registration_fees}}</td></tr>
                                                 @endif
                                                 @if ($data->trainer_fees)
-                                                Trainer Fees is {{$data->trainer_fees}}, 
+                                                <tr><td>Trainer Fees </td> <td>{{$data->trainer_fees}}</td> </tr>
                                                 @endif
-                                                Month Fees {{$data->gym_fees}}
+                                                <tr><td>Month Fees </td> <td>{{$data->gym_fees}}</td></tr>
                                             @else
-                                                Monthly Gym Fees
+                                                <tr><td>Monthly Gym Fees</td><td>{{$data->gym_fees}}</td></tr>
                                             @endif
-                                        </td>
-                                        <td>{{$data->registration_fees + $data->trainer_fees + $data->gym_fees}}</td>
-                                    </tr>
             
                                 </tbody>
                             </table>
@@ -88,12 +80,12 @@
                     <div class="d-flex flex-row-reverse bg-dark text-white p-4">
                         <div class="py-3 px-5 text-right">
                             <div class="mb-2">Grand Total</div>
-                            <div class="h2 font-weight-light">{{$data->net_total}}</div>
+                            <div class="h2 text-light">{{$data->net_total}}</div>
                         </div>
 
                         <div class="py-3 px-5 text-right">
                             <div class="mb-2">Discount</div>
-                            <div class="h2 font-weight-light">
+                            <div class="h2 text-light">
                                 @if ($data->discount)
                                 {{$data->discount}}
                                 @else
@@ -104,7 +96,7 @@
 
                         <div class="py-3 px-5 text-right">
                             <div class="mb-2">Sub - Total amount</div>
-                            <div class="h2 font-weight-light">{{$data->registration_fees + $data->trainer_fees + $data->gym_fees}}</div>
+                            <div class="h2 text-light">{{$data->registration_fees + $data->trainer_fees + $data->gym_fees}}</div>
                         </div>
                     </div>
                 </div>

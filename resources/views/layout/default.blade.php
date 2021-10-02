@@ -70,11 +70,16 @@
                 @endif
             </a>
 
-            <div class="nav-control">
+            <div class="nav-control ">
+                <div class="hamburger">
+                    <i class="fa fa-bars fa-1x text-light" aria-hidden="true"></i>
+                </div>
+            </div>
+            {{-- <div class="nav-control">
                 <div class="hamburger">
                     <span class="line"></span><span class="line"></span><span class="line"></span>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!--**********************************
             Nav header end

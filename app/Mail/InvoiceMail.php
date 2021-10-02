@@ -29,6 +29,6 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Invoice of the Month | Function')->view('customer.invoice');
+        return $this->subject('Registration Invoice | Function')->view('customer.invoice');
     }
 }

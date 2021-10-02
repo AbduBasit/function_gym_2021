@@ -47,7 +47,7 @@
 
                             <section class="pl-2 pr-2">
                                 <div class="heading-section mt-lg-2">
-                                    <h4>Personal Information</h4>
+                                    <h4><strong>Personal Information</strong></h4>
                                     <hr />
                                 </div>
                                 <div class="row">
@@ -60,20 +60,8 @@
                                     </div>
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
-                                            <label class="text-label">Email Address*</label>
-                                            <input type="email" class="form-control border-light" name="email_user" placeholder="abc@xyz.com" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 mb-2">
-                                        <div class="form-group">
                                             <label class="text-label">Phone Number*</label>
                                             <input type="text" name="phone" class="form-control border-light" placeholder="0300-XXXXXXX" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 mb-2">
-                                        <div class="form-group">
-                                            <label class="text-label">Password* </label>
-                                            <input type="password" required name="passwoRd" class="form-control border-light">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-2">
@@ -84,23 +72,8 @@
                                     </div>
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
-                                            <label class="text-label">Roles</label>
-                                              <select class="form-control border-light" required name="roles">
-                                                <option value="user">User (Secondary)</option>
-                                                <option value="admin">Admin (Primary)</option>
-                                              </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 mb-2">
-                                        <div class="form-group">
                                             <label class="text-label">Date of Birth</label>
                                             <input type="date" name="dob" class="form-control border-light">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 mb-2">
-                                        <div class="form-group">
-                                            <label class="text-label">Date of Joining</label>
-                                            <input type="date" name="doj" class="form-control border-light">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-2">
@@ -109,6 +82,74 @@
                                             <input type="text" name="cnic" class="form-control border-light" placeholder="42xxx-xxxxxx-x">
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <label class="text-label">Upload Image</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" name="image" class="custom-file-input" id="user-img">
+                                                <label class="custom-file-label" for="user-img">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="pl-2 pr-2">
+                                <div class="heading-section mt-lg-2">
+                                    <h4><strong>Login Information</strong></h4>
+                                    <hr />
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Email Address*</label>
+                                            <input type="email" class="form-control border-light" name="email_user" placeholder="abc@xyz.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Password* </label>
+                                            <div class="input-group mb-3" id="show_hide_password">
+                                                <input type="password" class="form-control" placeholder="Password" name="passwoRd">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                                  </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Roles</label>
+                                              <select class="form-control border-light" required name="roles">
+                                                <option value="user">User (Secondary)</option>
+                                                <option value="admin">Admin (Primary)</option>
+                                              </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="pl-2 pr-2">
+                                <div class="heading-section mt-lg-2">
+                                    <h4><strong>Designation Details</strong></h4>
+                                    <hr />
+                                </div>
+                                   <div class="row">
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Designation</label>
+                                            <input type="text" name="designation" class="form-control border-light">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="form-group">
+                                            <label class="text-label">Date of Joining</label>
+                                            <input type="date" name="doj" class="form-control border-light">
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Fixed Salary</label>
@@ -119,28 +160,17 @@
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Timing In</label>
-                                            <input type="time" name="tin" class="form-control border-light">
+                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                <input type="text" class="form-control clock-n" name="tin"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 mb-2">
                                         <div class="form-group">
                                             <label class="text-label">Timing Out</label>
-                                            <input type="time" name="tout" class="form-control border-light">
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-lg-12">
-                                        <label class="text-label">Upload Image</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Upload</span>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" name="image" class="custom-file-input" id="user-img">
-                                                <label class="custom-file-label" for="user-img">Choose file</label>
+                                            <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                <input type="text" class="form-control clock-n" name="tin"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></span>
                                             </div>
                                         </div>
                                     </div>

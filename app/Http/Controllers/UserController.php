@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\user;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -43,7 +43,7 @@ class UserController extends Controller
     public function create_new_user(Request $req){
 
         
-        $db= new user();
+        $db= new User();
         // dd($req->all());
         $db->user_name = $req->name;
         $db->email = $req->email_user;
@@ -52,6 +52,8 @@ class UserController extends Controller
         $db->address = $req->place;
         $db->roles = $req->roles;
         $db->dob = $req->dob;
+        $db->designation = $req->designation;
+        $db->name = $req->userName;
         $db->doj = $req->doj;
         $db->cnic = $req->cnic;
         $db->salary = $req->fixed_salary;
@@ -59,7 +61,11 @@ class UserController extends Controller
         $db->t_out = $req->tout;
           // Image Section
           if ($req->file('image')) {
-            $db->image = $req->file('image')->store('user_images');
+            $image_original = $req->file('image');
+            $extension = $image_original->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $image_original->move('upload/users/', $fileName);
+            $db->image = $fileName;
         }
         if ($db->save()) {
             return redirect('manage-user');
@@ -73,12 +79,12 @@ class UserController extends Controller
         return view('users.manage', compact('page_title', 'page_description', 'action'));
     }
     public function user_manage_fetch(){
-        $db=new user();
+        $db=new User();
         $data = $db->all();
         return $data;
     }
     public function user_delete($id){
-        $db=new user();
+        $db=new User();
         $data = $db->all()->find($id);
         if($data->delete()){
             return redirect('manage-user');
@@ -88,12 +94,12 @@ class UserController extends Controller
         $page_title = 'Update User';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        $db=new user();
+        $db=new User();
         $data = $db->all()->find($id);
         return view('users.editIndex', compact('page_title', 'page_description', 'action'), ['data'=>$data]);
     }
     public function update_user_data(Request $req){
-        $db= new user();
+        $db= new User();
         $data = $db->all()->find($req->id);
         // dd($req->all());
         $data->user_name = $req->name;
@@ -102,6 +108,8 @@ class UserController extends Controller
         $data->phone = $req->phone;
         $data->address = $req->place;
         $data->roles = $req->roles;
+        $data->designation = $req->designation;
+        $data->name = $req->userName;
         $data->dob = $req->dob;
         $data->doj = $req->doj;
         $data->cnic = $req->cnic;
@@ -110,7 +118,11 @@ class UserController extends Controller
         $data->t_out = $req->tout;
           // Image Section
           if ($req->file('image')) {
-            $data->image = $req->file('image')->store('user_images');
+            $image_original = $req->file('image');
+            $extension = $image_original->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $image_original->move('upload/users/', $fileName);
+            $data->image = $fileName;
         }
         if ($data->save()) {
             return redirect('manage-user');

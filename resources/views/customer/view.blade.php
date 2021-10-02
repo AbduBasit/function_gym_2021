@@ -41,10 +41,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <label class="text-label">Image</label>
-                                        @if($datas->image){
-                                            <img src="{{$datas->image}}" alt="" width="100px">
-                                        }
+                                        @if($datas->image)
+                                            <a href="{{asset('upload/customer_images/'.$datas->image)}}" target="_blank"><img src={{asset('upload/customer_images/'.$datas->image)}} alt="" class="mb-3" width="150px"></a>
+                                        
                                         @else <h6>No Image</h6>
                                         @endif
                                     </div>

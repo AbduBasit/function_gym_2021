@@ -58,7 +58,7 @@
                                             <div class="form-group">
                                                 <label class="text-label">Commision Amount</label>
                                                 <h6>
-                                                    {{ ($datas[0]->gym_fees * $datas[0]->commision) / 100 }}
+                                                    {{ ($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100}}
                                                 </h6>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                             <div class="form-group">
                                                 <label class="text-label">Total Clients</label>
                                                 <h6>
-                                                    {{ count($datas) }}
+                                                    {{ $datas[0]->count_trainer }}
                                                 </h6>
                                             </div>
                                         </div>
@@ -124,7 +124,7 @@
                                             <div class="form-group">
                                                 <label class="text-label text-primary"><strong>Net Salary</strong></label>
                                                 <h6>
-                                                    {{ round((($datas[0]->gym_fees * $datas[0]->commision) / 100) * $datas[0]->total_session + $datas[0]->fixed_salary + $datas[0]->trainer_fees_per_session + $datas[0]->registration_fees + $inv + $result) }}
+                                                    {{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) + $datas[0]->fixed_salary + $inv + $result) }}
                                                 </h6>
                                             </div>
                                         </div>
