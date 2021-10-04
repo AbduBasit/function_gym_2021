@@ -307,8 +307,8 @@ class PosController extends Controller
             $date2 = date("Y-m", strtotime("-1 months"));
             $t_dop = $date2;
             $val = count($_Query_1)- 1;
-            $i_dop1 = ;
-            dd($date2);
+            $i_dop1 = 0;
+            // dd($date2);
             
             $_Query_2 = DB::select('SELECT customer_name, sum(gym_fees) as fee , Month(pay_date) as month FROM invoices WHERE MONTH(pay_date) BETWEEN ' . $t_dop . ' and ' . $i_dop . ' and trainer_name = "' . $data[0]->tname . '" group by customer_name');
 

@@ -41,7 +41,11 @@
                                         <select id="to" class="multi-select border-primary" name="emails[]"
                                             multiple="multiple">
                                             @foreach ($data as $item)
+                                            <option value="customer">All Customer</option>
+                                            <option value="trainer">All Trainer</option>
+                                            <option value="user">All User</option>
                                                 <option value="{{ $item->email }}">{{ $item->email }}</option>
+
                                             @endforeach
                                         </select>
                                     </div>
