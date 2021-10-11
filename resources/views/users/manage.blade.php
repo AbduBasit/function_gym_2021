@@ -20,14 +20,15 @@
                     var output="";
                     for(var i = 0; i < response.length; i++){
                         output += '<tr><td>'+[i+1]+'</td>';
-                        output += '<td>'+response[i]["user_name"]+'</td>';
+                        output += '<td>'+response[i]["name"]+'</td>';
                         output += '<td>'+response[i]["email"]+'</td>';
                         output += '<td>'+response[i]["phone"]+'</td>';
                         output += '<td>'+response[i]["address"]+'</td>';
                         output += '<td>'+response[i]["roles"]+'</td>';
                         output += '<td>'+response[i]["t_in"]+'</td>';
                         output += '<td>'+response[i]["t_out"]+'</td>';
-                            output+= '<td>\
+                        if("{{session()->has('adminUser')}}"){
+                                output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
                                                 <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
@@ -64,6 +65,8 @@
                                         </div>\
                                         </div>\
                                     </td>'
+                            }
+                        
                         
                         output += '</tr>';
                     }
@@ -90,14 +93,15 @@ $(document).on('click', '#reset-btn', ()=>{
                     var output="";
                     for(var i = 0; i < response.length; i++){
                         output += '<tr><td>'+[i+1]+'</td>';
-                        output += '<td>'+response[i]["user_name"]+'</td>';
+                        output += '<td>'+response[i]["name"]+'</td>';
                         output += '<td>'+response[i]["email"]+'</td>';
                         output += '<td>'+response[i]["phone"]+'</td>';
                         output += '<td>'+response[i]["address"]+'</td>';
                         output += '<td>'+response[i]["roles"]+'</td>';
                         output += '<td>'+response[i]["t_in"]+'</td>';
                         output += '<td>'+response[i]["t_out"]+'</td>';
-                            output+= '<td>\
+                        if("{{session()->has('adminUser')}}"){
+                                output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
                                                 <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
@@ -134,6 +138,8 @@ $(document).on('click', '#reset-btn', ()=>{
                                         </div>\
                                         </div>\
                                     </td>'
+                            }
+                        
                         
                         output += '</tr>';
                     }
@@ -173,14 +179,15 @@ $(document).on('click', '#reset-btn', ()=>{
                     var output="";
                     for(var i = 0; i < response.length; i++){
                         output += '<tr><td>'+[i+1]+'</td>';
-                        output += '<td>'+response[i]["user_name"]+'</td>';
+                        output += '<td>'+response[i]["name"]+'</td>';
                         output += '<td>'+response[i]["email"]+'</td>';
                         output += '<td>'+response[i]["phone"]+'</td>';
                         output += '<td>'+response[i]["address"]+'</td>';
                         output += '<td>'+response[i]["roles"]+'</td>';
                         output += '<td>'+response[i]["t_in"]+'</td>';
                         output += '<td>'+response[i]["t_out"]+'</td>';
-                            output+= '<td>\
+                        if("{{session()->has('adminUser')}}"){
+                                output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
                                                 <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
@@ -217,6 +224,7 @@ $(document).on('click', '#reset-btn', ()=>{
                                         </div>\
                                         </div>\
                                     </td>'
+                            }
                         
                         output += '</tr>';
                     }
@@ -270,7 +278,9 @@ $(document).on('click', '#reset-btn', ()=>{
                                     <th><strong>Roles</strong></th>
                                     <th><strong>Timing In</strong></th>
                                     <th><strong>Timing Out</strong></th>
-                                    <th><strong>Action</strong></th>
+                                    @if (session()->has('adminUser'))
+                                        <th><strong>Action</strong></th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>

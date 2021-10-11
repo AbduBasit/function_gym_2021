@@ -41,6 +41,7 @@
                                         <select id="to" class="multi-select border-primary" name="emails[]"
                                             multiple="multiple">
                                             @foreach ($data as $item)
+                                            <option value="all">All</option>
                                             <option value="customer">All Customer</option>
                                             <option value="trainer">All Trainer</option>
                                             <option value="user">All User</option>
@@ -83,7 +84,39 @@
             let subject = document.getElementById('sub').value;
             let message = document.getElementById('message').value;
             let selectedValues = $('select[name="emails[]"] option:selected');
+            let allVal = document.getElementById('to').value;
             let emails = null;
+
+            function massMail(mass){
+                for (i = 0; i < mass.length; i++) {
+                emails = mass[i];
+                emailsData = [emails.value];
+                var values = {
+                    subject: [subject],
+                    message: [message],
+                };
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    type: "post",
+                    url: "{{ route('send_mail') }}",
+                    data: {
+                        values: values,
+                        emails: emails.value
+                    },
+                    success: function(response) {
+                        if (response) {
+                            alert(response);
+                        }
+                    }
+                });
+            }
+            }
+            
             for (i = 0; i < selectedValues.length; i++) {
                 emails = selectedValues[i];
                 emailsData = [emails.value];

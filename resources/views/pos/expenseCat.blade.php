@@ -73,7 +73,9 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        @if (session()->has('adminUser'))
                                         <th>Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,10 +83,12 @@
                                         <tr>
                                             <td>{{ $item->expense_title }}</td>
                                             <td>{{ $item->expense_description }}</td>
+                                            @if (session()->has('adminUser'))
                                             <td class="text-right"><a class="btn btn-danger btn-sm sharp"
-                                                    href="{{ url('cat_delete/' . $item->id) }}"><i class="fa fa-trash"
-                                                        aria-hidden="true"></i></a>
-                                            </td>
+                                                href="{{ url('cat_delete/' . $item->id) }}"><i class="fa fa-trash"
+                                                    aria-hidden="true"></i></a>
+                                             </td>
+                                            @endif
                                         </tr>
                                     @endforeach
 

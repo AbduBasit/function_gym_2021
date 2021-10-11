@@ -25,8 +25,8 @@
       </tr>
       <tr>
         <td colspan="2" style="border: solid 1px #ddd; padding:10px 20px;">
-          <p style="font-size:14px;margin:0 0 6px 0;"><span style="font-weight:bold;display:inline-block;min-width:150px">Order status</span><b style="color:green;font-weight:normal;margin:0"> {{$data[0]['fees_status']}}</b></p>
-          <p style="font-size:14px;margin:0 0 0 0;"><span style="font-weight:bold;display:inline-block;min-width:146px">Order amount</span> {{$data[1]}}</p>
+          <p style="font-size:14px;margin:0 0 6px 0;"><span style="font-weight:bold;display:inline-block;min-width:150px"> Fees Status</span><b style="color:green;font-weight:normal;margin:0"> {{$data[0]['fees_status']}}</b></p>
+          <p style="font-size:14px;margin:0 0 0 0;"><span style="font-weight:bold;display:inline-block;min-width:146px"> Fees Amount</span> {{$data[1]}}</p>
         </td>
       </tr>
       <tr>

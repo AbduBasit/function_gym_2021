@@ -56,8 +56,11 @@ class ActivityController extends Controller
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
 
-        $db = DB::select('select email from customers');
-        return view('activity.compose', compact('page_title', 'page_description', 'action'), ['data' => $db]);
+        $customer = DB::select('select email from customers');
+        $user = DB::select('select email from users');
+        $trainer = DB::select('select email from trainers');
+
+        return view('activity.compose', compact('page_title', 'page_description', 'action'), ['data' => $customer, 'user'=>$user, 'trainer'=>$trainer]);
     }
     public function email_send(Request $req)
     {

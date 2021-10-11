@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('command:customers')->daily();
         $schedule->command('command:trainer')->daily();
+        $schedule->command('command:reminder')->daily();
     }
 
     /**

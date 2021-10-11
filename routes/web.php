@@ -6,14 +6,20 @@ use App\Http\Controllers\CustomerController,
     App\Http\Controllers\TrainerController,
     App\Http\Controllers\ActivityController,
     App\Http\Controllers\PosController;
-
+use App\Models\User;
+use App\Notifications\reminderNotify;
 
 Route::get('/', 'App\Http\Controllers\FitoadminController@page_login');
 Route::post('login_process', [UserController::class, 'checkpoint']);
 Route::get('logout', [UserController::class, 'logout']);
+
 Route::group(['middleware' => ['protectedCMS']], function () {
+    Route::get('jfi3932nfo09&&831h', function(){
+        $db = User::find(1);
+        $db->unreadnotifications->markAsRead();
+        return redirect()->back();
+    });
     Route::get('/dashboard', 'App\Http\Controllers\FitoadminController@dashboard_1');
-    
     // Complete Customer Module
     Route::get('/create-customer', 'App\Http\Controllers\FitoadminController@form_wizard');
     Route::post('create-customer', [CustomerController::class, 'create_data']);

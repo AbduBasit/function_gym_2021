@@ -42,6 +42,7 @@
                         output += '<td>'+response[i]["timing_out"]+'</td>';
                         output += '<td><a class="anchor_link" href="trainer-schedule/'+response[i]["id"]+'">View Details</a></td>';
                         
+                        if("{{session()->has('adminUser')}}"){
                             output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
@@ -80,6 +81,26 @@
                                         </div>\
                                         </div>\
                                     </td>'
+                        }
+                        else{
+                            output+= '<td>\
+                                        <div class="dropdown">\
+                                            <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
+                                                <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
+                                                        <rect x="0" y="0" width="24" height="24" />\
+                                                        <circle fill="#000000" cx="5" cy="12" r="2" />\
+                                                        <circle fill="#000000" cx="12" cy="12" r="2" />\
+                                                        <circle fill="#000000" cx="19" cy="12" r="2" />\
+                                                    </g>\
+                                                </svg>\
+                                            </button>\
+                                            <div class="dropdown-menu">\
+                                                <a class="dropdown-item" href="trainer-view/'+response[i]["id"]+'">View</a>\
+                                            </div>\
+                                        </div>\
+                                    </td>'
+                        }
                         
                         output += '</tr>';
                     }
@@ -114,6 +135,7 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["timing_out"]+'</td>';
                         output += '<td><a class="anchor_link" href="trainer-schedule/'+response[i]["id"]+'">View Details</a></td>';
                         
+                        if("{{session()->has('adminUser')}}"){
                             output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
@@ -152,6 +174,26 @@ $(document).on('click', '#reset-btn', ()=>{
                                         </div>\
                                         </div>\
                                     </td>'
+                        }
+                        else{
+                            output+= '<td>\
+                                        <div class="dropdown">\
+                                            <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
+                                                <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
+                                                        <rect x="0" y="0" width="24" height="24" />\
+                                                        <circle fill="#000000" cx="5" cy="12" r="2" />\
+                                                        <circle fill="#000000" cx="12" cy="12" r="2" />\
+                                                        <circle fill="#000000" cx="19" cy="12" r="2" />\
+                                                    </g>\
+                                                </svg>\
+                                            </button>\
+                                            <div class="dropdown-menu">\
+                                                <a class="dropdown-item" href="trainer-view/'+response[i]["id"]+'">View</a>\
+                                            </div>\
+                                        </div>\
+                                    </td>'
+                        }
                         
                         output += '</tr>';
                     }
@@ -199,6 +241,7 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<td>'+response[i]["timing_out"]+'</td>';
                         output += '<td><a class="anchor_link" href="trainer-schedule/'+response[i]["id"]+'">View Details</a></td>';
                         
+                        if("{{session()->has('adminUser')}}"){
                             output+= '<td>\
                                         <div class="dropdown">\
                                             <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
@@ -237,6 +280,26 @@ $(document).on('click', '#reset-btn', ()=>{
                                         </div>\
                                         </div>\
                                     </td>'
+                        }
+                        else{
+                            output+= '<td>\
+                                        <div class="dropdown">\
+                                            <button type="button" class="btn btn-info light sharp" data-toggle="dropdown">\
+                                                <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">\
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
+                                                        <rect x="0" y="0" width="24" height="24" />\
+                                                        <circle fill="#000000" cx="5" cy="12" r="2" />\
+                                                        <circle fill="#000000" cx="12" cy="12" r="2" />\
+                                                        <circle fill="#000000" cx="19" cy="12" r="2" />\
+                                                    </g>\
+                                                </svg>\
+                                            </button>\
+                                            <div class="dropdown-menu">\
+                                                <a class="dropdown-item" href="trainer-view/'+response[i]["id"]+'">View</a>\
+                                            </div>\
+                                        </div>\
+                                    </td>'
+                        }
                         
                         output += '</tr>';
                     }

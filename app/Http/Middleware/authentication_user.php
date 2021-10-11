@@ -16,7 +16,7 @@ class authentication_user
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session()->has('adminUser')) {
+        if (session()->has('adminUser') || session()->has('userUser')) {
             return $next($request);
         } else {
             return redirect('/');

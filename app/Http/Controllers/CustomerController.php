@@ -18,9 +18,35 @@ use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
+    function sms($to, $message){
+        $token = "a5483bc9d08c5e96f0a8b5d6aa93f610abdeaa6194";
+        $secret = "saadUsmani112211122";
+        $brand = "SMS Alert";
+        $url = "https://lifetimesms.com/plain";
+        $parameters = array("api_token" => $token,
+                        "api_secret" => $secret,
+                        "to" => $to,
+                        "from" => $brand,
+                        "message" => $message
+                        );
+
+        $ch = curl_init();
+        $timeout  =  30;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,  2);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        // echo $response;
+    }
     public function index_customer(Request $req)
     {
-
+        
         $page_title = 'Manage Customers';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
@@ -385,7 +411,11 @@ class CustomerController extends Controller
             if($req->fees_status == "All Clear"){
                 Mail::to($req->email)->send(new InvoiceMail([$data, $net_total]));
             }
-        }   
+        }  
+        if($req->phone_number){
+            $message = "Dear ".$req->firstName." ".$req->lastName.", Thank you for signing up with Function. You will receive a confirmation E-mail with your registration invoice soon – Function";
+            $this->sms($req->phone_number, $message);
+        } 
         }
         return redirect('manage-customer');
     }

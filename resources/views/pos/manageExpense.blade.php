@@ -54,7 +54,8 @@
                         output += '<td><b>'+response[i]["net"]+'.00</b></td>';
                         
                         
-                            output+= '<td>\
+                            if("{{session()->has('adminUser')}}"){
+                                output+= '<td>\
                                         <div class="d-flex">\
                                             <a href="editExpense/'+response[i]["id"]+'" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>\
                                             <a data-toggle="modal" data-target="#deleteExpense'+response[i]["id"]+'" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>\
@@ -79,6 +80,7 @@
                                             </div>\
                                         </div>\
                                     </td>'
+                            }
                         
                         output += '</tr>';
                     }
@@ -124,7 +126,8 @@ $(document).on('click', '#reset-btn', ()=>{
                         }
                         output += '<td><b>'+response[i]["net"]+'.00</b></td>';
                         
-                            output+= '<td>\
+                            if("{{session()->has('adminUser')}}"){
+                                output+= '<td>\
                                         <div class="d-flex">\
                                             <a href="editExpense/'+response[i]["id"]+'" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>\
                                             <a data-toggle="modal" data-target="#deleteExpense'+response[i]["id"]+'" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>\
@@ -149,6 +152,7 @@ $(document).on('click', '#reset-btn', ()=>{
                                             </div>\
                                         </div>\
                                     </td>'
+                            }
                         
                         output += '</tr>';
                     }
@@ -207,7 +211,8 @@ $(document).on('click', '#reset-btn', ()=>{
                         }
                         output += '<td><b>'+response[i]["net"]+'.00</b></td>';
                         
-                            output+= '<td>\
+                            if("{{session()->has('adminUser')}}"){
+                                output+= '<td>\
                                         <div class="d-flex">\
                                             <a href="editExpense/'+response[i]["id"]+'" id="editExpense" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>\
                                             <a data-toggle="modal" data-target="#deleteExpense'+response[i]["id"]+'" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>\
@@ -232,6 +237,7 @@ $(document).on('click', '#reset-btn', ()=>{
                                             </div>\
                                         </div>\
                                     </td>'
+                            }
                         
                         output += '</tr>';
                     }
@@ -338,7 +344,10 @@ $(document).on('click', '#reset-btn', ()=>{
                                     <th>Discount</th>
                                     <th>Tax</th>
                                     <th>Net Amount</th>
+                                    
+                                    @if (session()->has('adminUser'))
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>

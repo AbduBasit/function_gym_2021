@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\customer;
 use App\Models\rule;
 use App\Models\trainer;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FitoadminController extends Controller
@@ -21,8 +23,11 @@ class FitoadminController extends Controller
         $logo = "images/logo.png";
         $logoText = "images/logo-text.png";
         $action = __FUNCTION__;
-
-        return view('dashboard.index', compact('page_title', 'page_description', 'action', 'logo', 'logoText'));
+        $db = User::find(1);
+        // $email = session('adminUser')->email;
+        // $user = $db->all()->where('email', '=', $email);
+        // dd($db->notifications);
+        return view('dashboard.index', compact('page_title', 'page_description', 'action', 'logo', 'logoText'), ['user'=>$db]);
     }
 
     // Distance Map
@@ -414,7 +419,7 @@ class FitoadminController extends Controller
         $page_description = 'Some description for the page';
 
         $action = __FUNCTION__;
-        if (session()->has('adminUser')) {
+        if (session()->has('adminUser') || session()->has('userUser')) {
             return redirect('/dashboard');
         } else {
             return view('login', compact('page_title', 'page_description', 'action'));
