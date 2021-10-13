@@ -413,7 +413,7 @@ class CustomerController extends Controller
             }
         }  
         if($req->phone_number){
-            $message = "Dear ".$req->firstName." ".$req->lastName.", Thank you for signing up with Function. You will receive a confirmation E-mail with your registration invoice soon – Function";
+            $message = "Dear ".$req->firstName." ".$req->lastName.", Thank you for signing up with Function. You will receive a confirmation E-mail with your registration invoice soon.";
             $this->sms($req->phone_number, $message);
         } 
         }

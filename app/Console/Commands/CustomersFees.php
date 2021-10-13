@@ -91,9 +91,9 @@ class CustomersFees extends Command
                     if($date == date('Y-m-d')){
                         DB::select('UPDATE `customers` SET `fees_clear`= "Unpaid" where renew_joining = "'.$renew.'"');
                        
-                        $notify_msg = "Some clients have become Unpaid becuase they has been completed a month and Invoices have been dispatched on Email, SMS alerts have been sent.";
+                        $notify_msg = $datas->first_name." ".$datas->last_name." have become Unpaid becuase they has been completed a month and Invoices have been dispatched on Email, SMS alerts have been sent.";
                         Notification::send($user, new reminderNotify($notify_msg));
-                        $message = "Dear ".$datas->first_name." ".$datas->last_name.", Your invoice of this month has been generated and sent to your E-mail.  – Function";
+                        $message = "Dear ".$datas->first_name." ".$datas->last_name.", Function - Your invoice of this has been generated and sent to your E-mail.";
                         sms($datas->phone_number, $message);
                         $emailMsG = "We hope the past month at Function has moved you closer to your fitness goals. 
                         Your invoice for the month of (month name) has been generated. 
@@ -115,15 +115,15 @@ class CustomersFees extends Command
                 // echo $join . " ";
                 if($date == date('Y-m-d')){
                     DB::select('UPDATE `customers` SET `fees_clear`= "Unpaid" where date_of_joining = "'.$join.'"');
-                    $notify_msg = "Some clients have become Unpaid becuase they has been completed a month and Invoices have been dispatched on Email, SMS alerts have been sent.";
-                    Notification::send($user, new reminderNotify($notify_msg));
-                    $message = "Dear ".$datas->first_name." ".$datas->last_name.", Your invoice of this month has been generated and sent to your E-mail.  – Function";
+                    $message = "Dear ".$datas->first_name." ".$datas->last_name.", Function - Your invoice of this has been generated and sent to your E-mail.";
                     sms($datas->phone_number, $message);
                     $emailMsG = "We hope the past month at Function has moved you closer to your fitness goals. 
                     Your invoice for the month of (month name) has been generated. 
                     Due date is up to 10 days after invoicing.
                     ";
                     Mail::to($datas->email)->send(new reminder($datas, "Your Invoice of this Month | Function", $emailMsG));
+                    $notify_msg = $datas->first_name." ".$datas->last_name. " have become Unpaid becuase they has been completed a month and Invoices have been dispatched on Email, SMS alerts have been sent.";
+                    Notification::send($user, new reminderNotify($notify_msg));
                 }
                }
             }

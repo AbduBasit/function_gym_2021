@@ -78,6 +78,8 @@ Route::group(['middleware' => ['protectedCMS']], function () {
     Route::get('manage-invoice', [PosController::class, 'invoice_index']);
     Route::get('manage_invoice_data', [PosController::class, 'manage_invoice_data'])->name('manage_invoice_data');
     Route::get('update_fees/{id}', [PosController::class, 'invoice_update_fees']);
+    Route::get('pnl_report', [PosController::class, 'pnl_report_index']);
+    Route::get('manage_pnl_data', [PosController::class, 'manage_pnl_data'])->name('manage_pnl_data');
     Route::get('delete_fees/{id}', [PosController::class, 'invoice_delete_fees']);
     Route::post('insertInvFees/{id}', [PosController::class, 'update_invoice']);
     Route::get('manage-expense', [PosController::class, 'expense_index']);

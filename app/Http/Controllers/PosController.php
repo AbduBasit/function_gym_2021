@@ -11,6 +11,7 @@ use App\Models\cat_expense;
 use App\Models\customer;
 use App\Models\expense;
 use App\Models\invoice;
+use App\Models\rule;
 use App\Models\trainer;
 use Dotenv\Validator;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
@@ -255,7 +256,34 @@ class PosController extends Controller
         $data->delete();
         return redirect('expense_category');
     }
-
+    public function pnl_report_index(){
+        $page_title = 'Profit & Loss Report';
+        $page_description = 'Some description for the page';
+        $action = __FUNCTION__;
+        return view('pos.managePnl', compact('page_title', 'page_description', 'action'));
+    }
+    public function manage_pnl_data(Request $req){
+     if(!$req->post()){
+        $expense = DB::select('SELECT pay_date, `desc`, net as amount, title, net FROM expenses  WHERE month(DATE(pay_date)) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)');
+        $invoice = DB::select('SELECT customer_name, net_total, pay_date FROM invoices  WHERE month(DATE(pay_date)) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)');
+        $sumExpense = DB::select('SELECT sum(net) as total FROM expenses WHERE month(DATE(pay_date)) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)');
+        $sumInv = DB::select('SELECT sum(net_total) as total FROM invoices WHERE month(DATE(pay_date)) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)');
+        return [$invoice, $expense, $sumExpense, $sumInv];
+     }
+     else{
+        //  return $req->post();
+        if($req->post('t_in') && $req->post('t_out')){
+            $in = $req->post('t_in');
+            $out = $req->post('t_out');
+            $expense = DB::select('SELECT pay_date, `desc`, net as amount, title, net FROM expenses  WHERE pay_date between "'.$in.'" and "'.$out.'"');
+            $invoice = DB::select('SELECT customer_name, net_total, pay_date FROM invoices  WHERE pay_date between "'.$in.'" and "'.$out.'"');
+            $sumExpense = DB::select('SELECT sum(net) as total FROM expenses WHERE pay_date between "'.$in.'" and "'.$out.'"');
+            $sumInv = DB::select('SELECT sum(net_total) as total FROM invoices WHERE pay_date between "'.$in.'" and "'.$out.'"');
+            return [$invoice, $expense, $sumExpense, $sumInv];
+            
+           }
+     }
+    }
     public function trainer_commision_index()
     {
         $page_title = 'Trainer Pay Slip';
@@ -281,7 +309,7 @@ class PosController extends Controller
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
         // Action Here
-        $db = new trainer();
+        // $db = new trainer();
         $name = "Syed Ghazanfar";
         $data = DB::select('SELECT trainers.date_of_pay, customers.reference_name, SUM(customers.registration_fees) as registration_fees , SUM(customers.gym_fees) as gym_fees, SUM(customers.trainer_fees_per_session) as trainer_fees_per_session, COUNT(customers.trainer_fees_per_session) as count_trainer, SUM(customers.total_session) as total_session, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name) WHERE trainers.id =' . $id);
 
@@ -294,49 +322,16 @@ class PosController extends Controller
 
         $rule = DB::select('select * from rules where rules_token = "RC_A1003"')[0];
         $calc = $data[0]->registration_fees * $rule->values / 100;
-        // $calc = 0;
-        // dd($inv[0]->registration_fees);
 
-        // Retians Commision
-        $date1 = date("m-Y", strtotime("-3 months"));
-        
-        // $_Query_1 = DB::select('SELECT customers.trainer_name, MONTH(trainers.date_of_pay) as t_dop, MONTH(invoices.pay_date) as i_dop FROM customers inner JOIN trainers ON customers.trainer_name=concat(trainers.first_name, " ", trainers.last_name) inner JOIN invoices ON customers.trainer_name=invoices.trainer_name WHERE invoices.trainer_name = "'. $data[0]->tname .'"');
-        $_Query_1 = DB::select('SELECT pay_date, trainer_name, concat(MONTH(invoices.pay_date),"-",Year(invoices.pay_date)) as dateInv, SUM(trainer_fees) as total_tfees, customer_name  FROM `invoices` WHERE trainer_name = "'.$data[0]->tname.'" GROUP by pay_date');
-        // dd($_Query_1);
-        if ($inv) {
-            $date2 = date("Y-m", strtotime("-1 months"));
-            $t_dop = $date2;
-            $val = count($_Query_1)- 1;
-            $i_dop1 = 0;
-            // dd($date2);
-            
-            $_Query_2 = DB::select('SELECT customer_name, sum(gym_fees) as fee , Month(pay_date) as month FROM invoices WHERE MONTH(pay_date) BETWEEN ' . $t_dop . ' and ' . $i_dop . ' and trainer_name = "' . $data[0]->tname . '" group by customer_name');
 
-            dd($_Query_2);
-            foreach ($_Query_2 as $key => $value) {
-                // $ss = $key;
-                // dd($value);
-                $_Query_3 = DB::select('select MONTH(pay_date) as pdate, customer_name, gym_fees, sum(gym_fees) over () as newcp FROM invoices where MONTH(pay_date) BETWEEN ' . $i_dop . ' and ' . $t_dop . ' and customer_name = "' . $_Query_2[$key]->name . '" and trainer_name = "' . $data[0]->tname . '" order by customer_name, pdate');
-                dd($_Query_3);
-                $array = json_decode(json_encode($_Query_3), true);
-                foreach ($_Query_3 as $value => $key) {
-                    $array[] = [$value, 'like', $key];
-                    $n = array_column($array, 'pdate');
-                    if (count($n) == 3) {
-                        $range = range($t_dop, $i_dop);
-                        if ($n[0] == $range[3] && $n[1] == $range[2] && $n[2] == $range[1]) {
-                            $value = array_sum(array_column($array, 'gym_fees'));
-                            $rule1 = DB::select('select * from rules where rules_token = "RC_A1004"')[0];
-                            $result1 = round($value * $rule1->values / 100);
-                        } else {
-                            $result1 = 0;
-                        }
-                    } else {
-                        $result1 = 0;
-                    }
-                }
-                return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => $result1]);
-            }
+    // Retension commision Section
+        $customerData = DB::select('SELECT sum(gym_fees) as total FROM `customers` where trainer_name = "'.$data[0]->tname.'"');
+        $ruleReten = DB::select('select * from rules where rules_token = "RM_A1005"')[0];
+        $invGetReten = DB::select('SELECT customer_name, pay_date FROM `invoices` WHERE trainer_name="'.$data[0]->tname.'" and pay_date >= CURDATE() - INTERVAL '.$ruleReten->values.' MONTH group by month(pay_date)');    
+        if(count($invGetReten)==3){
+            $rulerCount = DB::select('select * from rules where rules_token = "RC_A1004"')[0];
+            $result = ($customerData[0]->total * $rulerCount->values) / 100;
+            return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => $result]);
         }
         return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null]);
     }

@@ -67,7 +67,7 @@ class reminderSetups extends Command
                             curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
                             $response = curl_exec($ch);
                             curl_close($ch);
-                            // echo $response;
+                            echo $response;
         }
 
         $db = new customer();
@@ -88,7 +88,8 @@ class reminderSetups extends Command
                         if($date == date('Y-m-d', strtotime($today. "-3 days")) && $datas->fees_clear == "Unpaid"){
                             $dbv = DB::select('select * from `customers` where renew_joining = "'.$renew.'"');
                             foreach($dbv as $dt){
-                                $message = "Dear ".$dbv[$val]->first_name." ".$dbv[$val]->last_name.", \n\n This is a soft reminder to clear your monthly fee at your earliest convenience – Function";
+                                $message = "Dear ".$dbv[$val]->first_name." ".$dbv[$val]->last_name.", \n\nFunction - This is a soft reminder to clear your monthly fee at your earliest convenience.
+";
                             sms($dbv[$val]->phone_number, $message);
                             $emailMsG = "\n\n We hope the past month at Function has moved you closer to your fitness goals.\n 
                                 Your invoice for this month has been generated.\n\n 
@@ -113,7 +114,8 @@ class reminderSetups extends Command
                     if($date == date('Y-m-d', strtotime($today. "-3 days")) && $datas->fees_clear == "Unpaid"){
                         $dbv = DB::select('select * from `customers` where date_of_joining = "'.$join.'"');
                         foreach($dbv as $dt){
-                            $message = "Dear ".$dt->first_name." ".$dt->last_name.", \n\n This is a soft reminder to clear your monthly fee at your earliest convenience – Function";
+                            $message = "Dear ".$dt->first_name." ".$dt->last_name.", \n\nFunction - This is a soft reminder to clear your monthly fee at your earliest convenience.
+";
                         sms($dt->phone_number, $message);
                         $emailMsG = "\n\n We hope the past month at Function has moved you closer to your fitness goals.\n 
                             Your invoice for this month has been generated.\n\n 
@@ -133,14 +135,14 @@ class reminderSetups extends Command
                     if($datas->status == "active" && $datas->fees_clear == "Unpaid"){
                         $dojs = $datas->renew_joining;
                         $doj = explode("-", $dojs);
-                        $date1 = date('Y-m-d', strtotime($today. "-2 days"));
+                        $date1 = date('Y-m-d', strtotime($today. "-6 days"));
                         $dates = explode("-", $date1);
                         $date = $dates[0]."-".$dates[1]."-".$doj[2];
                         $renew = $doj[0]."-".$doj[1]."-".$dates[2];
-                        if($date == date('Y-m-d', strtotime($today. "-2 days")) && $datas->fees_clear == "Unpaid"){
+                        if($date == date('Y-m-d', strtotime($today. "-6 days")) && $datas->fees_clear == "Unpaid"){
                             $dbv = DB::select('select * from `customers` where renew_joining = "'.$renew.'"');
                             foreach($dbv as $dt){
-                                $message = "Dear ".$dt->first_name." ".$dt->last_name.", \n\n This is a soft reminder to clear your monthly fee – Function";
+                                $message = "Dear ".$dt->first_name." ".$dt->last_name.", \n\nFunction - This is a soft reminder to clear your monthly fee.";
                                 sms($dt->phone_number, $message);
                                 $emailMsG = "\n\n This is a soft reminder to clear your pending dues.\n 
                                 If this is an error and you have already made the payment, please let us know by responding to this email or in person.\n
@@ -166,7 +168,7 @@ class reminderSetups extends Command
                     if($date == date('Y-m-d', strtotime($today. "-6 days")) && $datas->fees_clear == "Unpaid"){
                         $dbv = DB::select('select * from `customers` where date_of_joining = "'.$join.'"');
                         foreach($dbv as $dt){
-                            $message = "Dear ".$dt->first_name." ".$dt->last_name.", \n\n This is a soft reminder to clear your monthly fee – Function";
+                            $message = "Dear ".$dt->first_name." ".$dt->last_name.", \n\nFunction - This is a soft reminder to clear your monthly fee.";
                             sms($dt->phone_number, $message);
                             $emailMsG = "\n\n This is a soft reminder to clear your pending dues.\n 
                             If this is an error and you have already made the payment, please let us know by responding to this email or in person.\n
