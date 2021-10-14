@@ -26,7 +26,7 @@
         <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <strong>Note!</strong> You can't Create and Delete the rules but all rules are editable, if you want to add some other rules so contact your <a href="#" class="text-primary">Developer</a>.
+        <strong>Note!</strong> You can't Create and Delete the rules but all rules are editable, if you want to add some other rules so contact your <a href="http://auditcreatives.com/" class="text-primary" target="_blank">Developer</a>.
     </div>
 
     <script>

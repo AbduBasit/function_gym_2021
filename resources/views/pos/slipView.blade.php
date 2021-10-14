@@ -73,7 +73,12 @@
                                             <div class="form-group">
                                                 <label class="text-label">Total Session / Month</label>
                                                 <h6>
+                                                    @if ($datas[0]->total_session)
                                                     {{ $datas[0]->total_session }}
+                                                    @else
+                                                    Not Avaialable
+                                                    @endif
+                                                    
                                                 </h6>
                                             </div>
                                         </div>
@@ -89,7 +94,12 @@
                                             <div class="form-group">
                                                 <label class="text-label">Registration Fees</label>
                                                 <h6>
+                                                    @if ($datas[0]->registration_fees)
                                                     {{ $datas[0]->registration_fees }}
+                                                    @else
+                                                        Not Avaialable
+                                                    @endif
+                                                    
                                                 </h6>
                                             </div>
                                         </div>
@@ -97,20 +107,20 @@
                                             <div class="form-group">
                                                 <label class="text-label">Trainer Session Fees</label>
                                                 <h6>
-                                                    {{ $datas[0]->trainer_fees_per_session }}
+                                                    @if ($datas[0]->trainer_fees_per_session)
+                                                    {{ $datas[0]->trainer_fees_per_session }}    
+                                                    @else
+                                                        Not Avaialable
+                                                    @endif
+                                                    
                                                 </h6>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-2">
                                             <div class="form-group">
                                                 <label class="text-label">Retian Commision</label>
-                                                <h6>
-                                                    @if ($result)
-                                                        {{ $result}}
-
-                                                    @else
-                                                        Not Available
-                                                    @endif
+                                                <h6 id="retain">
+                                                    Not Available
                                                 </h6>
                                             </div>
                                         </div>
@@ -130,12 +140,8 @@
                                         <div class="col-lg-4 mb-2">
                                             <div class="form-group">
                                                 <label class="text-label text-primary"><strong>Net Salary</strong></label>
-                                                <h6>
-                                                    @if ($result)
-                                                    {{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) +($datas[0]->total_session * $datas[0]->trainer_fees_per_session)+ $datas[0]->fixed_salary + $inv + $result)}}
-                                                    @else
+                                                <h6 id="net">
                                                     {{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) +($datas[0]->total_session * $datas[0]->trainer_fees_per_session)+ $datas[0]->fixed_salary + $inv)}}
-                                                    @endif
                                                 </h6>
                                             </div>
                                         </div>
@@ -166,5 +172,35 @@
             document.getElementById('printbtn').addEventListener('click', ()=>{
                 printContent()
             })
+
+            $(document).ready(function () {
+                var resCount = "{{$resultCount}}";
+                var res = JSON.parse(JSON.parse(JSON.stringify("{{json_encode($result)}}")).replace(/&quot;/g,'"'))
+                let result=null;
+                for(i=0; i<resCount; i++){
+                    if(res[i]['count']==3){
+                        var rule1="{{$rule}}";
+                        var rule = JSON.parse(JSON.parse(JSON.stringify(rule1)).replace(/&quot;/g,'"'));
+                        result += parseInt(res[i]['gym_fees']*rule['values']/100);
+                        $('#retain').html(result)
+
+                        
+
+                        if(!result){
+                            let net = parseInt("{{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) +($datas[0]->total_session * $datas[0]->trainer_fees_per_session)+ $datas[0]->fixed_salary + $inv)}}");
+                            $('#net').html(net)
+                            $('#retain').html("Not Available")
+                        }else{
+                            let net = parseInt("{{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) +($datas[0]->total_session * $datas[0]->trainer_fees_per_session)+ $datas[0]->fixed_salary + $inv)}}");
+                            $('#net').html(net+result)
+                        }
+                        
+                    }
+                    else{
+                        
+                    }
+                }
+                
+            });
         </script>
     @endsection

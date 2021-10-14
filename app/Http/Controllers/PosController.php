@@ -327,13 +327,13 @@ class PosController extends Controller
     // Retension commision Section
         $customerData = DB::select('SELECT sum(gym_fees) as total FROM `customers` where trainer_name = "'.$data[0]->tname.'"');
         $ruleReten = DB::select('select * from rules where rules_token = "RM_A1005"')[0];
-        $invGetReten = DB::select('SELECT customer_name, pay_date FROM `invoices` WHERE trainer_name="'.$data[0]->tname.'" and pay_date >= CURDATE() - INTERVAL '.$ruleReten->values.' MONTH group by month(pay_date)');    
-        if(count($invGetReten)==3){
+        $invGetReten = DB::select('SELECT sum(fee_amount) as gym_fees, customer_name , count(customer_name) as count FROM `invoices` WHERE fees_payable="All Clear" and trainer_name="'.$data[0]->tname.'" and pay_date >= CURDATE() - INTERVAL '.$ruleReten->values.' MONTH group by customer_name order by month(pay_date)');    
+        
+        if($invGetReten!=null){
             $rulerCount = DB::select('select * from rules where rules_token = "RC_A1004"')[0];
-            $result = ($customerData[0]->total * $rulerCount->values) / 100;
-            return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => $result]);
+            return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'resultCount' => json_encode(count($invGetReten)), 'result' => $invGetReten, 'rule'=>json_encode($rulerCount)]);
         }
-        return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null]);
+        return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'result' => null, 'resultCount' => null, 'rule' =>null]);
     }
     public function invoicePrint($id){
         $page_title = 'Invoice';

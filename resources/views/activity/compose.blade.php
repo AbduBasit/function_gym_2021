@@ -40,11 +40,12 @@
                                     <div class="form-group">
                                         <select id="to" class="multi-select border-primary" name="emails[]"
                                             multiple="multiple">
-                                            @foreach ($data as $item)
+                                            
                                             <option value="all">All</option>
                                             <option value="customer">All Customer</option>
                                             <option value="trainer">All Trainer</option>
                                             <option value="user">All User</option>
+                                            @foreach ($data as $item)
                                                 <option value="{{ $item->email }}">{{ $item->email }}</option>
 
                                             @endforeach
