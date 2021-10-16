@@ -15,8 +15,9 @@
                     <span class="nav-text">Customers</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{!! url('/manage-customer') !!}">Manage Customers</a></li>
+                   
                     <li><a href="{{ url('/create-customer') }}">Add Customer</a></li>
+                    <li><a href="{!! url('/manage-customer') !!}">Manage Customers</a></li>
                     <li><a href="{!! url('/pt-customer-details') !!}">Add PT Details</a></li>
                 </ul>
             </li>
@@ -35,7 +36,7 @@
             </a>
             <ul aria-expanded="false">
                 <li><a href="/create-user">Add User</a></li>
-                <li><a href="{!! url('/manage-user') !!}">Manage User</a></li>
+                <li><a href="{!! url('/manage-user') !!}">Manage Users</a></li>
             </ul>
         </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -45,10 +46,11 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ url('/manage-invoice') }}">Sales / Invoices</a></li>
                     <li><a href="{{ url('/manage-expense') }}">Expenses Reports</a></li>
-                    <li><a href="{{ url('/expense_category') }}">Manage Expense Categories</a></li>
                     <li><a href="{{ url('/trainer_payslip') }}">Trainer Pay Slip</a></li>
+                    <li><a href="{{ url('/expense_category') }}">Manage Expense Categories</a></li>
+                    <li><a href="{{ url('/trainer_availability') }}">Trainers Menu</a></li>
                     <li><a href="{{ url('/pnl_report') }}">Profit & Loss Report</a></li>
-                    <li><a href="{{ url('/trainer_availability') }}">Trainer Availability</a></li>
+                    
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -57,7 +59,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href={{ url('manage-rules') }}>Manage Rules</a></li>
-                    <li><a href="{!! url('/email-create') !!}">Compose Email </a></li>
+                    <li><a href="{!! url('/email-create') !!}">Communication </a></li>
                 </ul>
             </li>
             {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

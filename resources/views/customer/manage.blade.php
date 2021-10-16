@@ -65,8 +65,8 @@
                     for(var i = 0; i < response.length; i++){
                         output += '<tr><td>'+[i+1]+'</td>';
                         output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
-                        output += '<td>'+response[i]["address"]+'</td>';
-                        output += '<td>'+response[i]["date_of_birth"]+'</td>';
+                        output += '<td>'+response[i]["phone_number"]+'</td>';
+                        output += '<td>'+response[i]["total_session"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
 
@@ -212,8 +212,8 @@ $(document).on('click', '#reset-btn', ()=>{
                     for(var i = 0; i < response.length; i++){
                         output += '<tr><td>'+[i+1]+'</td>';
                         output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
-                        output += '<td>'+response[i]["address"]+'</td>';
-                        output += '<td>'+response[i]["date_of_birth"]+'</td>';
+                        output += '<td>'+response[i]["phone_number"]+'</td>';
+                        output += '<td>'+response[i]["total_session"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
 
@@ -372,8 +372,8 @@ $(document).on('click', '#reset-btn', ()=>{
                     for(var i = 0; i < response.length; i++){
                         output += '<tr><td>'+[i+1]+'</td>';
                         output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
-                        output += '<td>'+response[i]["address"]+'</td>';
-                        output += '<td>'+response[i]["date_of_birth"]+'</td>';
+                        output += '<td>'+response[i]["phone_number"]+'</td>';
+                        output += '<td>'+response[i]["total_session"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
                         output += '<td>'+response[i]["training_type"]+'</td>';
 
@@ -608,14 +608,14 @@ $(document).on('click', '#reset-btn', ()=>{
                                 <tr>
                                     <th class="width80"><strong>#</strong></th>
                                     <th><strong>Name</strong></th>
-                                    <th><strong>Address</strong></th>
-                                    <th><strong>D.O.B</strong></th>
+                                    <th><strong>Contact</strong></th>
+                                    <th><strong>Monthly Session</strong></th>
                                     <th><strong>Joining Date</strong></th>
                                     <th><strong>Training Type</strong></th>
                                     <th><strong>Trainer Name</strong></th>
                                     <th><strong>Status</strong></th>
                                     <th><strong>Dues</strong></th>
-                                    <th><strong>Action</strong></th>
+                                    <th><strong>Others</strong></th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -36,10 +36,8 @@
                         output += '<tr><td>'+[i+1]+'</td>';
                         output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
                         output += '<td>'+response[i]["phone_number"]+'</td>';
-                        output += '<td>'+response[i]["address"]+'</td>';
+                        output += '<td>'+response[i]["fixed_salary"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
-                        output += '<td>'+response[i]["timing_in"]+'</td>';
-                        output += '<td>'+response[i]["timing_out"]+'</td>';
                         output += '<td><a class="anchor_link" href="trainer-schedule/'+response[i]["id"]+'">View Details</a></td>';
                         
                         if("{{session()->has('adminUser')}}"){
@@ -129,10 +127,8 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<tr><td>'+[i+1]+'</td>';
                         output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
                         output += '<td>'+response[i]["phone_number"]+'</td>';
-                        output += '<td>'+response[i]["address"]+'</td>';
+                        output += '<td>'+response[i]["fixed_salary"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
-                        output += '<td>'+response[i]["timing_in"]+'</td>';
-                        output += '<td>'+response[i]["timing_out"]+'</td>';
                         output += '<td><a class="anchor_link" href="trainer-schedule/'+response[i]["id"]+'">View Details</a></td>';
                         
                         if("{{session()->has('adminUser')}}"){
@@ -235,10 +231,8 @@ $(document).on('click', '#reset-btn', ()=>{
                         output += '<tr><td>'+[i+1]+'</td>';
                         output += '<td>'+response[i]["first_name"] + ' ' +response[i]["last_name"]+'</td>';
                         output += '<td>'+response[i]["phone_number"]+'</td>';
-                        output += '<td>'+response[i]["address"]+'</td>';
+                        output += '<td>'+response[i]["fixed_salary"]+'</td>';
                         output += '<td>'+response[i]["date_of_joining"]+'</td>';
-                        output += '<td>'+response[i]["timing_in"]+'</td>';
-                        output += '<td>'+response[i]["timing_out"]+'</td>';
                         output += '<td><a class="anchor_link" href="trainer-schedule/'+response[i]["id"]+'">View Details</a></td>';
                         
                         if("{{session()->has('adminUser')}}"){
@@ -411,13 +405,11 @@ $(document).on('click', '#reset-btn', ()=>{
                                 <tr>
                                     <th class="width80"><strong>#</strong></th>
                                     <th><strong>Name</strong></th>
-                                    <th><strong>Phone Number</strong></th>
-                                    <th><strong>Address</strong></th>
+                                    <th><strong>Phone</strong></th>
+                                    <th><strong>Fixed Salary</strong></th>
                                     <th><strong>Date of Joining</strong></th>
-                                    <th><strong>Timing In</strong></th>
-                                    <th><strong>Timing Out</strong></th>
                                     <th><strong>Schedules</strong></th>
-                                    <th><strong>Action</strong></th>
+                                    <th><strong>Others</strong></th>
                                 </tr>
                             </thead>
                             <tbody>

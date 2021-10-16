@@ -60,14 +60,14 @@ class ActivityController extends Controller
         $user = DB::select('select email from users');
         $trainer = DB::select('select email from trainers');
 
-        return view('activity.compose', compact('page_title', 'page_description', 'action'), ['data' => $customer, 'user'=>$user, 'trainer'=>$trainer]);
+        return view('activity.compose', compact('page_title', 'page_description', 'action'), ['data' => $customer, 'user_email'=>$user, 'trainer'=>$trainer]);
     }
     public function email_send(Request $req)
     {
 
 
 
-        $to = $req->post('emails');
+        $to = $req->post('email_value');
         $subject = $req->post('values')['subject'][0];
         $msg = $req->post('values')['message'][0];
         // $user['to'] = $to;
@@ -85,6 +85,11 @@ class ActivityController extends Controller
         ];
 
         Mail::to($to)->send(new MassMail($details));
-        return 'Email Send Successfully';
+        if($to !=null){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 }

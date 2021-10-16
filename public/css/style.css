@@ -30525,3 +30525,7 @@ a:hover {
 hr {
   border-color: #1a75bc52 !important;
 }
+.btn-outline-light:hover{
+  background: #1a75bc !important;
+  color: white !important;
+}

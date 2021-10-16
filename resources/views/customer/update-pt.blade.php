@@ -372,115 +372,6 @@
                                                 </div>
 
 
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- Body Measurement accordion -->
-                                <div id="accordion-two" class="accordion accordion-primary">
-                                    <div class="accordion__item">
-                                        <div class="accordion__header rounded-lg" data-toggle="collapse" data-target="#default_collapseTwo">
-                                            <span class="accordion__header--text">Measurements and Body Statistics</span>
-                                            <span class="accordion__header--indicator"></span>
-                                        </div>
-                                        <div id="default_collapseTwo" class="collapse accordion__body show" data-parent="#accordion-two">
-                                            <div class="accordion__body--text">
-                                                <div class="heading-section mb-3 mt-4">
-                                                    <h4>Measurement </h4>
-                                                    <hr />
-                                                </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Calculation Unit</label>
-                                                            <select name="mcal" class="form-control form-control-lg" id="mcal">
-                                                                <option value="{{$datas->measurement_cal_unit}}" hidden>{{$datas->measurement_cal_unit}}</option>
-                                                                <option value="cm">Centimeter (cm)</option>
-                                                                <option value="inch">Inches (inch)</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Chest</label>
-                                                            <input type="text" name="chest" class="form-control" value="{{$datas->chest}}" placeholder="56">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Waist</label>
-                                                            <input type="text" class="form-control" placeholder="86" name="waist" value="{{$datas->waist}}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Hips</label>
-                                                            <input type="text" name="hips" class="form-control" value="{{$datas->hips}}" placeholder="36">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="heading-section mb-3 mt-4">
-                                                    <h4>Body Statistics</h4>
-                                                    <hr />
-                                                </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Weight Unit</label>
-                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight">
-                                                                <option value="{{$datas->weight_cal_unit}}" hidden>{{$datas->weight_cal_unit}}</option>
-                                                                <option value="kilogram">Kilogram</option>
-                                                                <option value="pound">Pounds</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Body Weight</label>
-                                                            <input type="number" min="0" name="weight" value="{{$datas->body_weight}}" class="form-control" placeholder="56">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Body FAT %</label>
-                                                            <input type="number" min="0" class="form-control" value="{{$datas->body_fat}}" placeholder="86" name="fat">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 mb-2">
-                                                        <div class="form-group">
-                                                            <label class="text-label">Muscles Mass %</label>
-                                                            <input type="number" min="0" name="muscles" class="form-control" value="{{$datas->muscles_mass}}" placeholder="16">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-
-                                <!-- Squart accordion -->
-                                <div id="accordion-three" class="accordion accordion-primary">
-                                    <div class="accordion__item">
-                                        <div class="accordion__header rounded-lg" data-toggle="collapse" data-target="#default_collapseThree">
-                                            <span class="accordion__header--text">Squat</span>
-                                            <span class="accordion__header--indicator"></span>
-                                        </div>
-                                        <div id="default_collapseThree" class="collapse accordion__body show" data-parent="#accordion-three">
-                                            <div class="accordion__body--text">
-
-
                                                 <div class="row mt-3">
                                                     <div class="col-lg-4 mb-2">
                                                         <div class="form-group">
@@ -690,7 +581,10 @@
                                                 </div>
 
 
-
+                                                <div class="heading-section mb-3 mt-4">
+                                                    <h4>Sqaut </h4>
+                                                    <hr />
+                                                </div>
                                                 <div class="row mt-3">
                                                     <div class="col-lg-6 mt-3">
                                                         <div class="form-group mb-4">
@@ -710,10 +604,106 @@
                                                         </div>
                                                     </div>
 
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+
+
+                                <!-- Body Measurement accordion -->
+                                <div id="accordion-two" class="accordion accordion-primary">
+                                    <div class="accordion__item">
+                                        <div class="accordion__header rounded-lg" data-toggle="collapse" data-target="#default_collapseTwo">
+                                            <span class="accordion__header--text">Measurements and Body Statistics</span>
+                                            <span class="accordion__header--indicator"></span>
+                                        </div>
+                                        <div id="default_collapseTwo" class="collapse accordion__body show" data-parent="#accordion-two">
+                                            <div class="accordion__body--text">
+                                                <div class="heading-section mb-3 mt-4">
+                                                    <h4>Measurement </h4>
+                                                    <hr />
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Calculation Unit</label>
+                                                            <select name="mcal" class="form-control form-control-lg" id="mcal">
+                                                                <option value="{{$datas->measurement_cal_unit}}" hidden>{{$datas->measurement_cal_unit}}</option>
+                                                                <option value="cm">Centimeter (cm)</option>
+                                                                <option value="inch">Inches (inch)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Chest</label>
+                                                            <input type="text" name="chest" class="form-control" value="{{$datas->chest}}" placeholder="56">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Waist</label>
+                                                            <input type="text" class="form-control" placeholder="86" name="waist" value="{{$datas->waist}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Hips</label>
+                                                            <input type="text" name="hips" class="form-control" value="{{$datas->hips}}" placeholder="36">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="heading-section mb-3 mt-4">
+                                                    <h4>Body Statistics</h4>
+                                                    <hr />
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Weight Unit</label>
+                                                            <select name="weight_unit" class="form-control form-control-lg" id="bweight">
+                                                                <option value="{{$datas->weight_cal_unit}}" hidden>{{$datas->weight_cal_unit}}</option>
+                                                                <option value="kilogram">Kilogram</option>
+                                                                <option value="pound">Pounds</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Body Weight</label>
+                                                            <input type="number" min="0" name="weight" value="{{$datas->body_weight}}" class="form-control" placeholder="56">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Body FAT %</label>
+                                                            <input type="number" min="0" class="form-control" value="{{$datas->body_fat}}" placeholder="86" name="fat">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="text-label">Muscles Mass %</label>
+                                                            <input type="number" min="0" name="muscles" class="form-control" value="{{$datas->muscles_mass}}" placeholder="16">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                           
+
                             </section>
 
                             <footer>
