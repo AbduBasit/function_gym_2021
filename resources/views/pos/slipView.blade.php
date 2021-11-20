@@ -141,7 +141,8 @@
                                             <div class="form-group">
                                                 <label class="text-label text-primary"><strong>Net Salary</strong></label>
                                                 <h6 id="net">
-                                                    {{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) +($datas[0]->total_session * $datas[0]->trainer_fees_per_session)+ $datas[0]->fixed_salary + $inv)}}
+                                                    {{-- //Changes Made ($datas[0]->total_session * $datas[0]->trainer_fees_per_session)+  --}}
+                                                    {{ round((($datas[0]->total_session * $datas[0]->trainer_fees_per_session) * $datas[0]->commision /100) + $datas[0]->fixed_salary + $inv)}}
                                                 </h6>
                                             </div>
                                         </div>

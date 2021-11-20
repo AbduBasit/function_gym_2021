@@ -28,6 +28,7 @@
                 <ul aria-expanded="false">
                     <li><a href="/create-trainer">Add Trainer</a></li>
                     <li><a href="{!! url('/manage-trainer') !!}">Manage Trainers</a></li>
+                    <li><a href="{{ url('/trainer_availability') }}">Trainers Menu</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -48,7 +49,7 @@
                     <li><a href="{{ url('/manage-expense') }}">Expenses Reports</a></li>
                     <li><a href="{{ url('/trainer_payslip') }}">Trainer Pay Slip</a></li>
                     <li><a href="{{ url('/expense_category') }}">Manage Expense Categories</a></li>
-                    <li><a href="{{ url('/trainer_availability') }}">Trainers Menu</a></li>
+                    
                     <li><a href="{{ url('/pnl_report') }}">Profit & Loss Report</a></li>
                     
                 </ul>

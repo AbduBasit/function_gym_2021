@@ -59,6 +59,7 @@
                 url: "{{route('manage_data')}}",
                 data: value,
                 success: function (response) {
+                    console.log(response);
                     if(response){
                     if(response){
                     var output="";
@@ -74,7 +75,7 @@
                             output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
                         }
                         else{
-                            output += '<td>'+response[i]["trainer_name"]+'</td>';
+                            output += '<td>'+response[i]["trainer_first_name"]+' '+response[i]["trainer_last_name"]+'</td>';
                         }
 
                         if(response[i]["status"]=="active"){
@@ -206,6 +207,7 @@ $(document).on('click', '#reset-btn', ()=>{
             url: "{{route('manage_data')}}",
             dataType: 'json',
             success: function (response) {
+                console.log(response);
                 if(response){
                     if(response){
                     var output="";
@@ -221,7 +223,7 @@ $(document).on('click', '#reset-btn', ()=>{
                             output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
                         }
                         else{
-                            output += '<td>'+response[i]["trainer_name"]+'</td>';
+                            output += '<td>'+response[i]["trainer_first_name"]+' '+response[i]["trainer_last_name"]+'</td>';
                         }
 
                         if(response[i]["status"]=="active"){
@@ -367,6 +369,7 @@ $(document).on('click', '#reset-btn', ()=>{
             url: "{{route('manage_data')}}",
             data: value,
             success: function (response) {
+                console.log(response);
                 if(response){
                     var output="";
                     for(var i = 0; i < response.length; i++){
@@ -381,7 +384,7 @@ $(document).on('click', '#reset-btn', ()=>{
                             output += '<td><a href="customer-edit/'+response[i]["id"]+'/#trainer_assign" class="text-danger">Unassigned</a></td>';
                         }
                         else{
-                            output += '<td>'+response[i]["trainer_name"]+'</td>';
+                            output += '<td>'+response[i]["trainer_first_name"]+' '+response[i]["trainer_last_name"]+'</td>';
                         }
 
                         if(response[i]["status"]=="active"){

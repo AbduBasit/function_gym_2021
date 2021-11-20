@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class invoice extends Model
 {
+
+    protected $table = "invoices";
     protected $fillable = [
         'customer_name',
          'customer_phone',
@@ -28,6 +30,7 @@ class invoice extends Model
     ];
 
     use HasFactory;
+
 
   
     public static function getInvoice(){

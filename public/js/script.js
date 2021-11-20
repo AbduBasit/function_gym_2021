@@ -1,16 +1,21 @@
 jQuery(document).ready(() => {
 
+        if($('#discounttoggle').is(':checked')){
+			
+            jQuery('.display').fadeToggle();
+            //jQuery('.discount, .discount1').fadeToggle();
+		}
         
-        jQuery('#g-fees, #t-months, #t-discount').on('keyup', () => {
-            var month = document.getElementById('t-months').value;
-            var gfees = document.getElementById('g-fees').value;
-            var discountval = document.getElementById('t-discount').value;
-            var result = month * gfees  - discountval;
-            $("#t-amount").val(function () {
-                return result;
-            });
+        // jQuery('#g-fees, #t-months, #t-discount').on('keyup', () => {
+        //     var month = document.getElementById('t-months').value;
+        //     var gfees = document.getElementById('g-fees').value;
+        //     var discountval = document.getElementById('t-discount').value;
+        //     var result = month * gfees  - discountval;
+        //     $("#t-amount").val(function () {
+        //         return result;
+        //     });
             
-        })
+        // })
 
     jQuery('#select_training').on('change', () => {
         jQuery('.display').fadeToggle();

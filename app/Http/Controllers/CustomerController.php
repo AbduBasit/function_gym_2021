@@ -65,18 +65,21 @@ class CustomerController extends Controller
         //     $target= $data;
            
         // }
+        //dd($action);
         return view('customer.manage', compact('page_title', 'page_description', 'action'));
     }
 
     public function manage_data(Request $req){
         $data = null;
-        $db = new customer();
+        //$db = new customer();
 
         if($req->post()){
            if($req->post('t_in') && $req->post('t_out')){
             $in = $req->post('t_in');
             $out = $req->post('t_out');
             $data = DB::select("SELECT * FROM customers WHERE date_of_joining BETWEEN '$in' and '$out'");
+            //$data = DB::select("SELECT * FROM customers WHERE status = 'active'");
+            //dd($data);
             if($data){
                 $target = $data;
                 return $target;
@@ -98,7 +101,11 @@ class CustomerController extends Controller
      
         }
         else{
-            $data = $db::all();
+            // $data = DB::table('customers')->join('trainers','trainers.id','=','customers.trainer_name')
+            // ->select('customers.*','trainers.first_name as trainer_first_name','trainers.last_name as trainer_last_name')
+            // ->get();
+            $data = DB::select("SELECT customers.* , trainers.first_name AS 'trainer_name', trainers.last_name AS 'trainer_last_name' from customers LEFT JOIN trainers ON customers.trainer_name = trainers.id
+                    ORDER by customers.id DESC");
             $target= $data;
             return $target;
         }
@@ -137,7 +144,6 @@ class CustomerController extends Controller
         $friday = $req->post('friday');
         $saturday = $req->post('saturday');
         $sunday = $req->post('sunday');
-
         $monday_m = $req->post('monday_m') ;
         $tuesday_m = $req->post('tuesday_m');
         $wednesday_m = $req->post('wednesday_m');
@@ -167,7 +173,7 @@ class CustomerController extends Controller
              sat_start_time like "'.$saturday.'%'.$saturday_m.'" or
              sun_start_time like "'.$sunday.'%'.$sunday_m.'"
              GROUP by 
-           trainer_name
+             trainer_name
              ');
 
             // foreach($data as $key=> $value){
@@ -184,6 +190,150 @@ class CustomerController extends Controller
 
         // return $monday;
         // continue
+    }
+
+    public function check_sunday(Request $req){
+        if($req->day == 7){
+             $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE sun_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers'=> $count]);
+
+        }
+    }
+
+    public function check_saturday(Request $req)
+    {
+        if ($req->day == 6) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE sat_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_friday(Request $req)
+    {
+        if ($req->day == 5) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE fri_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_thursday(Request $req)
+    {
+        if ($req->day == 4) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE thu_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_wednesday(Request $req)
+    {
+        if ($req->day == 3) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE wed_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_tuesday(Request $req)
+    {
+        if ($req->day == 2) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE tue_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_monday(Request $req)
+    {
+        if ($req->day == 1) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE mon_allow_pt = "yes" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    
+
+    public function check_sunday_time(Request $req)
+    {
+        if ($req->day == 7) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE CAST(sun_start_time as time) BETWEEN "'.$req->time_in.'" AND "'.$req->time_out. '"  AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+                                    return response()->json(['trainers' => $count]);
+        }
+    }
+
+    
+
+    public function check_saturday_time(Request $req)
+    {
+        if ($req->day == 6) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE sat_start_time BETWEEN "' . $req->time_in . '" AND "' . $req->time_out . '" AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_friday_time(Request $req)
+    {
+        if ($req->day == 5) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE CAST(fri_start_time as time) BETWEEN "' . $req->time_in . '" AND "' . $req->time_out . '"  AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_thursday_time(Request $req)
+    {
+        if ($req->day == 4) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE CAST(thu_start_time as time) BETWEEN "'.$req->time_in.'" AND "'.$req->time_out.'"  AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_wednesday_time(Request $req)
+    {
+        if ($req->day == 3) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE CAST(wed_start_time as time) BETWEEN "' . $req->time_in . '" AND "' . $req->time_out . '"  AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_tuesday_time(Request $req)
+    {
+        if ($req->day == 2) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE CAST(tue_start_time as time) BETWEEN "' . $req->time_in . '" AND "' . $req->time_out . '"  AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
+    }
+
+    public function check_monday_time(Request $req)
+    {
+        if ($req->day == 1) {
+            $count = DB::select(' select id, first_name, last_name, 
+                                    (SELECT COUNT(trainer_name) FROM `customers` WHERE CAST(mon_start_time as time) BETWEEN "' . $req->time_in . '" AND "' . $req->time_out . '"  AND trainer_name = trainers.id
+                                    GROUP BY (trainer_name)) as Count from trainers');
+            return response()->json(['trainers' => $count]);
+        }
     }
 
     public function trainer_check_3(Request $req){
@@ -272,7 +422,7 @@ class CustomerController extends Controller
     //Create Function of Customer
     public function create_data(Request $req)
     {
-        $inv = new invoice();
+        
 
         $data = "";
         $db = new customer();
@@ -310,12 +460,12 @@ class CustomerController extends Controller
         $db->registration_fees = $req->regfee;
         $db->gym_fees = $req->gymfee;
         $db->trainer_fees_per_session = $req->trainfee;
-        $db->advnace_allow = $req->avance_total;
+        //$db->advnace_allow = $req->avance_total;
         $db->advance_month = $req->advance_month;
         $db->discount = $req->discount;
 
         // invoice add
-
+        $inv = new invoice();
         $name = $req->firstName . ' ' . $req->lastName;
         $inv->customer_name = $name;
         $inv->customer_email = $req->email;
@@ -332,73 +482,101 @@ class CustomerController extends Controller
 
 
         // advance total calculation
-        if ($req->advnace_allow == 'yes') {
-            $db->avance_total = $req->gymfee * $req->advance_month - $req->discount;
-            $inv->amount = $req->gymfee * $req->advance_month - $req->discount;
-            $inv->gym_fees = $req->gymfee * $req->advance_month - $req->discount;
-            $inv->fee_amount = $req->gymfee * $req->advance_month - $req->discount;
+        if ($req->advnace_allow == 1) {
+            $db->advnace_allow = "yes";
+            //$db->avance_total = $req->gymfee * $req->advance_month - $req->discount;
+            $discount_amount = ($req->discount/100)*$req->avance_total;
+            $db->discount = $req->discount;
+            $db->avance_total = $req->avance_total;
+            //$inv->amount = $req->gymfee * $req->advance_month - $req->discount;
+            $inv->amount = $req->avance_total;
+            $inv->gym_fees = $req->avance_total- $discount_amount;
+            $inv->fee_amount = $req->avance_total;
         } else {
             $db->avance_total = 0;
-            $inv->amount = $req->gymfee;
+            $inv->amount = $req->total_payment;
             $inv->gym_fees = $req->gymfee;
-            $inv->fee_amount = $req->gymfee;
+            $inv->fee_amount = $req->regfee;
         }
 
-        $db->mon_start_time = $req->mondaytimein;
-        $db->mon_end_time = $req->mondaytimeout;
-        $db->mon_allow_pt = $req->mondaypt;
+        foreach($req->days as $day){
+            if($day == 'monday'){
+                $db->mon_start_time = $req->mondaytimein;
+                $db->mon_end_time = $req->mondaytimeout;
+                $db->mon_allow_pt = 'yes';
+            }
+            if($day == 'tuesday'){
+                $db->tue_start_time = $req->tuesdaytimein;
+                $db->tue_end_time = $req->tuesdaytimeout;
+                $db->tue_allow_pt = 'yes';
+            }
+            if ($day == 'wednesday') {
+                $db->wed_start_time = $req->wednesdaytimein;
+                $db->wed_end_time = $req->wednesdaytimeout;
+                $db->wed_allow_pt = 'yes';
+            }
+            if ($day == 'thursday') {
+                $db->thu_start_time = $req->thursdaytimein;
+                $db->thu_end_time = $req->thursdaytimeout;
+                $db->thu_allow_pt = 'yes';
+            }
+            if ($day == 'friday') {
+                $db->fri_start_time = $req->fridaytimein;
+                $db->fri_end_time = $req->fridaytimeout;
+                $db->fri_allow_pt = 'yes';
+            }
+            if ($day == 'saturday') {
+                $db->sat_start_time = $req->saturdaytimein;
+                $db->sat_end_time = $req->saturdaytimeout;
+                $db->sat_allow_pt = 'yes';
+            }
+            if ($day == 'sunday') {
+                $db->sun_start_time = $req->sundaytimein;
+                $db->sun_end_time = $req->sundaytimeout;
+                $db->sun_allow_pt = 'yes';
+            }
+            
+        }
+        $db->total_session = $req->tsession;
 
 
-        $db->tue_start_time = $req->tuesdaytimein;
-        $db->tue_end_time = $req->tuesdaytimeout;
-        $db->tue_allow_pt = $req->tuesdaypt;
-        $db->wed_start_time = $req->wednesdaytimein;
-        $db->wed_end_time = $req->wednesdaytimeout;
-        $db->wed_allow_pt = $req->wednesdaypt;
-        $db->thu_start_time = $req->thursdaytimein;
-        $db->thu_end_time = $req->thursdaytimeout;
-        $db->thu_allow_pt = $req->thursdaypt;
-        $db->fri_start_time = $req->fridaytimein;
-        $db->fri_end_time = $req->fridaytimeout;
-        $db->fri_allow_pt = $req->fridaypt;
-        $db->sat_start_time = $req->saturdaytimein;
-        $db->sat_end_time = $req->saturdaytimeout;
-        $db->sat_allow_pt = $req->saturdaypt;
-        $db->sun_start_time = $req->sundaytimein;
-        $db->sun_end_time = $req->sundaytimeout;
-        $db->sun_allow_pt = $req->sundaypt;
 
-        $count = 0;
+        
+        
+        
+        
 
-        if ($req->mondaypt) {
-            $count = $count + 1;
-        }
-        if ($req->tuesdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->wednesdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->thursdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->fridaypt) {
-            $count = $count + 1;
-        }
-        if ($req->saturdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->sundaypt) {
-            $count = $count + 1;
-        }
-        $result = $count * 4;
-        $db->total_session = $result;
+        // $count = 0;
+
+        // if ($req->mondaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->tuesdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->wednesdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->thursdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->fridaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->saturdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->sundaypt) {
+        //     $count = $count + 1;
+        // }
+        // $result = $count * 4;
+        
 
 
-        $inv->trainer_fees = $req->trainfee * $result;
+        $inv->trainer_fees = $req->trainfee * $req->tsession;
 
-        $net_total =($req->trainfee * $result) + $req->gymfee + $req->regfee;
-        $inv->net_total = $net_total;
+        //$net_total =($req->trainfee * $result) + $req->gymfee + $req->regfee;
+        $inv->net_total = $req->total_payment - $req->regfee;
 
 
         
@@ -409,7 +587,7 @@ class CustomerController extends Controller
         if($req->email){
             $data = $req->all();
             if($req->fees_status == "All Clear"){
-                Mail::to($req->email)->send(new InvoiceMail([$data, $net_total]));
+                Mail::to($req->email)->send(new InvoiceMail([$data, $req->total_payment]));
             }
         }  
         if($req->phone_number){
@@ -447,6 +625,7 @@ class CustomerController extends Controller
         $action = __FUNCTION__;
         $db = new customer();
         $data = $db::all()->find($id);
+        //dd($data);
         return view('customer.view', compact('page_title', 'page_description', 'action'), ['datas' => $data]);
     }
 
@@ -484,13 +663,22 @@ class CustomerController extends Controller
         $page_title = 'Customer Update';
         $page_description = 'Some description for the page';
         $action = __FUNCTION__;
-        $db = new customer();
+        //$db = new customer();
         $db_2 = new trainer();
-        $data = $db::all()->find($id);
+        //$data = $db::all()->find($id);
+        // $data = DB::table('customers')
+        // ->where('customers.id','=',$id)
+        // ->join('trainers', 'trainers.id','=', 'customers.trainer_name')
+        // ->select('customers.*','trainers.first_name as trainer_first_name', 'trainers.last_name as trainer_last_name')
+        // ->first();
+        $data = DB::select("SELECT customers.* , trainers.first_name AS 'trainer_first_name', trainers.last_name AS 'trainer_last_name' from customers LEFT JOIN trainers ON customers.trainer_name = trainers.id
+        WHERE customers.id = '".$id."'
+        ORDER by customers.id DESC");
+        //dd($data[0]);
         $data_2 = $db_2::all();
         $data_3 = (DB::select("select * from rules where rules_token = 'ME_A1002'"));
         // dd($data_3);
-        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'trainers' => $data_2, 'rul' => $data_3]);
+        return view('customer.update', compact('page_title', 'page_description', 'action'), ['datas' => $data[0], 'trainers' => $data_2, 'rul' => $data_3]);
     }
     public function customer_update(Request $req)
     {
@@ -530,73 +718,117 @@ class CustomerController extends Controller
         $data->gym_fees = $req->gymfee;
         $data->trainer_fees_per_session = $req->trainfee;
         $data->total_session = $req->tsession;
-        $data->advnace_allow = $req->avance_total;
-        $data->advance_month = $req->advance_month;
-        $data->discount = $req->discount;
+        //$data->advnace_allow = $req->avance_total;
+        
         // advance total calculation
         $count = '';
-        if ($req->advnace_allow == "yes") {
-            $count = $req->gymfee * $req->advance_month - $req->discount;
-            $data->avance_total = $count;
+        if ($req->advnace_allow == "1") {
+            //$count = $req->gymfee * $req->advance_month - $req->discount;
+            $data->advnace_allow = "1";
+            $data->avance_total = $req->avance_total;
+            $data->advance_month = $req->advance_month;
+            $data->discount = $req->discount;
         } else {
             $data->avance_total = 0;
         }
-        $data->mon_start_time = $req->mondaytimein;
-        $data->mon_end_time = $req->mondaytimeout;
-        $data->mon_allow_pt = $req->mondaypt;
-        $data->tue_start_time = $req->tuesdaytimein;
-        $data->tue_end_time = $req->tuesdaytimeout;
-        $data->tue_allow_pt = $req->tuesdaypt;
-        $data->wed_start_time = $req->wednesdaytimein;
-        $data->wed_end_time = $req->wednesdaytimeout;
-        $data->wed_allow_pt = $req->wednesdaypt;
-        $data->thu_start_time = $req->thursdaytimein;
-        $data->thu_end_time = $req->thursdaytimeout;
-        $data->thu_allow_pt = $req->thursdaypt;
-        $data->fri_start_time = $req->fridaytimein;
-        $data->fri_end_time = $req->fridaytimeout;
-        $data->fri_allow_pt = $req->fridaypt;
-        $data->sat_start_time = $req->saturdaytimein;
-        $data->sat_end_time = $req->saturdaytimeout;
-        $data->sat_allow_pt = $req->saturdaypt;
-        $data->sun_start_time = $req->sundaytimein;
-        $data->sun_end_time = $req->sundaytimeout;
-        $data->sun_allow_pt = $req->sundaypt;
+        // dd($req);
+        foreach ($req->days as $day) {
+            if ($day == 'monday') {
+                $data->mon_start_time = $req->mondaytimein;
+                $data->mon_end_time = $req->mondaytimeout;
+                $data->mon_allow_pt = 'yes';
+            }
+            if ($day == 'tuesday') {
+                $data->tue_start_time = $req->tuesdaytimein;
+                $data->tue_end_time = $req->tuesdaytimeout;
+                $data->tue_allow_pt = 'yes';
+            }
+            if ($day == 'wednesday') {
+                $data->wed_start_time = $req->wednesdaytimein;
+                $data->wed_end_time = $req->wednesdaytimeout;
+                $data->wed_allow_pt = 'yes';
+            }
+            if ($day == 'thursday') {
+                $data->thu_start_time = $req->thursdaytimein;
+                $data->thu_end_time = $req->thursdaytimeout;
+                $data->thu_allow_pt = 'yes';
+            }
+            if ($day == 'friday') {
+                $data->fri_start_time = $req->fridaytimein;
+                $data->fri_end_time = $req->fridaytimeout;
+                $data->fri_allow_pt = 'yes';
+            }
+            if ($day == 'saturday') {
+                $data->sat_start_time = $req->saturdaytimein;
+                $data->sat_end_time = $req->saturdaytimeout;
+                $data->sat_allow_pt = 'yes';
+            }
+            if ($day == 'sunday') {
+                $data->sun_start_time = $req->sundaytimein;
+                $data->sun_end_time = $req->sundaytimeout;
+                $data->sun_allow_pt = 'yes';
+            }
+        }
+        // $data->mon_start_time = $req->mondaytimein;
+        // $data->mon_end_time = $req->mondaytimeout;
+        // $data->mon_allow_pt = $req->mondaypt;
+        // $data->tue_start_time = $req->tuesdaytimein;
+        // $data->tue_end_time = $req->tuesdaytimeout;
+        // $data->tue_allow_pt = $req->tuesdaypt;
+        // $data->wed_start_time = $req->wednesdaytimein;
+        // $data->wed_end_time = $req->wednesdaytimeout;
+        // $data->wed_allow_pt = $req->wednesdaypt;
+        // $data->thu_start_time = $req->thursdaytimein;
+        // $data->thu_end_time = $req->thursdaytimeout;
+        // $data->thu_allow_pt = $req->thursdaypt;
+        // $data->fri_start_time = $req->fridaytimein;
+        // $data->fri_end_time = $req->fridaytimeout;
+        // $data->fri_allow_pt = $req->fridaypt;
+        // $data->sat_start_time = $req->saturdaytimein;
+        // $data->sat_end_time = $req->saturdaytimeout;
+        // $data->sat_allow_pt = $req->saturdaypt;
+        // $data->sun_start_time = $req->sundaytimein;
+        // $data->sun_end_time = $req->sundaytimeout;
+        // $data->sun_allow_pt = $req->sundaypt;
 
 
-        $count = 0;
+        // $count = 0;
 
-        if ($req->mondaypt) {
-            $count = $count + 1;
-        }
-        if ($req->tuesdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->wednesdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->thursdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->fridaypt) {
-            $count = $count + 1;
-        }
-        if ($req->saturdaypt) {
-            $count = $count + 1;
-        }
-        if ($req->sundaypt) {
-            $count = $count + 1;
-        }
-        $result = $count * 4;
-        $data->total_session = $result;
-
-
+        // if ($req->mondaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->tuesdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->wednesdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->thursdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->fridaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->saturdaypt) {
+        //     $count = $count + 1;
+        // }
+        // if ($req->sundaypt) {
+        //     $count = $count + 1;
+        // }
+        // $result = $count * 4;
+        $data->total_session = $req->tsession;
 
         if ($data->save()) {
-            return redirect('manage-customer');
+            return back();
         } else {
-            return redirect('manage-customer');
+            return back();
         }
+
+        // if ($data->save()) {
+        //     return redirect('manage-customer');
+        // } else {
+        //     return redirect('manage-customer');
+        // }
     }
     public function customer_update_pt($id)
     {

@@ -311,9 +311,9 @@ class PosController extends Controller
         // Action Here
         // $db = new trainer();
         $name = "Syed Ghazanfar";
-        $data = DB::select('SELECT trainers.date_of_pay, customers.reference_name, SUM(customers.registration_fees) as registration_fees , SUM(customers.gym_fees) as gym_fees, SUM(customers.trainer_fees_per_session) as trainer_fees_per_session, COUNT(customers.trainer_fees_per_session) as count_trainer, SUM(customers.total_session) as total_session, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = concat(trainers.first_name, " ", trainers.last_name) WHERE trainers.id =' . $id);
+        $data = DB::select('SELECT trainers.date_of_pay, customers.reference_name, SUM(customers.registration_fees) as registration_fees , SUM(customers.gym_fees) as gym_fees, SUM(customers.trainer_fees_per_session) as trainer_fees_per_session, COUNT(customers.trainer_fees_per_session) as count_trainer, SUM(customers.total_session) as total_session, trainers.id as trainer_id ,concat(trainers.first_name, " ", trainers.last_name) as tname, trainers.fixed_salary, trainers.commision FROM `customers` left JOIN trainers ON customers.trainer_name = trainers.id WHERE trainers.id =' . $id);
 
-        // dd($data[0]->tname);
+         //dd($data[0]->tname);
         $data1 = new invoice();
 
         // Reference Commision  
@@ -328,7 +328,6 @@ class PosController extends Controller
         $customerData = DB::select('SELECT sum(gym_fees) as total FROM `customers` where trainer_name = "'.$data[0]->tname.'"');
         $ruleReten = DB::select('select * from rules where rules_token = "RM_A1005"')[0];
         $invGetReten = DB::select('SELECT sum(fee_amount) as gym_fees, customer_name , count(customer_name) as count FROM `invoices` WHERE fees_payable="All Clear" and trainer_name="'.$data[0]->tname.'" and pay_date >= CURDATE() - INTERVAL '.$ruleReten->values.' MONTH group by customer_name order by month(pay_date)');    
-        
         if($invGetReten!=null){
             $rulerCount = DB::select('select * from rules where rules_token = "RC_A1004"')[0];
             return view('pos.slipView', compact('page_title', 'page_description', 'action'), ['datas' => $data, 'inv' => $calc, 'resultCount' => json_encode(count($invGetReten)), 'result' => $invGetReten, 'rule'=>json_encode($rulerCount)]);
@@ -363,8 +362,9 @@ class PosController extends Controller
     public function index_status(){
         $page_title = 'Trainer Scheduling';
         $page_description = 'Some description for the page';
+        $trainers = trainer::all();
         $action = __FUNCTION__;
-        return view('pos.trainerStatus', compact('page_title', 'page_description', 'action'));
+        return view('pos.trainerStatus', compact('page_title', 'page_description', 'action','trainers'));
     }
     public function status_change(Request $req)
     {
